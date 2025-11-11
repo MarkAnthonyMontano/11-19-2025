@@ -71,7 +71,7 @@ const StudentResetPassword = () => {
     if (settings.short_term) setShortTerm(settings.short_term);
     if (settings.campus_address) setCampusAddress(settings.campus_address);
 
-  }, [settings]); 
+  }, [settings]);
 
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
@@ -141,22 +141,22 @@ const StudentResetPassword = () => {
 
 
   // 🔒 Disable right-click
-    document.addEventListener('contextmenu', (e) => e.preventDefault());
+  document.addEventListener('contextmenu', (e) => e.preventDefault());
 
-    // 🔒 Block DevTools shortcuts silently
-    document.addEventListener('keydown', (e) => {
-        const isBlockedKey =
-            e.key === 'F12' ||
-            e.key === 'F11' ||
-            (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
-            (e.ctrlKey && e.key === 'U');
+  // 🔒 Block DevTools shortcuts silently
+  document.addEventListener('keydown', (e) => {
+    const isBlockedKey =
+      e.key === 'F12' ||
+      e.key === 'F11' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) ||
+      (e.ctrlKey && e.key === 'U');
 
-        if (isBlockedKey) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
-    });
- 
+    if (isBlockedKey) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  });
+
   return (
     <Box
       sx={{
@@ -200,7 +200,8 @@ const StudentResetPassword = () => {
             maxWidth: "540px",
             borderRadius: 4,
             backgroundColor: "#fff",
-            border: "2px solid maroon",
+            border: `2px solid ${borderColor}`,
+
             boxShadow: "0px 4px 20px rgba(0,0,0,0.1)",
             mb: 12,
           }}
@@ -334,7 +335,7 @@ const StudentResetPassword = () => {
                 py: 1.2,
                 borderRadius: 2,
                 backgroundColor: mainButtonColor,
-                border: `2px solid ${borderColor}`, 
+                border: `2px solid ${borderColor}`,
                 textTransform: "none",
                 fontWeight: "bold",
                 "&:hover": { backgroundColor: "#1565c0" },

@@ -23,48 +23,48 @@ import SchoolIcon from "@mui/icons-material/School";
 import PersonIcon from "@mui/icons-material/Person";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { BarChart, Bar, XAxis, YAxis, Tooltip, CartesianGrid, ResponsiveContainer, Cell } from "recharts";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import ExaminationProfile from "../registrar/ExaminationProfile";
 
 
 const Dashboard = ({ profileImage, setProfileImage }) => {
-  
- const settings = useContext(SettingsContext);
 
-const [titleColor, setTitleColor] = useState("#000000");
-const [subtitleColor, setSubtitleColor] = useState("#555555");
-const [borderColor, setBorderColor] = useState("#000000");
-const [mainButtonColor, setMainButtonColor] = useState("#1976d2");
-const [stepperColor, setStepperColor] = useState("#000000");   // ✅ NEW
+  const settings = useContext(SettingsContext);
 
-const [fetchedLogo, setFetchedLogo] = useState(null);
-const [companyName, setCompanyName] = useState("");
-const [shortTerm, setShortTerm] = useState("");
-const [campusAddress, setCampusAddress] = useState("");
+  const [titleColor, setTitleColor] = useState("#000000");
+  const [subtitleColor, setSubtitleColor] = useState("#555555");
+  const [borderColor, setBorderColor] = useState("#000000");
+  const [mainButtonColor, setMainButtonColor] = useState("#1976d2");
+  const [stepperColor, setStepperColor] = useState("#000000");   // ✅ NEW
 
-useEffect(() => {
-  if (!settings) return;
+  const [fetchedLogo, setFetchedLogo] = useState(null);
+  const [companyName, setCompanyName] = useState("");
+  const [shortTerm, setShortTerm] = useState("");
+  const [campusAddress, setCampusAddress] = useState("");
 
-  // 🎨 Colors
-  if (settings.title_color) setTitleColor(settings.title_color);
-  if (settings.subtitle_color) setSubtitleColor(settings.subtitle_color);
-  if (settings.border_color) setBorderColor(settings.border_color);
-  if (settings.main_button_color) setMainButtonColor(settings.main_button_color);
-  if (settings.stepper_color) setStepperColor(settings.stepper_color);   // ✅ NEW
+  useEffect(() => {
+    if (!settings) return;
 
-  // 🏫 Logo
-  if (settings.logo_url) {
-    setFetchedLogo(`http://localhost:5000${settings.logo_url}`);
-  } else {
-    setFetchedLogo(EaristLogo);
-  }
+    // 🎨 Colors
+    if (settings.title_color) setTitleColor(settings.title_color);
+    if (settings.subtitle_color) setSubtitleColor(settings.subtitle_color);
+    if (settings.border_color) setBorderColor(settings.border_color);
+    if (settings.main_button_color) setMainButtonColor(settings.main_button_color);
+    if (settings.stepper_color) setStepperColor(settings.stepper_color);   // ✅ NEW
 
-  // 🏷️ School Information
-  if (settings.company_name) setCompanyName(settings.company_name);
-  if (settings.short_term) setShortTerm(settings.short_term);
-  if (settings.campus_address) setCampusAddress(settings.campus_address);
+    // 🏫 Logo
+    if (settings.logo_url) {
+      setFetchedLogo(`http://localhost:5000${settings.logo_url}`);
+    } else {
+      setFetchedLogo(EaristLogo);
+    }
 
-}, [settings]);
+    // 🏷️ School Information
+    if (settings.company_name) setCompanyName(settings.company_name);
+    if (settings.short_term) setShortTerm(settings.short_term);
+    if (settings.campus_address) setCampusAddress(settings.campus_address);
+
+  }, [settings]);
 
 
   const [userID, setUserID] = useState("");
@@ -267,44 +267,44 @@ useEffect(() => {
     }
   }, []);
 
- const handleFileChange = async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-  try {
-    // ✅ Get the logged-in role (registrar, admin, etc.)
-    const role = localStorage.getItem("role");
+    try {
+      // ✅ Get the logged-in role (registrar, admin, etc.)
+      const role = localStorage.getItem("role");
 
-    // ✅ Get the registrar’s user_account_id using person_id
-    const accountRes = await axios.get(
-      `http://localhost:5000/api/get_user_account_id/${personData.person_id}`
-    );
-    const user_account_id = accountRes.data.user_account_id;
+      // ✅ Get the registrar’s user_account_id using person_id
+      const accountRes = await axios.get(
+        `http://localhost:5000/api/get_user_account_id/${personData.person_id}`
+      );
+      const user_account_id = accountRes.data.user_account_id;
 
-    const formData = new FormData();
-    formData.append("profile_picture", file);
+      const formData = new FormData();
+      formData.append("profile_picture", file);
 
-    // ✅ Use your backend route
-    await axios.post(
-      `http://localhost:5000/update_registrar/${user_account_id}`,
-      formData,
-      { headers: { "Content-Type": "multipart/form-data" } }
-    );
+      // ✅ Use your backend route
+      await axios.post(
+        `http://localhost:5000/update_registrar/${user_account_id}`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
 
-    // ✅ Refresh the data (using correct role)
-    const refreshed = await axios.get(
-      `http://localhost:5000/api/person_data/${personData.person_id}/${role}`
-    );
-    setPersonData(refreshed.data);
-    
-    const baseUrl = `http://localhost:5000/uploads/${refreshed.data.profile_image}`;
-    setProfileImage(`${baseUrl}?t=${Date.now()}`);
+      // ✅ Refresh the data (using correct role)
+      const refreshed = await axios.get(
+        `http://localhost:5000/api/person_data/${personData.person_id}/${role}`
+      );
+      setPersonData(refreshed.data);
 
-    console.log("✅ Profile updated successfully!");
-  } catch (err) {
-    console.error("❌ Upload failed:", err);
-  }
-};
+      const baseUrl = `http://localhost:5000/uploads/${refreshed.data.profile_image}`;
+      setProfileImage(`${baseUrl}?t=${Date.now()}`);
+
+      console.log("✅ Profile updated successfully!");
+    } catch (err) {
+      console.error("❌ Upload failed:", err);
+    }
+  };
 
 
   return (
@@ -362,23 +362,34 @@ useEffect(() => {
                       {personData?.fname?.[0]}
                     </Avatar>
 
-                    {/* Hover upload button */}
                     {hovered && (
-                      <IconButton
-                        size="small"
-                        sx={{
-                          position: "absolute",
-                          bottom: 0,
-                          right: 0,
-                          bgcolor: "maroon",
-                          color: "white",
-                          "&:hover": { bgcolor: "#6D2323" },
-                        }}
+                      <label
                         onClick={() => fileInputRef.current.click()}
+                        style={{
+                          position: "absolute",
+                          bottom: "-5px",
+                          right: 0,
+                          cursor: "pointer",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                          borderRadius: "50%",
+                          backgroundColor: "#ffffff",
+                          border: `2px solid ${borderColor}`,
+                          width: "36px",
+                          height: "36px",
+                        }}
                       >
-                        <AddIcon fontSize="small" />
-                      </IconButton>
+                        <AddCircleIcon
+                          sx={{
+                            color: settings?.header_color || "#1976d2",
+                            fontSize: 32,
+                            borderRadius: "50%",
+                          }}
+                        />
+                      </label>
                     )}
+
 
                     {/* Hidden file input */}
                     <input
@@ -444,7 +455,7 @@ useEffect(() => {
                   width: 70,
                   height: 70,
                   borderRadius: "50%",
-
+                  border: `2px solid ${borderColor}`,
                   backgroundColor: stat.color,
                   display: "flex",
                   alignItems: "center",
@@ -455,7 +466,7 @@ useEffect(() => {
                 {stat.icon}
               </Box>
               <Box>
-                <Typography variant="subtitle2" style={{color: subtitleColor,}} fontSize={20} fontWeight={1200}>
+                <Typography variant="subtitle2" style={{ color: subtitleColor, }} fontSize={20} fontWeight={1200}>
                   {stat.label}
                 </Typography>
                 <Typography variant="h5" fontWeight="bold">
@@ -474,7 +485,7 @@ useEffect(() => {
           <Typography
             variant="h5"
             mb={2}
-            sx={{ color: subtitleColor,  fontWeight: "bold", textAlign: "center", marginLeft: "-210px", marginTop: "-50px" }}
+            sx={{ color: subtitleColor, fontWeight: "bold", textAlign: "center", marginLeft: "-210px", marginTop: "-50px" }}
           >
             Department Overview
           </Typography>
@@ -507,7 +518,7 @@ useEffect(() => {
                 alignItems="center"
                 justifyContent="space-between"
                 sx={{
-              backgroundColor: settings?.header_color || "#1976d2",
+                  backgroundColor: settings?.header_color || "#1976d2",
                   color: "white",
                   borderRadius: "6px 6px 0 0",
                   padding: "4px 8px",

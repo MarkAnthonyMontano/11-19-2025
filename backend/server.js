@@ -1752,6 +1752,7 @@ app.put("/api/submitted-documents/:upload_id", async (req, res) => {
       [upload_id]
     );
     if (!row) return res.status(404).json({ error: "Upload not found" });
+
     const person_id = row.person_id;
 
     // 2️⃣ Applicant info
@@ -1765,24 +1766,35 @@ app.put("/api/submitted-documents/:upload_id", async (req, res) => {
     const applicant_number = appInfo?.applicant_number || "Unknown";
     const fullName = `${appInfo?.last_name || ""}, ${appInfo?.first_name || ""} ${appInfo?.middle_name?.charAt(0) || ""}.`;
 
-    // 3️⃣ Actor info
+    // 3️⃣ Actor info (FULL FORMAT identical to exam/save)
     let actorEmail = "earistmis@gmail.com";
-    let actorFullName = "SYSTEM";
+    let actorName = "SYSTEM";
+
     if (user_person_id) {
       const [actorRows] = await db3.query(
-        "SELECT email, role FROM user_accounts WHERE person_id = ? LIMIT 1",
+        `SELECT email, role, employee_id, last_name, first_name, middle_name 
+         FROM user_accounts 
+         WHERE person_id = ? LIMIT 1`,
         [user_person_id]
       );
+
       if (actorRows.length > 0) {
-        actorEmail = actorRows[0].email;
-        actorFullName = actorRows[0].role
-          ? actorRows[0].role.toUpperCase()
-          : actorEmail;
+        const u = actorRows[0];
+        const role = u.role?.toUpperCase() || "UNKNOWN";
+        const empId = u.employee_id || "";
+        const lname = u.last_name || "";
+        const fname = u.first_name || "";
+        const mname = u.middle_name || "";
+        const email = u.email || "";
+
+        actorEmail = email;
+        actorName = `${role} (${empId}) - ${lname}, ${fname} ${mname}`.trim();
       }
     }
 
-    // 4️⃣ Toggle + Log
+    // 4️⃣ Toggle + message
     let type, message;
+
     if (submitted_documents === 1) {
       await db.query(`
         UPDATE admission.requirement_uploads
@@ -1793,8 +1805,7 @@ app.put("/api/submitted-documents/:upload_id", async (req, res) => {
         WHERE person_id = ?`, [person_id]);
 
       type = "submit";
-      message = `✅ Applicant #${applicant_number} - ${fullName} submitted all requirements.`;
-
+      message = `✅ Requirements submitted by Applicant #${applicant_number} - ${fullName}`;
     } else {
       await db.query(`
         UPDATE admission.requirement_uploads
@@ -1805,31 +1816,41 @@ app.put("/api/submitted-documents/:upload_id", async (req, res) => {
         WHERE person_id = ?`, [person_id]);
 
       type = "unsubmit";
-      message = `↩️ Applicant #${applicant_number} - ${fullName} was unsubmitted.`;
+      message = `↩️ Requirements unsubmitted for Applicant #${applicant_number} - ${fullName}`;
     }
 
-    // 5️⃣ Save log
+    // ✅ Prevent duplicate notifications per day (same as exam/save)
     await db.query(
       `INSERT INTO notifications (type, message, applicant_number, actor_email, actor_name, timestamp)
-       VALUES (?, ?, ?, ?, ?, NOW())`,
-      [type, message, applicant_number, actorEmail, actorFullName]
+       SELECT ?, ?, ?, ?, ?, NOW()
+       FROM DUAL
+       WHERE NOT EXISTS (
+         SELECT 1 FROM notifications
+         WHERE applicant_number = ?
+           AND message = ?
+           AND DATE(timestamp) = CURDATE()
+       )`,
+      [type, message, applicant_number, actorEmail, actorName, applicant_number, message]
     );
 
+    // ✅ Emit socket event
     io.emit("notification", {
       type,
       message,
       applicant_number,
       actor_email: actorEmail,
-      actor_name: actorFullName,
+      actor_name: actorName,
       timestamp: new Date().toISOString(),
     });
 
     res.json({ success: true, message });
+
   } catch (err) {
     console.error("❌ Error toggling submitted documents:", err);
     res.status(500).json({ error: "Failed to toggle submitted documents" });
   }
 });
+
 
 app.get("/api/verified-exam-applicants", async (req, res) => {
   try {
@@ -12563,18 +12584,13 @@ app.put("/api/submitted-medical/:upload_id", async (req, res) => {
   const { upload_id } = req.params;
   const { submitted_medical, user_person_id } = req.body;
 
-  console.log(upload_id, submitted_medical, user_person_id);
-
-
   try {
-    // 1️⃣ Find person_id for logging
+    // 1️⃣ Find person_id
     const [[row]] = await db.query(
       "SELECT person_id FROM requirement_uploads WHERE upload_id = ?",
       [upload_id]
     );
     if (!row) return res.status(404).json({ error: "Upload not found" });
-
-    console.log(row)
 
     const person_id = row.person_id;
 
@@ -12589,37 +12605,61 @@ app.put("/api/submitted-medical/:upload_id", async (req, res) => {
     const applicant_number = appInfo?.applicant_number || "Unknown";
     const fullName = `${appInfo?.last_name || ""}, ${appInfo?.first_name || ""} ${appInfo?.middle_name?.charAt(0) || ""}.`;
 
-    // 3️⃣ Toggle medical status
+    // 3️⃣ Update submitted_medical
     await db.query(
       "UPDATE requirement_uploads SET submitted_medical = ? WHERE person_id = ?",
       [submitted_medical ? 1 : 0, person_id]
     );
 
-    // 4️⃣ Log notification
+    // 4️⃣ Create message
+    const type = submitted_medical ? "submit_medical" : "unsubmit_medical";
     const action = submitted_medical ? "✅ Medical submitted" : "❌ Medical unsubmitted";
     const message = `${action} (Applicant #${applicant_number} - ${fullName})`;
 
+    // ✅ Full actor info (same as exam/save)
     let actorEmail = "earistmis@gmail.com";
     let actorName = "SYSTEM";
+
     if (user_person_id) {
       const [actorRows] = await db3.query(
-        "SELECT email, role FROM user_accounts WHERE person_id = ? LIMIT 1",
+        `SELECT email, role, employee_id, last_name, first_name, middle_name
+         FROM user_accounts
+         WHERE person_id = ?
+         LIMIT 1`,
         [user_person_id]
       );
+
       if (actorRows.length > 0) {
-        actorEmail = actorRows[0].email;
-        actorName = actorRows[0].role ? actorRows[0].role.toUpperCase() : actorEmail;
+        const u = actorRows[0];
+        const role = u.role?.toUpperCase() || "UNKNOWN";
+        const empId = u.employee_id || "";
+        const lname = u.last_name || "";
+        const fname = u.first_name || "";
+        const mname = u.middle_name || "";
+        const email = u.email || "";
+
+        actorEmail = email;
+        actorName = `${role} (${empId}) - ${lname}, ${fname} ${mname}`.trim();
       }
     }
 
+    // ✅ No duplicates per day (same logic as exam/save)
     await db.query(
       `INSERT INTO notifications (type, message, applicant_number, actor_email, actor_name, timestamp)
-       VALUES (?, ?, ?, ?, ?, NOW())`,
-      [submitted_medical ? "submit_medical" : "unsubmit_medical", message, applicant_number, actorEmail, actorName]
+       SELECT ?, ?, ?, ?, ?, NOW()
+       FROM DUAL
+       WHERE NOT EXISTS (
+         SELECT 1 FROM notifications
+         WHERE applicant_number = ?
+           AND message = ?
+           AND DATE(timestamp) = CURDATE()
+       )`,
+      [type, message, applicant_number, actorEmail, actorName, applicant_number, message]
     );
 
+    // ✅ Socket emit
     io.emit("notification", {
-      type: submitted_medical ? "submit_medical" : "unsubmit_medical",
+      type,
       message,
       applicant_number,
       actor_email: actorEmail,
@@ -12628,11 +12668,16 @@ app.put("/api/submitted-medical/:upload_id", async (req, res) => {
     });
 
     res.json({ success: true, message });
+
   } catch (err) {
-    console.error("❌ Error toggling submitted_medical:", err);
+    console.error("❌ Error toggling submitted medical:", err);
     res.status(500).json({ error: "Failed to toggle submitted medical" });
   }
 });
+
+
+
+
 app.get("/api/requirements", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT id, description FROM requirements_table ORDER BY id ASC");

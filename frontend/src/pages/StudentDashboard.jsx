@@ -23,7 +23,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import CertificateOfRegistration from "../student/CertificateOfRegistration";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 
 
 const StudentDashboard = ({ profileImage, setProfileImage }) => {
@@ -64,7 +64,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
     if (settings.short_term) setShortTerm(settings.short_term);
     if (settings.campus_address) setCampusAddress(settings.campus_address);
 
-  }, [settings]); 
+  }, [settings]);
 
   const [userID, setUserID] = useState("");
   const [user, setUser] = useState("");
@@ -329,45 +329,45 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
     fetchAnnouncements();
   }, []);
 
-   const handleFileChange = async (e) => {
-      const file = e.target.files[0];
-      if (!file) return;
+  const handleFileChange = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
 
-      try {
-        const person_id = localStorage.getItem("person_id");
-        const role = localStorage.getItem("role");
-        
-        // ✅ Get user_account_id
-        const res = await axios.get(
-          `http://localhost:5000/api/get_user_account_id/${person_id}`
-        );
-        
-        const user_account_id = res.data.user_account_id;
-        
-        const formData = new FormData();
-        
-        formData.append("profile_picture", file);
-        
-        // ✅ Upload image using same backend API
-        await axios.post(
-          `http://localhost:5000/update_student/${user_account_id}`,
-          formData,
-          { headers: { "Content-Type": "multipart/form-data" } }
-        );
-        
-        // ✅ Refresh profile info to display the new image
-        const updated = await axios.get(
-          `http://localhost:5000/api/person_data/${person_id}/${role}`
-        );
-        
-        setPerson(updated.data.profile_image);
-        const baseUrl = `http://localhost:5000/uploads/${updated.data.profile_image}`;
-        setProfileImage(`${baseUrl}?t=${Date.now()}`);
-      } catch (error) {
-        console.error("❌ Upload failed:", error);
-      }
+    try {
+      const person_id = localStorage.getItem("person_id");
+      const role = localStorage.getItem("role");
+
+      // ✅ Get user_account_id
+      const res = await axios.get(
+        `http://localhost:5000/api/get_user_account_id/${person_id}`
+      );
+
+      const user_account_id = res.data.user_account_id;
+
+      const formData = new FormData();
+
+      formData.append("profile_picture", file);
+
+      // ✅ Upload image using same backend API
+      await axios.post(
+        `http://localhost:5000/update_student/${user_account_id}`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data" } }
+      );
+
+      // ✅ Refresh profile info to display the new image
+      const updated = await axios.get(
+        `http://localhost:5000/api/person_data/${person_id}/${role}`
+      );
+
+      setPerson(updated.data.profile_image);
+      const baseUrl = `http://localhost:5000/uploads/${updated.data.profile_image}`;
+      setProfileImage(`${baseUrl}?t=${Date.now()}`);
+    } catch (error) {
+      console.error("❌ Upload failed:", error);
     }
-  
+  }
+
 
   return (
     <Box sx={{ p: 4, marginLeft: "-2rem", paddingRight: 8, height: "calc(100vh - 150px)", overflowY: "auto" }}>
@@ -403,57 +403,68 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
                     <PersonIcon sx={{ color: "maroon" }} fontSize="large" />
                   ) : (
                     <Box
-                    position="relative"
-                    display="inline-block"
-                    mr={2}
-                    onMouseEnter={() => setHovered(true)}
-                    onMouseLeave={() => setHovered(false)}
-                  >
-                    <Avatar
-                      src={profileImage || `http://localhost:5000/uploads/${personData?.profile_image}`}
-                      alt={personData?.fname}
-                      sx={{
-                        width: 90,
-                        height: 90,
-                       border: `2px solid ${borderColor}`,
-                        cursor: "pointer",
-                        mt: -1.5,
-                      }}
-                      onClick={() => fileInputRef.current.click()}
+                      position="relative"
+                      display="inline-block"
+                      mr={2}
+                      onMouseEnter={() => setHovered(true)}
+                      onMouseLeave={() => setHovered(false)}
                     >
-                      {personData?.fname?.[0]}
-                    </Avatar>
-
-                    {/* Hover upload button */}
-                    {hovered && (
-                      <IconButton
-                        size="small"
+                      <Avatar
+                        src={profileImage || `http://localhost:5000/uploads/${personData?.profile_image}`}
+                        alt={personData?.fname}
                         sx={{
-                          position: "absolute",
-                          bottom: 0,
-                          right: 0,
-                          bgcolor: "maroon",
-                          color: "white",
-                          "&:hover": { bgcolor: "#6D2323" },
+                          width: 90,
+                          height: 90,
+                          border: `2px solid ${borderColor}`,
+                          cursor: "pointer",
+                          mt: -1.5,
                         }}
                         onClick={() => fileInputRef.current.click()}
                       >
-                        <AddIcon fontSize="small" />
-                      </IconButton>
-                    )}
+                        {personData?.fname?.[0]}
+                      </Avatar>
 
-                    {/* Hidden file input */}
-                    <input
-                      type="file"
-                      accept="image/*"
-                      ref={fileInputRef}
-                      style={{ display: "none" }}
-                      onChange={handleFileChange}
-                    />
-                  </Box>
+                      {hovered && (
+                        <label
+                          onClick={() => fileInputRef.current.click()}
+                          style={{
+                            position: "absolute",
+                            bottom: "0px",
+                            right: "0px",
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: "50%",
+                            backgroundColor: "#ffffff",
+                            border: `2px solid ${borderColor}`,
+                            width: "32px",
+                            height: "32px",
+                          }}
+                        >
+                          <AddCircleIcon
+                            sx={{
+                              color: settings?.header_color || "#1976d2",
+                              fontSize: 28,
+                              borderRadius: "50%",
+                            }}
+                          />
+                        </label>
+                      )}
+
+
+                      {/* Hidden file input */}
+                      <input
+                        type="file"
+                        accept="image/*"
+                        ref={fileInputRef}
+                        style={{ display: "none" }}
+                        onChange={handleFileChange}
+                      />
+                    </Box>
                   )}
                   <Box>
-                    <Typography variant="h4" fontWeight="bold" sx={{color: titleColor,}}>
+                    <Typography variant="h4" fontWeight="bold" sx={{ color: titleColor, }}>
                       Welcome back! {personData.last_name}, {personData.first_name} {personData.middle_name}
                     </Typography>
                     <Typography variant="body1" color="text.secondary">
@@ -543,7 +554,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
           <Grid item sx={{ flex: "1 1 33%" }}>
             <Card
               sx={{
-           border: `2px solid ${borderColor}`,
+                border: `2px solid ${borderColor}`,
                 boxShadow: 3,
                 p: 2,
                 height: "375px",
@@ -563,7 +574,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
                   alignItems="center"
                   justifyContent="space-between"
                   sx={{
-                   backgroundColor: settings?.header_color || "#1976d2",
+                    backgroundColor: settings?.header_color || "#1976d2",
                     color: "white",
                     borderRadius: "6px 6px 0 0",
                     padding: "4px 8px",
@@ -648,7 +659,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
           <Grid item sx={{ flex: "1 1 33%", }}>
             <Card
               sx={{
-          border: `2px solid ${borderColor}`,
+                border: `2px solid ${borderColor}`,
                 borderRadius: 3,
                 boxShadow: 3,
                 transition: "transform 0.2s ease",
@@ -765,7 +776,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
                     No active announcements.
                   </Typography>
                 ) : (
-                  <Box sx={{ maxHeight: 220, overflowY: "auto" }}>
+                  <Box sx={{ maxHeight: 260, overflowY: "auto" }}>
                     {announcements.map((a) => (
                       <Box
                         key={a.id}
@@ -774,7 +785,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
                           p: 1,
                           width: "100%",
                           borderRadius: 2,
-                          border: "1px solid #ddd",
+                         border: `2px solid ${borderColor}`, 
                           backgroundColor: "#fff8f6",
                         }}
                       >
@@ -898,7 +909,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
               display: "flex",
               marginLeft: "10px",
               flexDirection: "column",
-        border: `2px solid ${borderColor}`,
+              border: `2px solid ${borderColor}`,
               backgroundColor: "#fffaf5",
               alignItems: "center",
               justifyContent: "center",
@@ -912,7 +923,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
             }}
           >
             <CardContent sx={{ textAlign: "center" }}>
-              <SchoolIcon sx={{color: subtitleColor, }} fontSize="large" />
+              <SchoolIcon sx={{ color: subtitleColor, }} fontSize="large" />
               <Typography variant="h6" gutterBottom sx={{ mt: 1 }}>
                 Certificate of Registration
               </Typography>
@@ -934,7 +945,7 @@ const StudentDashboard = ({ profileImage, setProfileImage }) => {
             sx={{
               borderRadius: 3,
               boxShadow: 3,
-          border: `2px solid ${borderColor}`,
+              border: `2px solid ${borderColor}`,
               backgroundColor: "#fffaf5",
               minHeight: 170,
               transition: "transform 0.3s ease, box-shadow 0.3s ease",

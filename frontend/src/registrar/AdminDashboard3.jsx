@@ -667,10 +667,10 @@ const AdminDashboard3 = () => {
 
       <TableContainer component={Paper} sx={{ width: '100%', mb: 1 }}>
         <Table>
-          <TableHead sx={{ backgroundColor: settings?.header_color || "#1976d2", }}>
+             <TableHead sx={{ backgroundColor: settings?.header_color || "#1976d2", border: `2px solid ${borderColor}`, }}>
             <TableRow>
               {/* Left cell: Applicant ID */}
-              <TableCell sx={{ color: 'white', fontSize: '20px', fontFamily: 'Arial Black', border: 'none' }}>
+                    <TableCell sx={{ color: 'white', fontSize: '20px', fontFamily: 'Arial Black', }}>
                 Applicant ID:&nbsp;
                 <span style={{ fontFamily: "Arial", fontWeight: "normal", textDecoration: "underline" }}>
                   {person?.applicant_number || "N/A"}

@@ -28,8 +28,8 @@ import axios from "axios";
 import Unauthorized from "../components/Unauthorized";
 import LoadingOverlay from "../components/LoadingOverlay";
 import SearchIcon from "@mui/icons-material/Search";
-
-
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const RegisterProf = () => {
   const settings = useContext(SettingsContext);
@@ -146,7 +146,14 @@ const RegisterProf = () => {
     preview: "", // ✅ for image preview
   });
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+  const [snackbarSeverity, setSnackbarSeverity] = useState("success"); // success | error | info | warning
 
+  const handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") return;
+    setSnackbarOpen(false);
+  };
 
   const fetchProfessors = async () => {
     try {
@@ -282,11 +289,15 @@ const RegisterProf = () => {
     try {
       if (editData) {
         await axios.put(`http://localhost:5000/api/update_prof/${editData.prof_id}`, formData);
+        setSnackbarMessage("Professor updated successfully!");
+        setSnackbarSeverity("success");
       } else {
         await axios.post(`http://localhost:5000/api/register_prof`, formData);
+        setSnackbarMessage("Professor registered successfully!");
+        setSnackbarSeverity("success");
       }
 
-      // Delay refresh for DB to settle
+      setOpenSnackbar(true); // show snackbar
       setTimeout(() => {
         fetchProfessors();
       }, 500);
@@ -294,8 +305,11 @@ const RegisterProf = () => {
       handleCloseDialog();
     } catch (err) {
       console.error("Submit Error:", err);
-      alert(err.response?.data?.error || "An error occurred");
+      setSnackbarMessage(err.response?.data?.error || "An error occurred");
+      setSnackbarSeverity("error");
+      setOpenSnackbar(true); // show snackbar
     }
+
   };
 
   const handleEdit = (prof) => {
@@ -909,13 +923,13 @@ const RegisterProf = () => {
               </Button>
             </Stack>
 
-            {/* 🔹 Professor Information */}
             <TextField
               label="Employee ID"
               name="person_id"
               value={form.person_id}
               onChange={handleChange}
               fullWidth
+              autoComplete="off"
             />
             <TextField
               label="First Name"
@@ -923,6 +937,7 @@ const RegisterProf = () => {
               value={form.fname}
               onChange={handleChange}
               fullWidth
+              autoComplete="off"
             />
             <TextField
               label="Middle Name"
@@ -930,6 +945,7 @@ const RegisterProf = () => {
               value={form.mname}
               onChange={handleChange}
               fullWidth
+              autoComplete="off"
             />
             <TextField
               label="Last Name"
@@ -937,6 +953,7 @@ const RegisterProf = () => {
               value={form.lname}
               onChange={handleChange}
               fullWidth
+              autoComplete="off"
             />
             <TextField
               label="Email"
@@ -945,6 +962,7 @@ const RegisterProf = () => {
               value={form.email}
               onChange={handleChange}
               fullWidth
+              autoComplete="off"
             />
             {!editData && (
               <TextField
@@ -954,6 +972,7 @@ const RegisterProf = () => {
                 value={form.password}
                 onChange={handleChange}
                 fullWidth
+                autoComplete="new-password"
               />
             )}
 
@@ -992,6 +1011,17 @@ const RegisterProf = () => {
           </Button>
         </DialogActions>
       </Dialog>
+
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert severity={snackbarSeverity} sx={{ width: "100%" }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
 
 
 

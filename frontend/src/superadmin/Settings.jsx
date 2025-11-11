@@ -422,7 +422,7 @@ function Settings({ onUpdate }) {
                     </Box>
 
                     <Box mb={2}>
-                        <InputLabel>Title Color</InputLabel>
+                        <InputLabel>Title Color / Icons Color</InputLabel>
                         <Input
                             type="color"
                             value={titleColor}

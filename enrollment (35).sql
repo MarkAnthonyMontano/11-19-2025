@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 09, 2025 at 04:26 PM
+-- Generation Time: Nov 11, 2025 at 09:45 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -323,7 +323,7 @@ CREATE TABLE `dprtmnt_profs_table` (
 --
 
 INSERT INTO `dprtmnt_profs_table` (`dprtmnt_profs_id`, `dprtmnt_id`, `prof_id`) VALUES
-(1, 5, 1),
+(1, 4, 1),
 (2, 2, 2),
 (3, 2, 3),
 (4, 5, 4),
@@ -374,7 +374,10 @@ INSERT INTO `dprtmnt_profs_table` (`dprtmnt_profs_id`, `dprtmnt_id`, `prof_id`) 
 (49, 1, 62),
 (50, 1, 38),
 (51, 1, 63),
-(52, 5, 65);
+(52, 5, 65),
+(53, 5, 66),
+(54, 5, 67),
+(55, 5, 68);
 
 -- --------------------------------------------------------
 
@@ -406,7 +409,9 @@ INSERT INTO `dprtmnt_room_table` (`dprtmnt_room_id`, `dprtmnt_id`, `room_id`, `l
 (20, 2, 20, 0),
 (21, 1, 21, 0),
 (22, 5, 24, 0),
-(23, 5, 4, 0);
+(23, 5, 4, 0),
+(24, 1, 26, 0),
+(25, 1, 2, 0);
 
 -- --------------------------------------------------------
 
@@ -975,6 +980,22 @@ CREATE TABLE `enrolled_subject` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `enrolled_subject`
+--
+
+INSERT INTO `enrolled_subject` (`id`, `student_number`, `curriculum_id`, `course_id`, `active_school_year_id`, `midterm`, `finals`, `final_grade`, `grades_status`, `en_remarks`, `department_section_id`, `status`, `fe_status`, `created_at`) VALUES
+(778, '202500341', 1, 1, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40'),
+(779, '202500341', 1, 3, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-10 10:47:40'),
+(780, '202500341', 1, 5, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40'),
+(781, '202500341', 1, 6, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40'),
+(782, '202500341', 1, 4, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-10 10:47:40'),
+(783, '202500341', 1, 7, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40'),
+(784, '202500341', 1, 8, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40'),
+(785, '202500341', 1, 9, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40'),
+(786, '202500341', 1, 10, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40'),
+(787, '202500341', 1, 11, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-10 10:47:40');
+
 -- --------------------------------------------------------
 
 --
@@ -1091,7 +1112,7 @@ CREATE TABLE `page_access` (
   `id` int(11) NOT NULL,
   `page_privilege` tinyint(1) NOT NULL,
   `page_id` int(11) DEFAULT NULL,
-  `user_id` int(11) DEFAULT NULL
+  `user_id` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -1099,107 +1120,96 @@ CREATE TABLE `page_access` (
 --
 
 INSERT INTO `page_access` (`id`, `page_privilege`, `page_id`, `user_id`) VALUES
-(30, 1, 6, 61),
-(32, 1, 2, 61),
-(33, 1, 1, 61),
-(34, 1, 3, 61),
-(35, 1, 5, 61),
-(36, 1, 4, 61),
-(37, 1, 7, 61),
-(38, 1, 8, 61),
-(39, 1, 9, 61),
-(40, 1, 10, 61),
-(41, 1, 11, 61),
-(42, 1, 12, 61),
-(43, 1, 13, 61),
-(44, 1, 14, 61),
-(45, 1, 15, 61),
-(46, 1, 16, 61),
-(47, 1, 17, 61),
-(48, 1, 18, 61),
-(49, 1, 19, 61),
-(50, 1, 20, 61),
-(51, 1, 21, 61),
-(52, 1, 22, 61),
-(53, 1, 23, 61),
-(54, 1, 24, 61),
-(55, 1, 25, 61),
-(56, 1, 26, 61),
-(57, 1, 27, 61),
-(58, 1, 29, 61),
-(59, 1, 28, 61),
-(60, 1, 30, 61),
-(61, 1, 31, 61),
-(62, 1, 32, 61),
-(63, 1, 33, 61),
-(64, 1, 34, 61),
-(65, 1, 35, 61),
-(66, 1, 36, 61),
-(67, 1, 37, 61),
-(68, 1, 72, 61),
-(69, 1, 73, 61),
-(70, 1, 70, 61),
-(71, 1, 71, 61),
-(72, 1, 68, 61),
-(73, 1, 69, 61),
-(74, 1, 66, 61),
-(75, 1, 67, 61),
-(76, 1, 64, 61),
-(77, 1, 65, 61),
-(78, 1, 62, 61),
-(79, 1, 63, 61),
-(80, 1, 60, 61),
-(81, 1, 61, 61),
-(82, 1, 58, 61),
-(83, 1, 59, 61),
-(84, 1, 56, 61),
-(85, 1, 57, 61),
-(86, 1, 54, 61),
-(87, 1, 52, 61),
-(88, 1, 55, 61),
-(89, 1, 53, 61),
-(90, 1, 50, 61),
-(92, 1, 48, 61),
-(93, 1, 49, 61),
-(94, 1, 46, 61),
-(95, 1, 47, 61),
-(96, 1, 51, 61),
-(97, 1, 44, 61),
-(98, 1, 45, 61),
-(99, 1, 42, 61),
-(100, 1, 43, 61),
-(101, 1, 41, 61),
-(102, 1, 39, 61),
-(103, 1, 96, 61),
-(104, 1, 97, 61),
-(105, 1, 98, 61),
-(106, 1, 99, 61),
-(107, 1, 100, 61),
-(108, 1, 101, 61),
-(109, 1, 86, 61),
-(110, 1, 87, 61),
-(111, 1, 88, 61),
-(112, 1, 89, 61),
-(114, 1, 90, 61),
-(115, 1, 91, 61),
-(116, 1, 92, 61),
-(117, 1, 93, 61),
-(118, 1, 94, 61),
-(119, 1, 85, 61),
-(120, 1, 82, 61),
-(121, 1, 83, 61),
-(122, 1, 84, 61),
-(123, 1, 95, 61),
-(124, 1, 80, 61),
-(125, 1, 78, 61),
-(126, 1, 79, 61),
-(127, 1, 76, 61),
-(128, 1, 77, 61),
-(129, 1, 74, 61),
-(130, 1, 75, 61),
-(131, 1, 81, 61),
-(132, 1, 38, 61),
-(133, 1, 40, 61);
+(30, 1, 6, '61'),
+(40, 1, 10, '61'),
+(42, 1, 12, '61'),
+(43, 1, 13, '61'),
+(44, 1, 14, '61'),
+(45, 1, 15, '61'),
+(46, 1, 16, '61'),
+(47, 1, 17, '61'),
+(48, 1, 18, '61'),
+(49, 1, 19, '61'),
+(50, 1, 20, '61'),
+(51, 1, 21, '61'),
+(52, 1, 22, '61'),
+(53, 1, 23, '61'),
+(54, 1, 24, '61'),
+(55, 1, 25, '61'),
+(56, 1, 26, '61'),
+(57, 1, 27, '61'),
+(58, 1, 29, '61'),
+(59, 1, 28, '61'),
+(60, 1, 30, '61'),
+(61, 1, 31, '61'),
+(62, 1, 32, '61'),
+(63, 1, 33, '61'),
+(64, 1, 34, '61'),
+(65, 1, 35, '61'),
+(66, 1, 36, '61'),
+(68, 1, 72, '61'),
+(69, 1, 73, '61'),
+(70, 1, 70, '61'),
+(71, 1, 71, '61'),
+(72, 1, 68, '61'),
+(73, 1, 69, '61'),
+(74, 1, 66, '61'),
+(75, 1, 67, '61'),
+(77, 1, 65, '61'),
+(78, 1, 62, '61'),
+(79, 1, 63, '61'),
+(80, 1, 60, '61'),
+(81, 1, 61, '61'),
+(82, 1, 58, '61'),
+(83, 1, 59, '61'),
+(84, 1, 56, '61'),
+(85, 1, 57, '61'),
+(86, 1, 54, '61'),
+(88, 1, 55, '61'),
+(89, 1, 53, '61'),
+(90, 1, 50, '61'),
+(92, 1, 48, '61'),
+(93, 1, 49, '61'),
+(94, 1, 46, '61'),
+(95, 1, 47, '61'),
+(97, 1, 44, '61'),
+(98, 1, 45, '61'),
+(99, 1, 42, '61'),
+(100, 1, 43, '61'),
+(101, 1, 41, '61'),
+(102, 1, 39, '61'),
+(103, 1, 96, '61'),
+(104, 1, 97, '61'),
+(106, 1, 99, '61'),
+(107, 1, 100, '61'),
+(108, 1, 101, '61'),
+(109, 1, 86, '61'),
+(110, 1, 87, '61'),
+(111, 1, 88, '61'),
+(112, 1, 89, '61'),
+(114, 1, 90, '61'),
+(115, 1, 91, '61'),
+(116, 1, 92, '61'),
+(118, 1, 94, '61'),
+(119, 1, 85, '61'),
+(120, 1, 82, '61'),
+(121, 1, 83, '61'),
+(122, 1, 84, '61'),
+(123, 1, 95, '61'),
+(124, 1, 80, '61'),
+(125, 1, 78, '61'),
+(126, 1, 79, '61'),
+(127, 1, 76, '61'),
+(128, 1, 77, '61'),
+(129, 1, 74, '61'),
+(130, 1, 75, '61'),
+(131, 1, 81, '61'),
+(132, 1, 38, '61'),
+(133, 1, 40, '61'),
+(136, 1, 98, '61'),
+(146, 1, 93, '61'),
+(158, 1, 52, '61'),
+(159, 1, 2, '61');
 
 -- --------------------------------------------------------
 
@@ -1335,9 +1345,9 @@ CREATE TABLE `period_status` (
 --
 
 INSERT INTO `period_status` (`id`, `description`, `status`) VALUES
-(1, 'Midterm', 1),
+(1, 'Midterm', 0),
 (2, 'Finals', 0),
-(3, 'Final Grading Period', 0);
+(3, 'Final Grading Period', 1);
 
 -- --------------------------------------------------------
 
@@ -1389,7 +1399,8 @@ INSERT INTO `person_status_table` (`id`, `person_id`, `exam_status`, `requiremen
 (9, 306, 0, 0, 0, 1, 0, 0),
 (10, 307, 0, 0, 0, 1, 0, 0),
 (11, 309, 0, 0, 0, 1, 0, 0),
-(12, 323, 0, 0, 0, 1, 0, 0);
+(12, 323, 0, 0, 0, 1, 0, 0),
+(13, 341, 0, 0, 0, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1619,7 +1630,15 @@ INSERT INTO `person_table` (`person_id`, `student_number`, `profile_img`, `campu
 (307, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Montano', 'Mark Anthony', 'Placido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-16', 1),
 (308, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Ciruela', 'Genny', 'D.', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-09-16', 1),
 (1382, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Montano', 'Mark Anthony', 'Placido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'markmontano888@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
-(1347, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Montano', 'Mark Anthony', 'Placido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-01', 1);
+(1347, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Montano', 'Mark Anthony', 'Placido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2025-10-01', 1),
+(341, NULL, '2025100232_1by1_2025.png', 0, 'Techvoc', 'Returnee', 'Senior High School Graduate', '15', '12', '13', 'First Year', 'Kulit mo', 'Tamad', 'J', NULL, 'Johnny', '5\'5', '53', '123456789012', NULL, 0, NULL, NULL, NULL, '2000-10-09', 25, 'Manila, Philippines', 'Tagalog, English', 'SPANISH', 'Free Methodist', 'Single', 'Bantoanon', '+639953242510', 'montano.ma.bsinfotech@gmail.com', '19 G Dona yayang Street Libis', 'Ihubok I (Kaychanarianan)', '4100', 'Region II (Cagayan Valley)', 'Batanes', 'Basco (Capital)', 'DSWD1234567', 1, '19 G Dona yayang Street Libis', 'Ihubok I (Kaychanarianan)', '4100', 'Region II (Cagayan Valley)', 'Batanes', 'Basco (Capital)', 'DSWD1234567', 0, 1, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Mother', 'Montano', 'Mark Anthony', 'Placido', NULL, 'Benny', '19 G Dona yayang Street Libis', '09953242510', 'montano.ma.bsinfotech@gmail.com', '80,000 and below', 'High School/Junior High School', 'Rizal High School', 'Pasig City', 'STEM', 'With Honors', 92.59, 2022, 'Senior High School', 'NTC', 'Mendiola', 'BSIT', 'With high honor', 66.00, 2022, 'Information and Communications Technology (ICT)', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2025-11-10', 1),
+(1383, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Montano', 'Mark Anthony', 'Placido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'markmontano222@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(1384, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(1385, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(1386, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(1387, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(1388, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'gagsagsa', 'Mark Anthonyfas', 'Placidohfg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'montano.ma.bsinfotechs@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1),
+(1389, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'Montano', 'Mark Anthony', 'Placido', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'markmontano5221@gmail.com', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -1630,6 +1649,7 @@ INSERT INTO `person_table` (`person_id`, `student_number`, `profile_img`, `campu
 CREATE TABLE `prof_table` (
   `prof_id` int(11) NOT NULL,
   `person_id` int(11) DEFAULT NULL,
+  `employee_id` varchar(255) DEFAULT NULL,
   `profile_image` varchar(255) NOT NULL,
   `fname` varchar(100) DEFAULT NULL,
   `mname` varchar(100) DEFAULT NULL,
@@ -1644,46 +1664,49 @@ CREATE TABLE `prof_table` (
 -- Dumping data for table `prof_table`
 --
 
-INSERT INTO `prof_table` (`prof_id`, `person_id`, `profile_image`, `fname`, `mname`, `lname`, `email`, `password`, `status`, `role`) VALUES
-(1, 1, '', 'Hazel', 'Fogata', 'Anuncio', 'hazel.anuncio@earist.edu.ph', 'ANUNCIO', 1, 'faculty'),
-(2, 2, '', 'Eleazar', 'B.', 'Bernales', 'eleazar.bernales@earist.edu.ph', 'BERNALES', 0, 'faculty'),
-(3, 3, '', 'Lester', 'Dela Cruz', 'Bernardino', 'lester.bernardino@earist.edu.ph', 'BERNARDINO', 0, 'faculty'),
-(4, 4, '', 'Carlito', '', 'Biares', 'carlito.biares@earist.edu.ph', 'BIARES', 0, 'faculty'),
-(5, 5, '', 'James Darryl', 'Dela Cruz', 'Bungay', 'james.bungay@earist.edu.ph', 'BUNGAY', 0, 'faculty'),
-(6, 6, '', 'Renz Angelo', 'De Vera', 'Cadaoas', 'renz.cadaoas@earist.edu.ph', 'CADAOAS', 0, 'faculty'),
-(7, 7, '', 'Nerissa', 'Bugarin', 'Capili', 'nerissa.capili@earist.edu.ph', 'CAPILI', 0, 'faculty'),
-(8, 8, '', 'Romeo', 'B.', 'Capucao', 'romeo.capucao@earist.edu.ph', 'CAPUCAO', 0, 'faculty'),
-(9, 9, '', 'Ernanie', 'Molina', 'Carlos', 'ernanie.carlos@earist.edu.ph', 'CARLOS', 0, 'faculty'),
-(10, 10, '', 'Harold', 'Aspa', 'Casimira', 'harold.casimira@earist.edu.ph', 'CASIMIRA', 0, 'faculty'),
-(11, 11, '', 'Rosel', 'Ortiz', 'Cipriano', 'rosel.cipriano@earist.edu.ph', 'CIPRIANO', 0, 'faculty'),
-(12, 12, '', 'Janchloe', 'M', 'Duyan', 'janchloe.duyan@earist.edu.ph', 'DUYAN', 0, 'faculty'),
-(13, 13, '', 'Arlene', 'Peña', 'Evangelista', 'arlene.evangelista@earist.edu.ph', 'EVANGELISTA', 0, 'faculty'),
-(14, 14, '', 'Joevelyn', 'Waje', 'Fajardo', 'joevelyn.fajardo@earist.edu.ph', 'FAJARDO', 0, 'faculty'),
-(15, 15, '', 'Dennis', 'Berboso', 'Gonzales', 'dennis.gonzales@earist.edu.ph', 'GONZALES', 0, 'faculty'),
-(16, 16, '', 'Merlita', 'Cruz', 'Latip', 'merlita.latip@earist.edu.ph', 'LATIP', 0, 'faculty'),
-(17, 17, '', 'Reeneir', 'Ramos', 'Ledesma', 'reeneir.ledesma@earist.edu.ph', 'LEDESMA', 0, 'faculty'),
-(18, 18, '', 'Dennis', 'Dela Peña', 'Mangubat', 'dennis.mangubat@earist.edu.ph', 'MANGUBAT', 0, 'faculty'),
-(19, 19, '', 'Sheila Marie', 'Mobo', 'Matias', 'sheila.matias@earist.edu.ph', 'MATIAS', 0, 'faculty'),
-(20, 20, '', 'Joseph', 'Tarrayo', 'Moraca', 'joseph.moraca@earist.edu.ph', 'MORACA', 0, 'faculty'),
-(21, 21, '', 'Ruth Lareza', 'Aguilar', 'Morales', 'ruth.morales@earist.edu.ph', 'MORALES', 0, 'faculty'),
-(22, 22, '', 'Mark Kenneth', 'Barnobal', 'Nicart', 'mark.nicart@earist.edu.ph', 'NICART', 0, 'faculty'),
-(23, 23, '', 'Rodora', 'Tanglao', 'Oliveros', 'rodora.oliveros@earist.edu.ph', 'OLIVEROS', 0, 'faculty'),
-(24, 24, '', 'Abigail', 'J.', 'Purificacion', 'abigail.purificacion@earist.edu.ph', 'PURIFICACION', 0, 'faculty'),
-(25, 25, '', 'Raynald', 'C', 'Redondo', 'raynald.redondo@earist.edu.ph', 'REDONDO', 0, 'faculty'),
-(26, 26, '', 'Hiromi', '', 'Rivas', 'hiromi.rivas@earist.edu.ph', 'RIVAS', 0, 'faculty'),
-(27, 27, '', 'Eula Luz Jasmine Dioneo', '', 'Sandoval', 'eula.sandoval@earist.edu.ph', 'SANDOVAL', 0, 'faculty'),
-(28, 28, '', 'Al', 'Ferrer', 'Santiago', 'al.santiago@earist.edu.ph', 'SANTIAGO', 0, 'faculty'),
-(29, 29, '', 'Larex', 'Bartolome', 'Tagalog', 'larex.tagalog@earist.edu.ph', 'TAGALOG', 0, 'faculty'),
-(30, 30, '', 'Jayson', 'D.', 'Tolentino', 'jayson.tolentino@earist.edu.ph', 'TOLENTINO', 0, 'faculty'),
-(31, 31, '', 'Edmund Sinagub', NULL, 'Almazan', 'edmund.almazan@earist.edu.ph', 'ALMAZAN', 0, 'faculty'),
-(32, 32, '', 'Jesus', 'de los Santos', 'Paguigan', 'jesus.paguigan@earist.edu.ph', 'PAGUIGAN', 0, 'faculty'),
-(33, 33, '', 'Kathleen', NULL, 'Dimaano', 'kathleen.dimaano@earist.edu.ph', 'DIMAANO', 0, 'faculty'),
-(34, 34, '', 'Charlene', NULL, 'Ronda', 'charlene.ronda@earist.edu.ph', 'RONDA', 0, 'faculty'),
-(35, 35, '', 'Maria Jasmine', NULL, 'Macasil', 'jasmine.macasil@earist.edu.ph', 'MACASIL', 0, 'faculty'),
-(36, 36, '', 'Jefferson', NULL, 'Costales', 'jefferson.costales@earist.edu.ph', 'COSTALES', 0, 'faculty'),
-(37, 37, '', 'Arjo', NULL, 'Ladia', 'arjo.ladia@earist.edu.ph', 'LADIA', 0, 'faculty'),
-(38, 38, '23838_profile_image_2025.webp', 'Mark Anthony', 'Placido', 'Montano', 'markmontano999@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 'faculty'),
-(63, 98, '98_ProfessorProfile_2025.png', 'Dhani', 'San', 'Jose', 'disanjose@earist.edu.ph', '$2b$10$/XhdvzV/4rugRbZH5gWafenpXBkbuJT2pjsopS85Mj27vDI2ZjFxm', 1, 'faculty');
+INSERT INTO `prof_table` (`prof_id`, `person_id`, `employee_id`, `profile_image`, `fname`, `mname`, `lname`, `email`, `password`, `status`, `role`) VALUES
+(1, 1, NULL, '', 'Hazel', 'Fogata', 'Anuncio', 'hazel.anuncio@earist.edu.ph', 'ANUNCIO', 1, 'faculty'),
+(2, 2, NULL, '', 'Eleazar', 'B.', 'Bernales', 'eleazar.bernales@earist.edu.ph', 'BERNALES', 0, 'faculty'),
+(3, 3, NULL, '', 'Lester', 'Dela Cruz', 'Bernardino', 'lester.bernardino@earist.edu.ph', 'BERNARDINO', 0, 'faculty'),
+(4, 4, NULL, '', 'Carlito', '', 'Biares', 'carlito.biares@earist.edu.ph', 'BIARES', 0, 'faculty'),
+(5, 5, NULL, '', 'James Darryl', 'Dela Cruz', 'Bungay', 'james.bungay@earist.edu.ph', 'BUNGAY', 0, 'faculty'),
+(6, 6, NULL, '', 'Renz Angelo', 'De Vera', 'Cadaoas', 'renz.cadaoas@earist.edu.ph', 'CADAOAS', 0, 'faculty'),
+(7, 7, NULL, '', 'Nerissa', 'Bugarin', 'Capili', 'nerissa.capili@earist.edu.ph', 'CAPILI', 0, 'faculty'),
+(8, 8, NULL, '', 'Romeo', 'B.', 'Capucao', 'romeo.capucao@earist.edu.ph', 'CAPUCAO', 0, 'faculty'),
+(9, 9, NULL, '', 'Ernanie', 'Molina', 'Carlos', 'ernanie.carlos@earist.edu.ph', 'CARLOS', 0, 'faculty'),
+(10, 10, NULL, '', 'Harold', 'Aspa', 'Casimira', 'harold.casimira@earist.edu.ph', 'CASIMIRA', 0, 'faculty'),
+(11, 11, NULL, '', 'Rosel', 'Ortiz', 'Cipriano', 'rosel.cipriano@earist.edu.ph', 'CIPRIANO', 0, 'faculty'),
+(12, 12, NULL, '', 'Janchloe', 'M', 'Duyan', 'janchloe.duyan@earist.edu.ph', 'DUYAN', 0, 'faculty'),
+(13, 13, NULL, '', 'Arlene', 'Peña', 'Evangelista', 'arlene.evangelista@earist.edu.ph', 'EVANGELISTA', 0, 'faculty'),
+(14, 14, NULL, '', 'Joevelyn', 'Waje', 'Fajardo', 'joevelyn.fajardo@earist.edu.ph', 'FAJARDO', 0, 'faculty'),
+(15, 15, NULL, '', 'Dennis', 'Berboso', 'Gonzales', 'dennis.gonzales@earist.edu.ph', 'GONZALES', 0, 'faculty'),
+(16, 16, NULL, '', 'Merlita', 'Cruz', 'Latip', 'merlita.latip@earist.edu.ph', 'LATIP', 0, 'faculty'),
+(17, 17, NULL, '', 'Reeneir', 'Ramos', 'Ledesma', 'reeneir.ledesma@earist.edu.ph', 'LEDESMA', 0, 'faculty'),
+(18, 18, NULL, '', 'Dennis', 'Dela Peña', 'Mangubat', 'dennis.mangubat@earist.edu.ph', 'MANGUBAT', 0, 'faculty'),
+(19, 19, NULL, '', 'Sheila Marie', 'Mobo', 'Matias', 'sheila.matias@earist.edu.ph', 'MATIAS', 0, 'faculty'),
+(20, 20, NULL, '', 'Joseph', 'Tarrayo', 'Moraca', 'joseph.moraca@earist.edu.ph', 'MORACA', 0, 'faculty'),
+(21, 21, NULL, '', 'Ruth Lareza', 'Aguilar', 'Morales', 'ruth.morales@earist.edu.ph', 'MORALES', 0, 'faculty'),
+(22, 22, NULL, '', 'Mark Kenneth', 'Barnobal', 'Nicart', 'mark.nicart@earist.edu.ph', 'NICART', 0, 'faculty'),
+(23, 23, NULL, '', 'Rodora', 'Tanglao', 'Oliveros', 'rodora.oliveros@earist.edu.ph', 'OLIVEROS', 0, 'faculty'),
+(24, 24, NULL, '', 'Abigail', 'J.', 'Purificacion', 'abigail.purificacion@earist.edu.ph', 'PURIFICACION', 0, 'faculty'),
+(25, 25, NULL, '', 'Raynald', 'C', 'Redondo', 'raynald.redondo@earist.edu.ph', 'REDONDO', 0, 'faculty'),
+(26, 26, NULL, '', 'Hiromi', '', 'Rivas', 'hiromi.rivas@earist.edu.ph', 'RIVAS', 0, 'faculty'),
+(27, 27, NULL, '', 'Eula Luz Jasmine Dioneo', '', 'Sandoval', 'eula.sandoval@earist.edu.ph', 'SANDOVAL', 0, 'faculty'),
+(28, 28, NULL, '', 'Al', 'Ferrer', 'Santiago', 'al.santiago@earist.edu.ph', 'SANTIAGO', 0, 'faculty'),
+(29, 29, NULL, '', 'Larex', 'Bartolome', 'Tagalog', 'larex.tagalog@earist.edu.ph', 'TAGALOG', 0, 'faculty'),
+(30, 30, NULL, '', 'Jayson', 'D.', 'Tolentino', 'jayson.tolentino@earist.edu.ph', 'TOLENTINO', 0, 'faculty'),
+(31, 31, NULL, '', 'Edmund Sinagub', NULL, 'Almazan', 'edmund.almazan@earist.edu.ph', 'ALMAZAN', 0, 'faculty'),
+(32, 32, NULL, '', 'Jesus', 'de los Santos', 'Paguigan', 'jesus.paguigan@earist.edu.ph', 'PAGUIGAN', 0, 'faculty'),
+(33, 33, NULL, '', 'Kathleen', NULL, 'Dimaano', 'kathleen.dimaano@earist.edu.ph', 'DIMAANO', 0, 'faculty'),
+(34, 34, NULL, '', 'Charlene', NULL, 'Ronda', 'charlene.ronda@earist.edu.ph', 'RONDA', 0, 'faculty'),
+(35, 35, NULL, '', 'Maria Jasmine', NULL, 'Macasil', 'jasmine.macasil@earist.edu.ph', 'MACASIL', 0, 'faculty'),
+(36, 36, NULL, '', 'Jefferson', NULL, 'Costales', 'jefferson.costales@earist.edu.ph', 'COSTALES', 0, 'faculty'),
+(37, 37, NULL, '', 'Arjo', NULL, 'Ladia', 'arjo.ladia@earist.edu.ph', 'LADIA', 0, 'faculty'),
+(38, 38, NULL, '23838_profile_image_2025.webp', 'Mark Anthony', 'Placido', 'Montano', 'markmontano999@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 'faculty'),
+(63, 98, NULL, '98_ProfessorProfile_2025.png', 'Dhani', 'San', 'Jose', 'disanjose@earist.edu.ph', '$2b$10$/XhdvzV/4rugRbZH5gWafenpXBkbuJT2pjsopS85Mj27vDI2ZjFxm', 1, 'faculty'),
+(66, 567890, NULL, '567890_ProfessorProfile_2025.jpg', 'dhani', 'ignacio', 'san jose', 'dhanisanjoseignacio@gmail.com', '$2b$10$gF8lfr.zabcwktuTxRapVesbwq7eCpNaKjucIknawNPSr9N7syhfa', 0, 'faculty'),
+(67, 2432532, NULL, '2432532_ProfessorProfile_2025.png', 'dfasdas', '346fsdsd', 'fasdtgsdg', 'sheila.matias@earist.edu.ph', '$2b$10$mdUeu1cnPE/BKyTj17Y65urVxNeXKAapH4/.XczMWc//CC6jWIfaq', 0, 'faculty'),
+(68, 1252151, NULL, '1252151_ProfessorProfile_2025.jpg', 'sdhsjg436346', 'jgjg', 'jgjgh', 'montano.ma.bsinfotech1245@gmail.com', '$2b$10$G.am9naNQLKpa5SjUYHIquSQeE8g1NaLEvIuTKVyD0lLgZACz9sC2', 0, 'faculty');
 
 -- --------------------------------------------------------
 
@@ -1777,7 +1800,7 @@ CREATE TABLE `program_tagging_table` (
 --
 
 INSERT INTO `program_tagging_table` (`program_tagging_id`, `curriculum_id`, `year_level_id`, `semester_id`, `course_id`) VALUES
-(1, 1, 1, 1, 1),
+(1, 1, 2, 1, 1),
 (2, 1, 1, 2, 2),
 (3, 1, 1, 1, 3),
 (4, 1, 1, 1, 4),
@@ -1941,7 +1964,12 @@ INSERT INTO `requirement_uploads` (`upload_id`, `requirements_id`, `person_id`, 
 (179, 2, 323, NULL, '2025100214_Form138_2025.pdf', 'examinationpermit.pdf', 'GWA did not meet the Requirements', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:20', NULL),
 (180, 3, 323, NULL, '2025100214_GoodMoralCharacter_2025.pdf', 'officeoftheregistrar.pdf', 'FORM 138 IS NOT COMPLETE', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:23', NULL),
 (181, 4, 323, NULL, '2025100214_CertificateOfGraduatingClass_2025.pdf', 'IAAS2_Midterm Activity No 2.pdf', 'Have failed and incomplete grades', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:28', NULL),
-(182, 5, 323, NULL, '2025100214_VaccineCard_2025.pdf', 'examinationpermit.pdf', NULL, 1, 'Disapproved', NULL, NULL, '2025-10-01 16:05:32', NULL);
+(182, 5, 323, NULL, '2025100214_VaccineCard_2025.pdf', 'examinationpermit.pdf', NULL, 1, 'Disapproved', NULL, NULL, '2025-10-01 16:05:32', NULL),
+(183, 1, 341, NULL, '2025100232_PSA_2025.png', 'admin.png', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:11', NULL),
+(184, 2, 341, NULL, '2025100232_F138_2025.jpg', 'solo.jpg', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:15', NULL),
+(185, 3, 341, NULL, '2025100232_CGMC_2025.jpg', 'thumbmark.jpg', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:20', NULL),
+(186, 4, 341, NULL, '2025100232_CBGC_2025.jpg', 'sung jin woo.jpg', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:23', NULL),
+(187, 5, 341, NULL, '2025100232_CVC_2025.png', 'admin.png', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:27', NULL);
 
 -- --------------------------------------------------------
 
@@ -2141,7 +2169,16 @@ CREATE TABLE `student_curriculum_table` (
 
 INSERT INTO `student_curriculum_table` (`id`, `student_numbering_id`, `curriculum_id`) VALUES
 (1, 123, 14),
-(2, 1, 1);
+(2, 1, 25),
+(3, 124, 1),
+(4, 124, 1),
+(5, 124, 1),
+(6, 124, 1),
+(7, 124, 1),
+(8, 124, 1),
+(9, 125, 25),
+(10, 126, 14),
+(11, 127, 14);
 
 -- --------------------------------------------------------
 
@@ -2159,6 +2196,18 @@ CREATE TABLE `student_evaluation_table` (
   `question_answer` int(11) NOT NULL DEFAULT 0,
   `answered_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `student_evaluation_table`
+--
+
+INSERT INTO `student_evaluation_table` (`id`, `student_number`, `school_year_id`, `prof_id`, `course_id`, `question_id`, `question_answer`, `answered_at`) VALUES
+(22, '202500341', 16, 63, 4, 7, 1, '2025-11-10 11:15:11'),
+(23, '202500341', 16, 63, 4, 8, 3, '2025-11-10 11:15:11'),
+(24, '202500341', 16, 63, 4, 9, 2, '2025-11-10 11:15:11'),
+(25, '202500341', 16, NULL, 3, 7, 4, '2025-11-10 11:15:23'),
+(26, '202500341', 16, NULL, 3, 8, 3, '2025-11-10 11:15:23'),
+(27, '202500341', 16, NULL, 3, 9, 4, '2025-11-10 11:15:23');
 
 -- --------------------------------------------------------
 
@@ -2306,7 +2355,11 @@ INSERT INTO `student_numbering_table` (`id`, `student_number`, `person_id`) VALU
 (120, '200-0153', 1378),
 (121, '200-0152', 1379),
 (122, '200-0145', 1380),
-(123, '224-06342M', 1382);
+(123, '224-06342M', 1382),
+(124, '202500341', 341),
+(125, '254373', 1383),
+(126, '532151', 1388),
+(127, '254373', 1389);
 
 -- --------------------------------------------------------
 
@@ -2392,7 +2445,8 @@ INSERT INTO `student_status_table` (`id`, `student_number`, `active_curriculum`,
 (96, '202500306', 1, '1', 1, 0, 0),
 (97, '202500307', 0, '1', 0, 0, 0),
 (98, '202500309', 0, '1', 0, 0, 0),
-(99, '202500323', 0, '1', 0, 0, 0);
+(99, '202500323', 0, '1', 0, 0, 0),
+(100, '202500341', 1, '1', 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2427,7 +2481,9 @@ INSERT INTO `time_table` (`id`, `room_day`, `school_time_start`, `school_time_en
 (31, 4, '10:00 AM', '12:00 PM', 7, 2, 38, 21, 12),
 (32, 3, '12:00 PM', '3:00 PM', 2, 15, 63, 21, 12),
 (33, 6, '8:00 AM', '10:00 AM', 4, 11, 63, 21, 12),
-(34, 1, '7:00 AM', '10:00 AM', 1, 1, 38, 21, 3);
+(34, 1, '7:00 AM', '10:00 AM', 1, 1, 38, 21, 3),
+(35, 2, '10:00 AM', '12:00 PM', 2, 1, 38, 21, 16),
+(36, 2, '7:00 AM', '8:00 AM', 1, 15, 38, 26, 16);
 
 -- --------------------------------------------------------
 
@@ -2455,7 +2511,7 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `person_id`, `employee_id`, `profile_picture`, `role`, `last_name`, `middle_name`, `first_name`, `email`, `password`, `status`, `dprtmnt_id`) VALUES
-(1, 1, NULL, NULL, 'student', NULL, NULL, NULL, 'markmontao2671@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 1),
+(1, 1, NULL, NULL, 'student', NULL, NULL, NULL, 'markmontao2671@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 6),
 (2, 4, NULL, NULL, 'student', NULL, NULL, NULL, 'markmontano0626@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, NULL),
 (12, 13, NULL, NULL, 'student', NULL, NULL, NULL, 'benjamin.anderson13@example.com', '$2b$10$QEsrP1R1oVa.eZiqlZRgoeFaaIJSX2ZuR9DhZvArwINLs3mR2a/cm', 0, NULL),
 (13, 14, NULL, NULL, 'student', NULL, NULL, NULL, 'ava.thomas14@example.com', '$2b$10$Bqh2HDkbbs0PabLc1ycQpOYj4RBqeb4rR7b/Iu8B5b3mM7cAFPY8W', 0, NULL),
@@ -2517,14 +2573,22 @@ INSERT INTO `user_accounts` (`id`, `person_id`, `employee_id`, `profile_picture`
 (70, 57, NULL, NULL, 'student', NULL, NULL, NULL, 'nathan.reed57@example.com', '$2b$10$jnUt93mOT7dY3lOJ7GAkMutqEzQIg3FR42FBIs.CRiYbZyrD0NCly', 0, NULL),
 (71, 59, NULL, NULL, 'student', NULL, NULL, NULL, 'levi.morgan59@example.com', '$2b$10$b9kBNyc6ZfQLV1TIB2Jm5.NSQhp8YsQMItIxnJTA6otBZWuoYd6lS', 0, NULL),
 (72, 60, NULL, NULL, 'student', NULL, NULL, NULL, 'mecasio.a.bsinfotech@gmail.com', '$2b$10$mgM73SADDUd.J5AZmNh38.0t9LQaQLbpQC/fCNYGH/1dB.KRy567q', 1, NULL),
-(73, 61, '224-06342M', '224-06342M_profile_image_2025.png', 'registrar', 'Montano', 'Placido', 'Mark Anthony', 'markmontano522@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 5),
+(73, 61, '224-06342M', '224-06342M_profile_image_2025.jpg', 'registrar', 'Montano', 'Placido', 'Mark Anthony', 'markmontano522@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 0, 5),
 (74, 306, NULL, NULL, 'student', NULL, NULL, NULL, 'delacruz.lc.bsinfotech@gmail.com', '$2b$10$0euJr9pUR.su/PpmOIENd..YKBEZCP/aBsKhjyfnmWsE1kJyRb56a', NULL, NULL),
 (75, 307, NULL, NULL, 'student', NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', '$2b$10$KtKN9/cT9fuTOPJzEe6TLOSkcMF61D.WIN8Mh5p2l40f2aLH2SXna', NULL, NULL),
 (76, 309, NULL, NULL, 'student', NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', '$2b$10$wzhCvWPfpU.hKrvkpf/m..LDAv4lbMSTXzHWsxliegtvNB3AXoR9u', NULL, NULL),
 (77, 323, NULL, NULL, 'student', NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', '$2b$10$XnfO0iS1WJD.TN75/oesJ.vKbrYdueEa65axVeSwraKm7OMZb/wZG', NULL, NULL),
-(78, 1358, NULL, NULL, 'registrar', 'Pedro', 'Juan', 'Penduco', 'markmontano111@gmail.com', '$2b$10$uk40j.VZLXGZClaAd3Upr.I7dDtu2y05KNO7H9y18Wf41vzT5Y8T6', 1, 2),
+(78, 1358, '51235256789', NULL, 'registrar', 'Pedro', 'Juan', 'Penduco', 'markmontano111@gmail.com', '$2b$10$uk40j.VZLXGZClaAd3Upr.I7dDtu2y05KNO7H9y18Wf41vzT5Y8T6', 1, 2),
 (79, 1381, '111111', NULL, 'registrar', 'Dhani', 'D. ', 'San Jose', 'disanjose@gmail.com', '$2b$10$gT9D98Juy/tht8U.ZIUwyecnp4BPpOECKwzVuR6CvYw6UkxQmnHdO', 1, 3),
-(80, 1382, NULL, 'undefined_profile.png', 'student', 'Montano', 'Placido', 'Mark Anthony', 'markmontano888@gmail.com', '$2b$10$8HCsU/TuwWOZAN5/HqYRL.Dyhwg5vK6trjvaNStVLdLF7hdc87N1S', 1, 5);
+(80, 1382, NULL, 'undefined_profile.png', 'student', 'Montano', 'Placido', 'Mark Anthony', 'markmontano888@gmail.com', '$2b$10$8HCsU/TuwWOZAN5/HqYRL.Dyhwg5vK6trjvaNStVLdLF7hdc87N1S', 1, 5),
+(81, 341, NULL, NULL, 'student', NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', '$2b$10$mwAgpMiEbt7UQKoketz/hei3/ibD9QL/jh5UHMrfxu5ihy7/VHR3G', 1, 6),
+(82, 1383, NULL, NULL, 'student', 'Montano', 'Placido', 'Mark Anthony', 'markmontano222@gmail.com', '$2b$10$AdN/pSDBTNMvbj9mbcmsMu33VqTcwyfu/rRkSGOCM0TxKjFT7Nbdi', 1, 7),
+(83, 1384, '7890-', '7890-_1762782743823.png', 'registrar', 'Montano', 'Placido', 'Mark Anthony', 'markmontano5511@gmail.com', '$2b$10$JfZE0L8rPGTdJxYwPjgTYeWgRZnp3IClupCTk6yDiOtuEVJn7wx2W', 1, 7),
+(84, 1385, '7890-', '7890-_1762783582090.png', 'registrar', 'Montano', 'Placido', 'Mark Anthony', 'markmontano67890@gmail.com', '$2b$10$ifEgWEHLffScWkGKsXLWBuuv9d9wWfVBywgtM2mKf2ahKh70L1rju', 1, 5),
+(85, 1386, '512352', '512352_1762788917421.jpg', 'registrar', 'rsdfsdf', 'dfhf', 'gjaDAS', 'markmontano5436346@gmail.com', '$2b$10$tQBJ7Z4MO141a3alWvleq.PB4GwVTSiD5worknie3hB1fTwg/YlRq', 0, 6),
+(86, 1387, '325235', '325235_1762789382949.jpg', 'registrar', 'hgfhfdgh', 'gfd', 'gdfgdf', 'markmontano511@gmail.com', '$2b$10$QhFsBQvkQsYDHwmKZQIyB.flx2Q/LEV1ZU0U2ovoJNJ1jUg8etJgW', 1, 8),
+(87, 1388, NULL, NULL, 'student', 'Montanofsaagdfgf', 'Placidohfg', 'Mark Anthonyfas', 'montano.ma.bsinfotechs@gmail.com', '$2b$10$5AeO49RhYB0GX7attPPhhukQi753msj3YuYUNv4Utrzi6VN61L1ry', 1, 5),
+(88, 1389, NULL, NULL, 'student', 'Montano', 'Placido', 'Mark Anthony', 'markmontano5221@gmail.com', '$2b$10$gbW57yRTYaRVFrcN3Ad8aO.WjHIyMhBEeaF9cYCsZ5dVNlSUsgK8W', 1, 5);
 
 -- --------------------------------------------------------
 
@@ -2857,13 +2921,13 @@ ALTER TABLE `dprtmnt_curriculum_table`
 -- AUTO_INCREMENT for table `dprtmnt_profs_table`
 --
 ALTER TABLE `dprtmnt_profs_table`
-  MODIFY `dprtmnt_profs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `dprtmnt_profs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `dprtmnt_room_table`
 --
 ALTER TABLE `dprtmnt_room_table`
-  MODIFY `dprtmnt_room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `dprtmnt_room_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT for table `dprtmnt_section_table`
@@ -2881,7 +2945,7 @@ ALTER TABLE `dprtmnt_table`
 -- AUTO_INCREMENT for table `enrolled_subject`
 --
 ALTER TABLE `enrolled_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=778;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=788;
 
 --
 -- AUTO_INCREMENT for table `evaluation_table`
@@ -2899,7 +2963,7 @@ ALTER TABLE `medical_requirements`
 -- AUTO_INCREMENT for table `page_access`
 --
 ALTER TABLE `page_access`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=160;
 
 --
 -- AUTO_INCREMENT for table `page_table`
@@ -2923,19 +2987,19 @@ ALTER TABLE `person_prof_table`
 -- AUTO_INCREMENT for table `person_status_table`
 --
 ALTER TABLE `person_status_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `person_table`
 --
 ALTER TABLE `person_table`
-  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1383;
+  MODIFY `person_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1390;
 
 --
 -- AUTO_INCREMENT for table `prof_table`
 --
 ALTER TABLE `prof_table`
-  MODIFY `prof_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=66;
+  MODIFY `prof_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT for table `program_table`
@@ -2965,7 +3029,7 @@ ALTER TABLE `requirements_table`
 -- AUTO_INCREMENT for table `requirement_uploads`
 --
 ALTER TABLE `requirement_uploads`
-  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `upload_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=188;
 
 --
 -- AUTO_INCREMENT for table `room_day_table`
@@ -3007,13 +3071,13 @@ ALTER TABLE `student_counter`
 -- AUTO_INCREMENT for table `student_curriculum_table`
 --
 ALTER TABLE `student_curriculum_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `student_evaluation_table`
 --
 ALTER TABLE `student_evaluation_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `student_grade_overall_table`
@@ -3025,25 +3089,25 @@ ALTER TABLE `student_grade_overall_table`
 -- AUTO_INCREMENT for table `student_numbering_table`
 --
 ALTER TABLE `student_numbering_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=124;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=128;
 
 --
 -- AUTO_INCREMENT for table `student_status_table`
 --
 ALTER TABLE `student_status_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `time_table`
 --
 ALTER TABLE `time_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT for table `user_accounts`
 --
 ALTER TABLE `user_accounts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `year_level_table`

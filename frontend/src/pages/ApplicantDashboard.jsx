@@ -25,7 +25,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
 import WarningAmberIcon from '@mui/icons-material/WarningAmber';
 import CheckIcon from "@mui/icons-material/Check";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import { Dialog } from "@mui/material";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
 
@@ -706,21 +706,33 @@ const ApplicantDashboard = (props) => {
 
                       {/* Hover upload button */}
                       {hovered && (
-                        <IconButton
-                          size="small"
-                          sx={{
-                            position: "absolute",
-                            bottom: 0,
-                            right: 0,
-                            bgcolor: "maroon",
-                            color: "white",
-                            "&:hover": { bgcolor: "#6D2323" },
-                          }}
+                        <label
                           onClick={() => fileInputRef.current.click()}
+                          style={{
+                            position: "absolute",
+                            bottom: "-5px",
+                            right: 0,
+                            cursor: "pointer",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            borderRadius: "50%",
+                            backgroundColor: "#ffffff",
+                            border: `2px solid ${borderColor}`,
+                            width: "32px",
+                            height: "32px",
+                          }}
                         >
-                          <AddIcon fontSize="small" />
-                        </IconButton>
+                          <AddCircleIcon
+                            sx={{
+                              color: settings?.header_color || "#1976d2",
+                              fontSize: 28,
+                              borderRadius: "50%",
+                            }}
+                          />
+                        </label>
                       )}
+
 
                       {/* Hidden file input */}
                       <input
@@ -797,8 +809,9 @@ const ApplicantDashboard = (props) => {
                               style={{
                                 padding: "10px 20px",
                                 backgroundColor: mainButtonColor,
+                                border: `2px solid ${borderColor}`,
                                 color: "white",
-                                border: "none",
+                                fontSize: "15px",
                                 borderRadius: "8px",
                                 cursor: "pointer",
                                 marginTop: "10px",
@@ -834,8 +847,9 @@ const ApplicantDashboard = (props) => {
                               style={{
                                 padding: "10px 20px",
                                 backgroundColor: mainButtonColor,
+                                border: `2px solid ${borderColor}`,
                                 color: "white",
-                                border: "none",
+                                fontSize: "15px",
                                 borderRadius: "8px",
                                 cursor: "pointer",
                                 marginTop: "10px",
@@ -933,24 +947,25 @@ const ApplicantDashboard = (props) => {
                 <Typography sx={{ textAlign: "center" }} variant="h6" gutterBottom>
                   Announcements
                 </Typography>
-                <Divider sx={{ mb: 2 }} />
+                <Divider sx={{ mb: 2, }} />
 
                 {announcements.length === 0 ? (
                   <Typography variant="body2" color="text.secondary" align="center">
                     No active announcements.
                   </Typography>
                 ) : (
-                  <Box sx={{ maxHeight: 220, overflowY: "auto" }}>
+                  <Box sx={{ maxHeight: 270, overflowY: "auto" }}>
                     {announcements.map((a) => (
                       <Box
                         key={a.id}
                         sx={{
                           mb: 2,
                           p: 1,
-                          width: 400,
+                          width: 430,
+                          
 
                           borderRadius: 2,
-                          border: "1px solid #ddd",
+                          border: `2px solid ${borderColor}`,
                           backgroundColor: "#fff8f6",
                         }}
                       >
@@ -971,7 +986,7 @@ const ApplicantDashboard = (props) => {
                               alt={a.title}
                               style={{
                                 width: "100%",
-                                maxHeight: "120px",
+                                maxHeight: "150px",
                                 objectFit: "cover",
                                 borderRadius: "6px",
                                 marginBottom: "6px",

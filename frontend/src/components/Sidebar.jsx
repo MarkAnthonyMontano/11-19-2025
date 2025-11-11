@@ -137,7 +137,11 @@ const SideBar = ({ setIsAuthenticated, profileImage, setProfileImage }) => {
 
   return (
     <div className="h-full w-enough hidden-print">
-      <ul className="bg-white h-full border-r-[3px] border-maroon-500 p-3 px-5 text-maroon-500 w-full gap-2 ">
+      <ul
+        className="bg-white h-full p-3 px-5 text-maroon-500 w-full gap-2"
+        style={{ border: `5px solid ${borderColor}` }}
+      >
+
         <div className="flex items-center flex-col mt-24 mb-4 relative">
           {/* 🧑 Profile Picture */}
           {!personData?.profile_image ? (
@@ -161,7 +165,7 @@ const SideBar = ({ setIsAuthenticated, profileImage, setProfileImage }) => {
                 width: 116,
                 height: 116,
                 mx: "auto",
-                border: `2px solid ${borderColor}`,
+                border: `4px solid ${borderColor}`,
                 bgcolor: settings?.header_color || "#1976d2",
               }}
             />
@@ -197,8 +201,10 @@ const SideBar = ({ setIsAuthenticated, profileImage, setProfileImage }) => {
                     color: settings?.header_color || "#1976d2",
                     fontSize: 32,
                     backgroundColor: "white",
+                    width: "36px",
+                    height: "36px",
                     borderRadius: "50%",
-                    border: `2px solid ${borderColor}`,
+                    border: `4px solid ${borderColor}`,
                   }}
                 />
               </label>
@@ -263,7 +269,9 @@ const SideBar = ({ setIsAuthenticated, profileImage, setProfileImage }) => {
                     fontSize: 32,
                     backgroundColor: "white",
                     borderRadius: "50%",
-                    border: `2px solid ${borderColor}`,
+                    width: "36px",
+                    height: "36px",
+                    border: `4px solid ${borderColor}`,
                   }}
                 />
               </label>
@@ -329,7 +337,9 @@ const SideBar = ({ setIsAuthenticated, profileImage, setProfileImage }) => {
                     fontSize: 32,
                     backgroundColor: "white",
                     borderRadius: "50%",
-                    border: `2px solid ${borderColor}`,
+                    width: "36px",
+                    height: "36px",
+                    border: `4px solid ${borderColor}`,
                   }}
                 />
               </label>
@@ -394,6 +404,8 @@ const SideBar = ({ setIsAuthenticated, profileImage, setProfileImage }) => {
                     fontSize: 32,
                     backgroundColor: "white",
                     borderRadius: "50%",
+                    width: "36px",
+                    height: "36px",
                     border: `2px solid ${borderColor}`,
                   }}
                 />

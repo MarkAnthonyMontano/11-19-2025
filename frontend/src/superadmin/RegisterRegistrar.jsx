@@ -133,6 +133,9 @@ const RegisterRegistrar = () => {
     const [department, setDepartment] = useState([]);
     const [openSnackbar, setOpenSnackbar] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+
     const [registrars, setRegistrars] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [editData, setEditData] = useState(null);
@@ -225,7 +228,6 @@ const RegisterRegistrar = () => {
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
     };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -247,39 +249,51 @@ const RegisterRegistrar = () => {
             for (let pair of fd.entries()) console.log(pair[0], pair[1]);
 
             if (editData) {
-                // 🔹 EDIT existing registrar
+                // EDIT registrar
                 await axios.put(`http://localhost:5000/update_registrar/${editData.id}`, fd, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
+
+                // ✅ SUCCESS SNACKBAR
+                setSnackbarMessage("Registrar updated successfully.");
+                setSnackbarSeverity("success");
+
             } else {
-                // 🔹 ADD new registrar
+                // ADD registrar
                 await axios.post("http://localhost:5000/register_registrar", fd, {
                     headers: { "Content-Type": "multipart/form-data" },
                 });
+
+                // ✅ SUCCESS SNACKBAR
+                setSnackbarMessage("Registrar added successfully.");
+                setSnackbarSeverity("success");
             }
 
             setOpenSnackbar(true);
             setOpenDialog(false);
             setEditData(null);
             fetchRegistrars();
+
         } catch (err) {
             console.error("❌ Submit error:", err);
 
             const backendMessage = err.response?.data?.message;
 
-            // 🧠 Show clear error message on UI
+            // ERROR MESSAGES
             if (backendMessage === "Email already exists") {
-                setErrorMessage("Email already exists. Please use a different email.");
+                setSnackbarMessage("Email already exists. Please use a different email.");
             } else if (backendMessage === "All required fields must be filled") {
-                setErrorMessage("Please complete all required fields before submitting.");
+                setSnackbarMessage("Please complete all required fields before submitting.");
             } else {
-                setErrorMessage(backendMessage || "Something went wrong. Please try again.");
+                setSnackbarMessage(backendMessage || "Something went wrong. Please try again.");
             }
 
+            // ✅ ERROR SNACKBAR
+            setSnackbarSeverity("error");
             setOpenSnackbar(true);
         }
-
     };
+
 
 
 
@@ -946,8 +960,8 @@ const RegisterRegistrar = () => {
                 onClose={() => setOpenSnackbar(false)}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
             >
-                <Alert severity={errorMessage.includes("successfully") ? "success" : "error"} sx={{ width: "100%" }}>
-                    {errorMessage}
+                <Alert severity={snackbarSeverity} sx={{ width: "100%" }}>
+                    {snackbarMessage}
                 </Alert>
             </Snackbar>
 

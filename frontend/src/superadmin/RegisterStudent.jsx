@@ -33,46 +33,47 @@ import EditIcon from "@mui/icons-material/Edit";
 import Unauthorized from "../components/Unauthorized";
 import LoadingOverlay from "../components/LoadingOverlay";
 import SearchIcon from "@mui/icons-material/Search";
+import { FaFileExcel } from "react-icons/fa";
 
 const RegisterStudents = () => {
     const settings = useContext(SettingsContext);
 
-  const [titleColor, setTitleColor] = useState("#000000");
-  const [subtitleColor, setSubtitleColor] = useState("#555555");
-  const [borderColor, setBorderColor] = useState("#000000");
-  const [mainButtonColor, setMainButtonColor] = useState("#1976d2");
-  const [subButtonColor, setSubButtonColor] = useState("#ffffff");   // ✅ NEW
-  const [stepperColor, setStepperColor] = useState("#000000");       // ✅ NEW
+    const [titleColor, setTitleColor] = useState("#000000");
+    const [subtitleColor, setSubtitleColor] = useState("#555555");
+    const [borderColor, setBorderColor] = useState("#000000");
+    const [mainButtonColor, setMainButtonColor] = useState("#1976d2");
+    const [subButtonColor, setSubButtonColor] = useState("#ffffff");   // ✅ NEW
+    const [stepperColor, setStepperColor] = useState("#000000");       // ✅ NEW
 
-  const [fetchedLogo, setFetchedLogo] = useState(null);
-  const [companyName, setCompanyName] = useState("");
-  const [shortTerm, setShortTerm] = useState("");
-  const [campusAddress, setCampusAddress] = useState("");
+    const [fetchedLogo, setFetchedLogo] = useState(null);
+    const [companyName, setCompanyName] = useState("");
+    const [shortTerm, setShortTerm] = useState("");
+    const [campusAddress, setCampusAddress] = useState("");
 
-  useEffect(() => {
-    if (!settings) return;
+    useEffect(() => {
+        if (!settings) return;
 
-    // 🎨 Colors
-    if (settings.title_color) setTitleColor(settings.title_color);
-    if (settings.subtitle_color) setSubtitleColor(settings.subtitle_color);
-    if (settings.border_color) setBorderColor(settings.border_color);
-    if (settings.main_button_color) setMainButtonColor(settings.main_button_color);
-    if (settings.sub_button_color) setSubButtonColor(settings.sub_button_color);   // ✅ NEW
-    if (settings.stepper_color) setStepperColor(settings.stepper_color);           // ✅ NEW
+        // 🎨 Colors
+        if (settings.title_color) setTitleColor(settings.title_color);
+        if (settings.subtitle_color) setSubtitleColor(settings.subtitle_color);
+        if (settings.border_color) setBorderColor(settings.border_color);
+        if (settings.main_button_color) setMainButtonColor(settings.main_button_color);
+        if (settings.sub_button_color) setSubButtonColor(settings.sub_button_color);   // ✅ NEW
+        if (settings.stepper_color) setStepperColor(settings.stepper_color);           // ✅ NEW
 
-    // 🏫 Logo
-    if (settings.logo_url) {
-      setFetchedLogo(`http://localhost:5000${settings.logo_url}`);
-    } else {
-      setFetchedLogo(EaristLogo);
-    }
+        // 🏫 Logo
+        if (settings.logo_url) {
+            setFetchedLogo(`http://localhost:5000${settings.logo_url}`);
+        } else {
+            setFetchedLogo(EaristLogo);
+        }
 
-    // 🏷️ School Information
-    if (settings.company_name) setCompanyName(settings.company_name);
-    if (settings.short_term) setShortTerm(settings.short_term);
-    if (settings.campus_address) setCampusAddress(settings.campus_address);
+        // 🏷️ School Information
+        if (settings.company_name) setCompanyName(settings.company_name);
+        if (settings.short_term) setShortTerm(settings.short_term);
+        if (settings.campus_address) setCampusAddress(settings.campus_address);
 
-  }, [settings]); 
+    }, [settings]);
 
     // Also put it at the very top
     const [userID, setUserID] = useState("");
@@ -127,13 +128,14 @@ const RegisterStudents = () => {
         }
     };
 
-    
+
     const [searchQuery, setSearchQuery] = useState("");
     const [department, setDepartment] = useState([]);
     const [programs, setPrograms] = useState([]);
     const [openSnackbar, setOpenSnackbar] = useState(false);
-    const [openSnackbar2, setOpenSnackbar2] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
+    const [snackbarMessage, setSnackbarMessage] = useState("");
+    const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+
     const [Students, setStudents] = useState([]);
     const [openDialog, setOpenDialog] = useState(false);
     const [editData, setEditData] = useState(null);
@@ -209,7 +211,6 @@ const RegisterStudents = () => {
         try {
             const fd = new FormData();
 
-            // ✅ Append all fields properly
             fd.append("student_number", form.student_number);
             fd.append("last_name", form.last_name);
             fd.append("middle_name", form.middle_name);
@@ -219,31 +220,35 @@ const RegisterStudents = () => {
             fd.append("status", form.status || 1);
             fd.append("dprtmnt_id", form.dprtmnt_id);
             fd.append("curriculum_id", form.curriculum_id);
-            if (form.profile_picture) fd.append("profile_picture", form.profile_picture);
+
+            if (form.profile_picture) {
+                fd.append("profile_picture", form.profile_picture);
+            }
 
             const url = editData
                 ? `http://localhost:5000/update_student/${editData.user_id}`
                 : "http://localhost:5000/register_student";
 
             const res = editData
-            ? await axios.put(url, fd, {
-                headers: { "Content-Type": "multipart/form-data" },
-                })
-            : await axios.post(url, fd, {
-                headers: { "Content-Type": "multipart/form-data" },
-                });
+                ? await axios.put(url, fd, { headers: { "Content-Type": "multipart/form-data" } })
+                : await axios.post(url, fd, { headers: { "Content-Type": "multipart/form-data" } });
 
             if (!res.data.success) {
-                setErrorMessage(res.data.message);
-                setOpenSnackbar2(true);
+                setSnackbarMessage(res.data.message);
+                setSnackbarSeverity("error");
+                setOpenSnackbar(true);
                 return;
             }
 
-            // ✅ Success flow
-            fetchStudents();
+            // ✅ Success
+            setSnackbarMessage(editData ? "Student updated successfully!" : "Student registered successfully!");
+            setSnackbarSeverity("success");
             setOpenSnackbar(true);
+
+            fetchStudents();
             setOpenDialog(false);
             setEditData(null);
+
             setForm({
                 student_number: "",
                 last_name: "",
@@ -258,10 +263,14 @@ const RegisterStudents = () => {
                 profile_picture: null,
                 preview: "",
             });
+
         } catch (err) {
-            setErrorMessage(err.response?.data?.message || "Something went wrong");
+            setSnackbarMessage(err.response?.data?.message || "Something went wrong.");
+            setSnackbarSeverity("error");
+            setOpenSnackbar(true);
         }
     };
+
 
     const handleEdit = (r) => {
         setEditData(r);
@@ -348,19 +357,19 @@ const RegisterStudents = () => {
 
     const filteredStudent = Students
         .filter((r) => {
-        const fullText = `${r.student_number} ${r.first_name || ""} ${r.middle_name || ""} ${r.last_name || ""} ${r.email || ""}`.toLowerCase();
-        const matchesSearch = fullText.includes(searchQuery);
-        const matchesDepartment =
-            selectedDepartmentFilter === "" || r.dprtmnt_name === selectedDepartmentFilter;
-        return matchesSearch && matchesDepartment;
+            const fullText = `${r.student_number} ${r.first_name || ""} ${r.middle_name || ""} ${r.last_name || ""} ${r.email || ""}`.toLowerCase();
+            const matchesSearch = fullText.includes(searchQuery);
+            const matchesDepartment =
+                selectedDepartmentFilter === "" || r.dprtmnt_name === selectedDepartmentFilter;
+            return matchesSearch && matchesDepartment;
         })
         .sort((a, b) => {
-        const nameA = `${a.first_name} ${a.last_name}`.toLowerCase();
-        const nameB = `${b.first_name} ${b.last_name}`.toLowerCase();
+            const nameA = `${a.first_name} ${a.last_name}`.toLowerCase();
+            const nameB = `${b.first_name} ${b.last_name}`.toLowerCase();
 
-        if (sortOrder === "asc") return nameA.localeCompare(nameB);
-        if (sortOrder === "desc") return nameB.localeCompare(nameA);
-        return 0; // no sorting if not selected
+            if (sortOrder === "asc") return nameA.localeCompare(nameB);
+            if (sortOrder === "desc") return nameB.localeCompare(nameA);
+            return 0; // no sorting if not selected
         });
 
 
@@ -404,31 +413,31 @@ const RegisterStudents = () => {
         <Box sx={{ height: "calc(100vh - 150px)", overflowY: "auto", pr: 1 }}>
             <Box display="flex" justifyContent="space-between" alignItems="center" mb={2}>
                 {/* Left: Header */}
-                <Typography variant="h4" fontWeight="bold" style={{color: titleColor,}}>
+                <Typography variant="h4" fontWeight="bold" style={{ color: titleColor, }}>
                     STUDENTS ACCOUNTS
                 </Typography>
 
                 {/* Right: Search */}
                 <TextField
-                  variant="outlined"
-                  placeholder="Search Student Name / Email / Student Number"
-                  size="small"
-                  value={searchQuery}
-                  onChange={(p) => {
-                    setSearchQuery(p.target.value.toLowerCase());
-                    setCurrentPage(1); // reset to page 1 when searching
-                  }}
-                  sx={{
-                    width: 450,
-                    backgroundColor: "#fff",
-                    borderRadius: 1,
-                    "& .MuiOutlinedInput-root": {
-                      borderRadius: "10px",
-                    },
-                  }}
-                  InputProps={{
-                    startAdornment: <SearchIcon sx={{ mr: 1, color: "gray" }} />,
-                  }}
+                    variant="outlined"
+                    placeholder="Search Student Name / Email / Student Number"
+                    size="small"
+                    value={searchQuery}
+                    onChange={(p) => {
+                        setSearchQuery(p.target.value.toLowerCase());
+                        setCurrentPage(1); // reset to page 1 when searching
+                    }}
+                    sx={{
+                        width: 450,
+                        backgroundColor: "#fff",
+                        borderRadius: 1,
+                        "& .MuiOutlinedInput-root": {
+                            borderRadius: "10px",
+                        },
+                    }}
+                    InputProps={{
+                        startAdornment: <SearchIcon sx={{ mr: 1, color: "gray" }} />,
+                    }}
                 />
             </Box>
 
@@ -437,14 +446,14 @@ const RegisterStudents = () => {
 
             <TableContainer component={Paper} sx={{ width: '100%' }}>
                 <Table size="small">
-                    <TableHead sx={{ backgroundColor: '#6D2323', color: "white" }}>
+                    <TableHead sx={{ backgroundColor: settings?.header_color || "#1976d2", color: "white" }}>
                         <TableRow>
                             <TableCell
                                 colSpan={10}
                                 sx={{
-                                    border: `2px solid ${borderColor}`, 
+                                    border: `2px solid ${borderColor}`,
                                     py: 0.5,
-                                    backgroundColor: '#6D2323',
+                                    backgroundColor: settings?.header_color || "#1976d2",
                                     color: "white"
                                 }}
                             >
@@ -613,7 +622,7 @@ const RegisterStudents = () => {
                 component={Paper}
                 sx={{
                     width: "100%",
-                    border: "2px solid #800000",
+                    border: `2px solid ${borderColor}`
                 }}
             >
                 <Table>
@@ -653,7 +662,7 @@ const RegisterStudents = () => {
                                             textTransform: "none",
                                             fontWeight: "bold",
                                             width: "350px",
-                                            "&:hover": { backgroundColor: "#6D2323" },
+                                            "&:hover": { backgroundColor: "#000" },
                                         }}
                                     >
                                         Add Student
@@ -697,22 +706,61 @@ const RegisterStudents = () => {
                                             </Select>
                                         </FormControl>
 
-                                        <input type="file" accept=".xlsx, .xls" onChange={handleFileChange} />
+                                        {/* Excel Import Section */}
+                                        <Box display="flex" alignItems="center" gap={2}>
+                                            {/* ✅ Hidden File Input */}
+                                            <input
+                                                type="file"
+                                                accept=".xlsx,.xls"
+                                                onChange={handleImportFile}
+                                                style={{ display: "none" }}
+                                                id="excel-upload"
+                                            />
 
-                                        <Button
-                                            variant="outlined"
-                                            startIcon={<FileUpload />}
-                                            onClick={handleImportFile}
-                                            sx={{
-                                                borderColor: "#800000",
-                                                color: "#800000",
-                                                textTransform: "none",
-                                                fontWeight: "bold",
-                                                "&:hover": { borderColor: "#a52a2a", color: "white", background: "#a52a2a" },
-                                            }}
-                                        >
-                                            Import XLSX
-                                        </Button>
+                                            {/* ✅ Styled Choose Excel Button with Excel Icon */}
+                                            <button
+                                                onClick={() => document.getElementById("excel-upload").click()}
+                                                style={{
+                                                    padding: "5px 20px",
+                                                    border: "2px solid green",
+                                                    backgroundColor: "#f0fdf4",
+                                                    color: "green",
+                                                    borderRadius: "5px",
+                                                    cursor: "pointer",
+                                                    fontSize: "14px",
+                                                    fontWeight: "bold",
+                                                    height: "50px",
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    gap: "8px",
+                                                    userSelect: "none",
+                                                    width: "175px",
+                                                }}
+                                                type="button"
+                                            >
+                                                <FaFileExcel size={20} />
+                                                Choose Excel
+                                            </button>
+
+                                            {/* ✅ Import Button */}
+                                            <Button
+                                                onClick={handleImportFile}
+                                                variant="outlined"
+                                                startIcon={<FaFileExcel />}
+                                                sx={{
+                                                    borderColor: "#800000",
+                                                    color: "#800000",
+                                                    textTransform: "none",
+                                                    fontWeight: "bold",
+                                                    height: "50px",
+                                                    width: "175px",
+                                                    "&:hover": { borderColor: "#a52a2a", color: "white", background: "#a52a2a" },
+                                                }}
+                                            >
+                                                Import XLSX
+                                            </Button>
+                                        </Box>
+
 
                                         {/* Export CSV */}
                                         <Button
@@ -737,9 +785,9 @@ const RegisterStudents = () => {
                 </Table>
             </TableContainer>
 
-            <TableContainer component={Paper} sx={{ width: "100%", border: `2px solid ${borderColor}`,  mb: 4 }}>
+            <TableContainer component={Paper} sx={{ width: "100%", border: `2px solid ${borderColor}`, mb: 4 }}>
                 <Table>
-                    <TableHead sx={{ backgroundColor: "#6D2323" }}>
+                    <TableHead sx={{ backgroundColor: settings?.header_color || "#1976d2", }}>
                         <TableRow>
                             {[
                                 "Student Number",
@@ -759,7 +807,7 @@ const RegisterStudents = () => {
                                         color: "white",
                                         fontWeight: "bold",
                                         textAlign: "center",
-                                        border: "1px solid maroon"
+                                        border: `2px solid ${borderColor}`
                                     }}
                                 >
                                     {header}
@@ -772,14 +820,14 @@ const RegisterStudents = () => {
                         {filteredStudent.length > 0 ? (
                             filteredStudent.map((r) => (
                                 <TableRow key={r.user_id}>
-                                    <TableCell sx={{ textAlign: "center", border: "1px solid maroon" }}>{r.student_number}</TableCell>
+                                    <TableCell sx={{ textAlign: "center", border: `2px solid ${borderColor}` }}>{r.student_number}</TableCell>
 
-                                    <TableCell sx={{ textAlign: "center", border: "1px solid maroon" }}>
+                                    <TableCell sx={{ textAlign: "center", border: `2px solid ${borderColor}` }}>
                                         {r.profile_picture ? (
                                             <Avatar
                                                 src={`http://localhost:5000/uploads/${r.profile_picture}`}
                                                 alt={r.first_name}
-                                                sx={{ width: 60, height: 60, margin: "auto", border: "1px solid maroon" }}
+                                                sx={{ width: 60, height: 60, margin: "auto", border: `2px solid ${borderColor}` }}
                                             />
                                         ) : (
                                             <Avatar sx={{ bgcolor: "#6D2323", margin: "auto" }}>
@@ -788,28 +836,28 @@ const RegisterStudents = () => {
                                         )}
                                     </TableCell>
 
-                                    <TableCell sx={{ textAlign: "center", border: "1px solid maroon" }}>
+                                    <TableCell sx={{ textAlign: "center", border: `2px solid ${borderColor}` }}>
                                         {`${r.first_name || ""} ${r.middle_name || ""} ${r.last_name || ""}`}
                                     </TableCell>
 
-                                    <TableCell sx={{ textAlign: "center", border: "1px solid maroon" }}>{r.email}</TableCell>
+                                    <TableCell sx={{ textAlign: "center", border: `2px solid ${borderColor}` }}>{r.email}</TableCell>
 
-                                    <TableCell sx={{ textAlign: "center", border: "1px solid maroon" }}>
+                                    <TableCell sx={{ textAlign: "center", border: `2px solid ${borderColor}` }}>
                                         {r.program_description || "N/A"}
                                     </TableCell>
 
-                                    <TableCell sx={{ textAlign: "center", border: "1px solid maroon" }}>
+                                    <TableCell sx={{ textAlign: "center", border: `2px solid ${borderColor}` }}>
                                         {r.year_level_description || "None"}
                                     </TableCell>
 
 
 
                                     {/* ✅ EDIT BUTTON */}
-                                    <TableCell sx={{ border: "1px solid maroon", border: `2px solid ${borderColor}`, }}>
+                                    <TableCell sx={{ border: `2px solid ${borderColor}`, }}>
                                         <Button
                                             onClick={() => handleEdit(r)}
                                             sx={{
-                                                backgroundColor: "#eccb22ff",
+                                                backgroundColor: "green",
                                                 color: "white",
                                                 textTransform: "none",
                                                 fontWeight: "bold",
@@ -822,7 +870,7 @@ const RegisterStudents = () => {
                                     </TableCell>
 
                                     {/* ✅ STATUS TOGGLE BUTTON */}
-                                    <TableCell sx={{ border: "1px solid maroon" }}>
+                                    <TableCell sx={{ border: `2px solid ${borderColor}` }}>
                                         <Button
                                             onClick={() => handleToggleStatus(r.user_id, r.status)}
                                             sx={{
@@ -878,7 +926,7 @@ const RegisterStudents = () => {
                                 sx={{
                                     width: 80,
                                     height: 80,
-                                    border: `2px solid ${borderColor}`, 
+                                    border: `2px solid ${borderColor}`,
                                     boxShadow: "0 2px 4px rgba(0,0,0,0.2)",
                                 }}
                             />
@@ -1044,16 +1092,19 @@ const RegisterStudents = () => {
                     Student registered successfully!
                 </Alert>
             </Snackbar>
+
             <Snackbar
-                open={openSnackbar2}
+                open={openSnackbar}
                 autoHideDuration={3000}
-                onClose={() => setOpenSnackbar2(false)}
+                onClose={() => setOpenSnackbar(false)}
                 anchorOrigin={{ vertical: "top", horizontal: "center" }}
             >
-                <Alert severity="error" sx={{ width: "100%" }}>
-                    {errorMessage}
+                <Alert severity={snackbarSeverity} sx={{ width: "100%" }}>
+                    {snackbarMessage}
                 </Alert>
             </Snackbar>
+
+
         </Box>
     );
 }
