@@ -149,7 +149,7 @@ const SuperAdminRegistrarResetPassword = () => {
     try {
       const res = await axios.post(
         "http://localhost:5000/forgot-password-registrar",
-        { email: searchQuery }
+        { email: userInfo.email } // ✅ use fetched email instead of searchQuery
       );
       setResetMsg(res.data.message);
     } catch (err) {
@@ -160,6 +160,7 @@ const SuperAdminRegistrarResetPassword = () => {
       setLoading(false);
     }
   };
+
 
   // ✅ Change account status
   const handleStatusChange = async (e) => {

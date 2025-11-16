@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2025 at 01:04 AM
+-- Generation Time: Nov 16, 2025 at 06:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -53,7 +53,8 @@ INSERT INTO `active_school_year_table` (`id`, `year_id`, `semester_id`, `astatus
 (13, 5, 2, 0, 0),
 (14, 5, 3, 0, 0),
 (15, 3, 1, 0, 0),
-(16, 10, 1, 1, 0);
+(16, 10, 1, 1, 0),
+(17, 12, 1, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -67,95 +68,96 @@ CREATE TABLE `course_table` (
   `course_description` varchar(255) DEFAULT NULL,
   `course_unit` int(11) DEFAULT NULL,
   `lab_unit` int(11) DEFAULT NULL,
-  `value` int(11) DEFAULT NULL
+  `lec_value` varchar(255) DEFAULT '0',
+  `lab_value` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `course_table`
 --
 
-INSERT INTO `course_table` (`course_id`, `course_code`, `course_description`, `course_unit`, `lab_unit`, `value`) VALUES
-(1, 'GEREADPH', 'Readings in Philippine History', 5, 0, NULL),
-(2, 'GEUNDETS', 'Understanding the Self', 3, 0, NULL),
-(3, 'GEARTAPP', 'Art Appreciation', 3, 0, NULL),
-(4, 'GEPURPCO', 'Purposive Communication', 3, 0, NULL),
-(5, 'GEKOMFIL', 'Kontekstwalisadong Komunikasyon sa Filipino', 3, 0, NULL),
-(6, 'INTCOMLC', 'Introduction to Computing (Lecture)', 2, 0, NULL),
-(7, 'INTCOMLB', 'Introduction to Computing (Laboratory)', 0, 1, NULL),
-(8, 'FPROGLEC', 'Computer Programming 1 (Lecture)', 2, 0, NULL),
-(9, 'FPROGLAB', 'Computer Programming 1 (Laboratory)', 0, 1, NULL),
-(10, 'GEPEMOVE', 'Movement Enhancement', 2, 0, NULL),
-(11, 'NSTPCTS1', 'National Service Training Program 1', 3, 0, NULL),
-(12, 'GEMATHMW', 'Mathematics in the Modern World', 3, 0, NULL),
-(13, 'GESCIETS', 'Science, Technology and Society', 3, 0, NULL),
-(14, 'GEFILDIS', 'Filipino sa Iba’t-Ibang Disiplina', 3, 0, NULL),
-(15, 'GEPANIPI', 'Panitikan sa Pilipinas', 3, 0, NULL),
-(16, 'IPROGLEC', 'Computer Programming 2 (Lecture)', 2, 0, NULL),
-(17, 'IPROGLAB', 'Computer Programming 2 (Laboratory)', 0, 1, NULL),
-(18, 'DISCMATH', 'Discrete Mathematics', 3, 0, NULL),
-(19, 'DBMSLEC1', 'Database Management System 1 (Lecture)', 2, 0, NULL),
-(20, 'DBMSLAB1', 'Database Management System 1 (Laboratory)', 0, 1, NULL),
-(21, 'GEPEFITE', 'Fitness Exercise', 2, 0, NULL),
-(22, 'NSTPCTS2', 'National Service Training Program 2', 3, 0, NULL),
-(23, 'GEETHICS', 'Ethics', 3, 0, NULL),
-(24, 'DSALGLEC', 'Data Structures and Algorithm 1 (Lecture)', 2, 0, NULL),
-(25, 'DSALGLAB', 'Data Structures and Algorithm 1 (Laboratory)', 0, 1, NULL),
-(26, 'INFMGTLC', 'Information Management (Lecture)', 2, 0, NULL),
-(27, 'INFMGTLB', 'Information Management (Laboratory)', 0, 1, NULL),
-(28, 'PTECHLEC', 'Platform Technologies (Lecture)', 2, 0, NULL),
-(29, 'PTECHLAB', 'Platform Technologies (Laboratory)', 0, 1, NULL),
-(30, 'WEBDVLC1', 'Web Development 1 (Lecture)', 2, 0, NULL),
-(31, 'WEBDVLB1', 'Web Development 1 (Laboratory)', 0, 1, NULL),
-(32, 'BUSANALY', 'Business Analytics', 3, 0, NULL),
-(33, 'GEPEHEF1', 'Physical Activity Towards Health and Fitness 1', 2, 0, NULL),
-(34, 'GEELECCP', 'Communicative Proficiency in Business Writing', 3, 0, NULL),
-(35, 'DBMSLEC2', 'Database Management System 2 (Lecture)', 2, 0, NULL),
-(36, 'DBMSLAB2', 'Database Management System 2 (Laboratory)', 0, 1, NULL),
-(37, 'INTHCILC', 'Introduction to Human-Computer Interaction (Lecture)', 2, 0, NULL),
-(38, 'INTHCILB', 'Introduction to Human-Computer Interaction (Laboratory)', 0, 1, NULL),
-(39, 'NETWKLC1', 'Networking 1 (Lecture)', 2, 0, NULL),
-(40, 'NETWKLB1', 'Networking 1 (Laboratory)', 0, 1, NULL),
-(41, 'WEBDVLC2', 'Web Development 2 (Lecture)', 2, 0, NULL),
-(42, 'WEBDVLB2', 'Web Development 2 (Laboratory)', 0, 1, NULL),
-(43, 'IPATLEC1', 'Integrative Programming and Technologies 1 (Lecture)', 2, 0, NULL),
-(44, 'IPATLAB1', 'Integrative Programming and Technologies 1 (Laboratory)', 0, 1, NULL),
-(45, 'GEPEHEF2', 'Physical Activity Towards Health and Fitness 2', 2, 0, NULL),
-(46, 'GEELECDS', 'Practical Data Science', 3, 0, NULL),
-(47, 'WEBDVLC3', 'Web Development 3 (Lecture)', 2, 0, NULL),
-(48, 'WEBDVLB3', 'Web Development 3 (Laboratory)', 0, 1, NULL),
-(49, 'MMDIALEC', 'Multimedia (Lecture)', 2, 0, NULL),
-(50, 'MMDIALAB', 'Multimedia (Laboratory)', 0, 1, NULL),
-(51, 'SYSARCH1', 'Systems Integration and Architecture 1 (Lecture)', 2, 0, NULL),
-(52, 'SYSARLB1', 'Systems Integration and Architecture 1 (Laboratory)', 0, 1, NULL),
-(53, 'APDEVLEC', 'Application Development and Emerging Tech (Lecture)', 2, 0, NULL),
-(54, 'APDEVLAB', 'Application Development and Emerging Tech (Lab)', 0, 1, NULL),
-(55, 'NETWKLC2', 'Networking 2 (Lecture)', 2, 0, NULL),
-(56, 'NETWKLB2', 'Networking 2 (Laboratory)', 0, 1, NULL),
-(57, 'GELIFEWR', 'Life and Works of Rizal', 3, 0, NULL),
-(58, 'GEELECES', 'Environmental Science', 3, 0, NULL),
-(59, 'QUANMETH', 'Quantitative Methods', 3, 0, NULL),
-(60, 'ITTHESI1', 'Research 1', 3, 0, NULL),
-(61, 'MOBAPLEC', 'Mobile App Development (Lecture)', 2, 0, NULL),
-(62, 'MOBAPLAB', 'Mobile App Development (Laboratory)', 0, 1, NULL),
-(63, 'OOPRGLEC', 'Object-Oriented Programming (Lecture)', 2, 0, NULL),
-(64, 'OOPRGLAB', 'Object-Oriented Programming (Laboratory)', 0, 1, NULL),
-(65, 'IAASLEC1', 'Information Assurance and Security 1 (Lecture)', 2, 0, NULL),
-(66, 'IAASLAB1', 'Information Assurance and Security 1 (Laboratory)', 0, 1, NULL),
-(67, 'GECONTWO', 'Contemporary World', 3, 0, NULL),
-(68, 'SYSARCH2', 'Systems Integration and Architecture 2 (Lecture)', 2, 0, NULL),
-(69, 'SYSARLB2', 'Systems Integration and Architecture 2 (Laboratory)', 0, 1, NULL),
-(70, 'ITTHESI2', 'Research 2 (Lecture)', 2, 0, NULL),
-(71, 'ITTHESL2', 'Research 2 (Laboratory)', 0, 1, NULL),
-(72, 'IAASLEC2', 'Information Assurance and Security 2 (Lecture)', 2, 0, NULL),
-(73, 'IAASLAB2', 'Information Assurance and Security 2 (Laboratory)', 0, 1, NULL),
-(74, 'SYSADMLC', 'Systems Administration and Maintenance (Lecture)', 2, 0, NULL),
-(75, 'SYSADMLB', 'Systems Administration and Maintenance (Laboratory)', 0, 1, NULL),
-(76, 'SPISSUES', 'Social and Professional Issues', 3, 0, NULL),
-(77, 'ITINTERN', 'Practicum / Internship', 10, 0, NULL),
-(78, 'GELIFEWR', 'Life And Work of Rizal', 2, 0, NULL),
-(79, 'GELIFEWR', 'Life And Work of Rizal', 2, 0, NULL),
-(80, 'DATANALY', 'Data Analytics ', 3, 0, NULL),
-(81, 'ITTHESIS', 'THESIS 2', 2, 1, NULL);
+INSERT INTO `course_table` (`course_id`, `course_code`, `course_description`, `course_unit`, `lab_unit`, `lec_value`, `lab_value`) VALUES
+(1, 'GEREADPH', 'Readings in Philippine History', 3, 0, '100', '0'),
+(2, 'GEUNDETS', 'Understanding the Self', 3, 0, '100', '0'),
+(3, 'GEARTAPP', 'Art Appreciation', 3, 0, '100', '0'),
+(4, 'GEPURPCO', 'Purposive Communication', 3, 0, '100', '0'),
+(5, 'GEKOMFIL', 'Kontekstwalisadong Komunikasyon sa Filipino', 3, 0, '100', '0'),
+(6, 'INTCOMLC', 'Introduction to Computing (Lecture)', 2, 0, '100', '0'),
+(7, 'INTCOMLB', 'Introduction to Computing (Laboratory)', 0, 1, '0', '100'),
+(8, 'FPROGLEC', 'Computer Programming 1 (Lecture)', 2, 0, '100', '0'),
+(9, 'FPROGLAB', 'Computer Programming 1 (Laboratory)', 0, 1, '0', '100'),
+(10, 'GEPEMOVE', 'Movement Enhancement', 2, 0, '100', '0'),
+(11, 'NSTPCTS1', 'National Service Training Program 1', 3, 0, '300', '0'),
+(12, 'GEMATHMW', 'Mathematics in the Modern World', 3, 0, '0', '0'),
+(13, 'GESCIETS', 'Science, Technology and Society', 3, 0, '0', '0'),
+(14, 'GEFILDIS', 'Filipino sa Iba’t-Ibang Disiplina', 3, 0, '0', '0'),
+(15, 'GEPANIPI', 'Panitikan sa Pilipinas', 3, 0, '0', '0'),
+(16, 'IPROGLEC', 'Computer Programming 2 (Lecture)', 2, 0, '0', '0'),
+(17, 'IPROGLAB', 'Computer Programming 2 (Laboratory)', 0, 1, '0', '0'),
+(18, 'DISCMATH', 'Discrete Mathematics', 3, 0, '0', '0'),
+(19, 'DBMSLEC1', 'Database Management System 1 (Lecture)', 2, 0, '0', '0'),
+(20, 'DBMSLAB1', 'Database Management System 1 (Laboratory)', 0, 1, '0', '0'),
+(21, 'GEPEFITE', 'Fitness Exercise', 2, 0, '0', '0'),
+(22, 'NSTPCTS2', 'National Service Training Program 2', 3, 0, '0', '0'),
+(23, 'GEETHICS', 'Ethics', 3, 0, '0', '0'),
+(24, 'DSALGLEC', 'Data Structures and Algorithm 1 (Lecture)', 2, 0, '0', '0'),
+(25, 'DSALGLAB', 'Data Structures and Algorithm 1 (Laboratory)', 0, 1, '0', '0'),
+(26, 'INFMGTLC', 'Information Management (Lecture)', 2, 0, '0', '0'),
+(27, 'INFMGTLB', 'Information Management (Laboratory)', 0, 1, '0', '0'),
+(28, 'PTECHLEC', 'Platform Technologies (Lecture)', 2, 0, '0', '0'),
+(29, 'PTECHLAB', 'Platform Technologies (Laboratory)', 0, 1, '0', '0'),
+(30, 'WEBDVLC1', 'Web Development 1 (Lecture)', 2, 0, '0', '0'),
+(31, 'WEBDVLB1', 'Web Development 1 (Laboratory)', 0, 1, '0', '0'),
+(32, 'BUSANALY', 'Business Analytics', 3, 0, '0', '0'),
+(33, 'GEPEHEF1', 'Physical Activity Towards Health and Fitness 1', 2, 0, '0', '0'),
+(34, 'GEELECCP', 'Communicative Proficiency in Business Writing', 3, 0, '0', '0'),
+(35, 'DBMSLEC2', 'Database Management System 2 (Lecture)', 2, 0, '0', '0'),
+(36, 'DBMSLAB2', 'Database Management System 2 (Laboratory)', 0, 1, '0', '0'),
+(37, 'INTHCILC', 'Introduction to Human-Computer Interaction (Lecture)', 2, 0, '0', '0'),
+(38, 'INTHCILB', 'Introduction to Human-Computer Interaction (Laboratory)', 0, 1, '0', '0'),
+(39, 'NETWKLC1', 'Networking 1 (Lecture)', 2, 0, '0', '0'),
+(40, 'NETWKLB1', 'Networking 1 (Laboratory)', 0, 1, '0', '0'),
+(41, 'WEBDVLC2', 'Web Development 2 (Lecture)', 2, 0, '0', '0'),
+(42, 'WEBDVLB2', 'Web Development 2 (Laboratory)', 0, 1, '0', '0'),
+(43, 'IPATLEC1', 'Integrative Programming and Technologies 1 (Lecture)', 2, 0, '0', '0'),
+(44, 'IPATLAB1', 'Integrative Programming and Technologies 1 (Laboratory)', 0, 1, '0', '0'),
+(45, 'GEPEHEF2', 'Physical Activity Towards Health and Fitness 2', 2, 0, '0', '0'),
+(46, 'GEELECDS', 'Practical Data Science', 3, 0, '0', '0'),
+(47, 'WEBDVLC3', 'Web Development 3 (Lecture)', 2, 0, '0', '0'),
+(48, 'WEBDVLB3', 'Web Development 3 (Laboratory)', 0, 1, '0', '0'),
+(49, 'MMDIALEC', 'Multimedia (Lecture)', 2, 0, '0', '0'),
+(50, 'MMDIALAB', 'Multimedia (Laboratory)', 0, 1, '0', '0'),
+(51, 'SYSARCH1', 'Systems Integration and Architecture 1 (Lecture)', 2, 0, '0', '0'),
+(52, 'SYSARLB1', 'Systems Integration and Architecture 1 (Laboratory)', 0, 1, '0', '0'),
+(53, 'APDEVLEC', 'Application Development and Emerging Tech (Lecture)', 2, 0, '0', '0'),
+(54, 'APDEVLAB', 'Application Development and Emerging Tech (Lab)', 0, 1, '0', '0'),
+(55, 'NETWKLC2', 'Networking 2 (Lecture)', 2, 0, '0', '0'),
+(56, 'NETWKLB2', 'Networking 2 (Laboratory)', 0, 1, '0', '0'),
+(57, 'GELIFEWR', 'Life and Works of Rizal', 3, 0, '0', '0'),
+(58, 'GEELECES', 'Environmental Science', 3, 0, '0', '0'),
+(59, 'QUANMETH', 'Quantitative Methods', 3, 0, '0', '0'),
+(60, 'ITTHESI1', 'Research 1', 3, 0, '0', '0'),
+(61, 'MOBAPLEC', 'Mobile App Development (Lecture)', 2, 0, '0', '0'),
+(62, 'MOBAPLAB', 'Mobile App Development (Laboratory)', 0, 1, '0', '0'),
+(63, 'OOPRGLEC', 'Object-Oriented Programming (Lecture)', 2, 0, '0', '0'),
+(64, 'OOPRGLAB', 'Object-Oriented Programming (Laboratory)', 0, 1, '0', '0'),
+(65, 'IAASLEC1', 'Information Assurance and Security 1 (Lecture)', 2, 0, '0', '0'),
+(66, 'IAASLAB1', 'Information Assurance and Security 1 (Laboratory)', 0, 1, '0', '0'),
+(67, 'GECONTWO', 'Contemporary World', 3, 0, '0', '0'),
+(68, 'SYSARCH2', 'Systems Integration and Architecture 2 (Lecture)', 2, 0, '0', '0'),
+(69, 'SYSARLB2', 'Systems Integration and Architecture 2 (Laboratory)', 0, 1, '0', '0'),
+(70, 'ITTHESI2', 'Research 2 (Lecture)', 2, 0, '0', '0'),
+(71, 'ITTHESL2', 'Research 2 (Laboratory)', 0, 1, '0', '0'),
+(72, 'IAASLEC2', 'Information Assurance and Security 2 (Lecture)', 2, 0, '0', '0'),
+(73, 'IAASLAB2', 'Information Assurance and Security 2 (Laboratory)', 0, 1, '0', '0'),
+(74, 'SYSADMLC', 'Systems Administration and Maintenance (Lecture)', 2, 0, '0', '0'),
+(75, 'SYSADMLB', 'Systems Administration and Maintenance (Laboratory)', 0, 1, '0', '0'),
+(76, 'SPISSUES', 'Social and Professional Issues', 3, 0, '0', '0'),
+(77, 'ITINTERN', 'Practicum / Internship', 10, 0, '0', '0'),
+(78, 'GELIFEWR', 'Life And Work of Rizal', 2, 0, '0', '0'),
+(79, 'GELIFEWR', 'Life And Work of Rizal', 2, 0, '0', '0'),
+(80, 'DATANALY', 'Data Analytics ', 3, 0, '0', '0'),
+(81, 'ITTHESIS', 'THESIS 2', 2, 1, '0', '0');
 
 -- --------------------------------------------------------
 
@@ -377,7 +379,8 @@ INSERT INTO `dprtmnt_profs_table` (`dprtmnt_profs_id`, `dprtmnt_id`, `prof_id`) 
 (52, 5, 65),
 (53, 5, 66),
 (54, 5, 67),
-(55, 5, 68);
+(55, 5, 68),
+(56, 5, 69);
 
 -- --------------------------------------------------------
 
@@ -985,81 +988,24 @@ CREATE TABLE `enrolled_subject` (
 --
 
 INSERT INTO `enrolled_subject` (`id`, `student_number`, `curriculum_id`, `course_id`, `active_school_year_id`, `midterm`, `finals`, `final_grade`, `grades_status`, `en_remarks`, `department_section_id`, `status`, `fe_status`, `created_at`) VALUES
-(812, '202500001', 1, 1, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(813, '202500001', 1, 3, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(814, '202500001', 1, 6, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(815, '202500001', 1, 5, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(816, '202500001', 1, 4, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(817, '202500001', 1, 7, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(818, '202500001', 1, 8, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(819, '202500001', 1, 9, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:14'),
-(820, '202500001', 1, 10, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:15'),
-(821, '202500001', 1, 11, 17, '0.00', '0.00', '0.00', NULL, 0, 4, 1, 0, '2025-11-10 06:56:15'),
-(834, '202500001', 1, 34, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(835, '202500001', 1, 35, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(836, '202500001', 1, 36, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(837, '202500001', 1, 37, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(838, '202500001', 1, 38, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(839, '202500001', 1, 39, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(840, '202500001', 1, 40, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(841, '202500001', 1, 41, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(842, '202500001', 1, 42, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(843, '202500001', 1, 43, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(844, '202500001', 1, 44, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(845, '202500001', 1, 45, 8, '0.00', '0.00', '0.00', NULL, 0, 5, 1, 0, '2025-11-10 08:11:47'),
-(847, '202500001', 1, 14, 8, '0.00', '0.00', '0.00', NULL, 0, 1, 0, 0, '2025-11-10 16:07:56'),
-(848, '202500001', 1, 58, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(849, '202500001', 1, 57, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(850, '202500001', 1, 59, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(851, '202500001', 1, 62, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(852, '202500001', 1, 60, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(853, '202500001', 1, 61, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(854, '202500001', 1, 63, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(855, '202500001', 1, 64, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(856, '202500001', 1, 65, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(857, '202500001', 1, 66, 10, '0.00', '0.00', '0.00', NULL, 0, 7, 1, 0, '2025-11-11 08:38:15'),
-(858, '202500001', 1, 46, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:52'),
-(859, '202500001', 1, 47, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:52'),
-(860, '202500001', 1, 48, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:52'),
-(861, '202500001', 1, 49, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:52'),
-(862, '202500001', 1, 50, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:52'),
-(863, '202500001', 1, 51, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:52'),
-(864, '202500001', 1, 52, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:53'),
-(865, '202500001', 1, 53, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:53'),
-(866, '202500001', 1, 55, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:53'),
-(867, '202500001', 1, 56, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:53'),
-(868, '202500001', 1, 54, 11, '0.00', '0.00', '0.00', NULL, 0, 8, 1, 0, '2025-11-11 08:38:53'),
-(869, '202500001', 1, 1, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(870, '202500001', 1, 3, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(871, '202500001', 1, 4, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(872, '202500001', 1, 5, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(873, '202500001', 1, 6, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(874, '202500001', 1, 7, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(875, '202500001', 1, 8, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(876, '202500001', 1, 9, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(877, '202500001', 1, 10, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(878, '202500001', 1, 11, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-11 08:39:35'),
-(879, '202500001', 1, 2, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(880, '202500001', 1, 12, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(881, '202500001', 1, 13, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(882, '202500001', 1, 14, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(883, '202500001', 1, 15, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(884, '202500001', 1, 16, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(885, '202500001', 1, 17, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(886, '202500001', 1, 18, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(887, '202500001', 1, 19, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(888, '202500001', 1, 20, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(889, '202500001', 1, 21, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(890, '202500001', 1, 22, 4, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-11 08:40:10'),
-(891, '202500343', 1, 6, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(892, '202500343', 1, 5, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(893, '202500343', 1, 3, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(894, '202500343', 1, 4, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(895, '202500343', 1, 7, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(896, '202500343', 1, 8, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(897, '202500343', 1, 9, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(898, '202500343', 1, 10, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38'),
-(899, '202500343', 1, 11, 16, '0.00', '0.00', '0.00', NULL, 0, 2, 1, 0, '2025-11-12 07:34:38');
+(1004, '202500001', 1, 3, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1005, '202500001', 1, 4, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1006, '202500001', 1, 5, 3, '1.00', '1.75', '1.38', '1.38', 1, 1, 1, 1, '2025-11-14 05:32:58'),
+(1007, '202500001', 1, 6, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1008, '202500001', 1, 8, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1009, '202500001', 1, 7, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1010, '202500001', 1, 9, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1011, '202500001', 1, 10, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1012, '202500001', 1, 11, 3, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 1, '2025-11-14 05:32:58'),
+(1013, '202500001', 1, 3, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1014, '202500001', 1, 4, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1015, '202500001', 1, 5, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1016, '202500001', 1, 7, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1017, '202500001', 1, 8, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1018, '202500001', 1, 6, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1019, '202500001', 1, 9, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1020, '202500001', 1, 10, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02'),
+(1021, '202500001', 1, 11, 16, '0.00', '0.00', '0.00', NULL, 0, 1, 1, 0, '2025-11-16 13:04:02');
 
 -- --------------------------------------------------------
 
@@ -1081,7 +1027,61 @@ CREATE TABLE `evaluation_table` (
 INSERT INTO `evaluation_table` (`id`, `school_year_id`, `question_id`, `created_at`) VALUES
 (1, 16, 7, '2025-10-12 08:27:08'),
 (2, 16, 8, '2025-10-12 08:37:44'),
-(3, 16, 9, '2025-10-12 11:25:59');
+(3, 16, 9, '2025-10-12 11:25:59'),
+(4, 3, 10, '2025-11-14 04:53:47'),
+(5, 3, 11, '2025-11-14 05:29:34'),
+(6, 3, 12, '2025-11-14 05:30:24'),
+(7, 3, 13, '2025-11-14 05:30:38'),
+(8, 3, 14, '2025-11-14 05:30:52');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `matriculation`
+--
+
+CREATE TABLE `matriculation` (
+  `id` int(11) NOT NULL,
+  `campus_name` varchar(60) NOT NULL,
+  `student_number` varchar(255) NOT NULL,
+  `learner_reference_number` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `given_name` varchar(255) NOT NULL,
+  `middle_initial` varchar(60) NOT NULL,
+  `degree_program` varchar(255) NOT NULL,
+  `year_level` varchar(255) NOT NULL,
+  `sex` varchar(60) NOT NULL,
+  `email_address` varchar(255) NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `laboratory_units` varchar(255) NOT NULL,
+  `computer_units` varchar(255) NOT NULL,
+  `academic_units_enrolled` varchar(255) NOT NULL,
+  `academic_units_nstp_enrolled` varchar(255) NOT NULL,
+  `tuition_fees` varchar(255) NOT NULL,
+  `nstp_fees` varchar(255) NOT NULL,
+  `athletic_fees` varchar(255) NOT NULL,
+  `computer_fees` varchar(255) NOT NULL,
+  `cultural_fees` varchar(255) NOT NULL,
+  `development_fees` varchar(255) NOT NULL,
+  `guidance_fees` varchar(255) NOT NULL,
+  `laboratory_fees` varchar(255) NOT NULL,
+  `library_fees` varchar(255) NOT NULL,
+  `medical_and_dental_fees` varchar(255) NOT NULL,
+  `registration_fees` varchar(255) NOT NULL,
+  `school_id_fees` varchar(255) NOT NULL,
+  `total_tosf` varchar(255) NOT NULL,
+  `remark` varchar(255) NOT NULL,
+  `active_school_year_id` int(11) NOT NULL,
+  `payment` varchar(255) NOT NULL DEFAULT '0',
+  `balance` varchar(255) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `matriculation`
+--
+
+INSERT INTO `matriculation` (`id`, `campus_name`, `student_number`, `learner_reference_number`, `last_name`, `given_name`, `middle_initial`, `degree_program`, `year_level`, `sex`, `email_address`, `phone_number`, `laboratory_units`, `computer_units`, `academic_units_enrolled`, `academic_units_nstp_enrolled`, `tuition_fees`, `nstp_fees`, `athletic_fees`, `computer_fees`, `cultural_fees`, `development_fees`, `guidance_fees`, `laboratory_fees`, `library_fees`, `medical_and_dental_fees`, `registration_fees`, `school_id_fees`, `total_tosf`, `remark`, `active_school_year_id`, `payment`, `balance`) VALUES
+(1, 'Manila', '202500001', '123456789012', 'Montaño', 'Mark Anthony', 'P', 'Bachelor of Science in Architecture', 'Fourth Year', 'Male', 'markmontano999@gmail.com', '09171234567999999', '2', '3', '20', '3', '2600', '1000', '50', '500', '50', '80', '30', '200', '100', '130', '2000', '100', '3590', '', 3, '0', '0');
 
 -- --------------------------------------------------------
 
@@ -1403,7 +1403,9 @@ INSERT INTO `page_table` (`id`, `page_description`, `page_group`, `created_at`) 
 (94, 'Department Management', 'registrar', '2025-10-30 15:28:46'),
 (95, 'System Management', 'registrar', '2025-10-30 15:28:46'),
 (96, 'Account Dashboard', 'registrar', '2025-10-30 15:28:46'),
-(97, 'History Logs', 'registrar', '2025-10-30 16:01:18');
+(97, 'History Logs', 'registrar', '2025-10-30 16:01:18'),
+(98, 'Announcement For Admission', 'registrar', '2025-11-14 02:47:26'),
+(99, 'TOSF CRUD', 'registrar', '2025-11-16 13:14:07');
 
 -- --------------------------------------------------------
 
@@ -1422,9 +1424,9 @@ CREATE TABLE `period_status` (
 --
 
 INSERT INTO `period_status` (`id`, `description`, `status`) VALUES
-(1, 'Midterm', 1),
+(1, 'Midterm', 0),
 (2, 'Finals', 0),
-(3, 'Final Grading Period', 0);
+(3, 'Final Grading Period', 1);
 
 -- --------------------------------------------------------
 
@@ -1782,7 +1784,8 @@ INSERT INTO `prof_table` (`prof_id`, `person_id`, `employee_id`, `profile_image`
 (36, 36, NULL, '', 'Jefferson', NULL, 'Costales', 'jefferson.costales@earist.edu.ph', 'COSTALES', 0, 'faculty'),
 (37, 37, NULL, '', 'Arjo', NULL, 'Ladia', 'arjo.ladia@earist.edu.ph', 'LADIA', 0, 'faculty'),
 (38, 38, NULL, '23838_profile_image_2025.webp', 'Mark Anthony', 'Placido', 'Montano', 'markmontano999@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 'faculty'),
-(63, 98, NULL, '98_ProfessorProfile_2025.png', 'Dhani', 'San', 'Jose', 'disanjose@earist.edu.ph', '$2b$10$/XhdvzV/4rugRbZH5gWafenpXBkbuJT2pjsopS85Mj27vDI2ZjFxm', 1, 'faculty');
+(63, 98, NULL, '98_ProfessorProfile_2025.png', 'Dhani', 'San', 'Jose', 'disanjose@earist.edu.ph', '$2b$10$/XhdvzV/4rugRbZH5gWafenpXBkbuJT2pjsopS85Mj27vDI2ZjFxm', 1, 'faculty'),
+(69, 39, NULL, '39_ProfessorProfile_2025.jpg', 'Jona', 'Descuatan', 'Arcaño', 'jonalane@gmail.com', '$2b$10$XvcQqYNh52ENCzxAtCTI1e6QsCexyw7VsT0ine2LNlGPLp/xTH1oS', 1, 'faculty');
 
 -- --------------------------------------------------------
 
@@ -1979,7 +1982,12 @@ CREATE TABLE `question_table` (
 INSERT INTO `question_table` (`id`, `question_description`, `first_choice`, `second_choice`, `third_choice`, `fourth_choice`, `fifth_choice`) VALUES
 (7, 'Is prof good?', '1', '2', '3', '4', '5'),
 (8, 'Is prof alright?', '1', '2', '3', '4', '5'),
-(9, 'Is prof nice?', '1', '2', '3', '4', '5');
+(9, 'Is prof nice?', '1', '2', '3', '4', '5'),
+(10, 'The instructor uses examples or demonstrations that help me learn.', '1', '2', '3', '4', '5'),
+(11, 'The instructor explains concepts clearly and in an understandable manne', '1', '2', '3', '4', '5'),
+(12, 'The instructor is knowledgeable about the course content.', '1', '2', '3', '4', '5'),
+(13, 'The instructor provides feedback that helps me improve.', '1', '2', '3', '4', '5'),
+(14, 'The instructor encourages students to ask questions and participate.', '1', '2', '3', '4', '5');
 
 -- --------------------------------------------------------
 
@@ -2036,11 +2044,11 @@ CREATE TABLE `requirement_uploads` (
 --
 
 INSERT INTO `requirement_uploads` (`upload_id`, `requirements_id`, `person_id`, `submitted_documents`, `file_path`, `original_name`, `remarks`, `status`, `document_status`, `missing_documents`, `registrar_status`, `created_at`, `last_updated_by`) VALUES
-(178, 1, 323, NULL, '2025100214_BirthCertificate_2025.pdf', 'personaldataformprint.pdf', '75% OF ATTENDANCE IS NEEDED FOR TRANSFEREE', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:17', NULL),
-(179, 2, 323, NULL, '2025100214_Form138_2025.pdf', 'examinationpermit.pdf', 'GWA did not meet the Requirements', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:20', NULL),
-(180, 3, 323, NULL, '2025100214_GoodMoralCharacter_2025.pdf', 'officeoftheregistrar.pdf', 'FORM 138 IS NOT COMPLETE', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:23', NULL),
-(181, 4, 323, NULL, '2025100214_CertificateOfGraduatingClass_2025.pdf', 'IAAS2_Midterm Activity No 2.pdf', 'Have failed and incomplete grades', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:28', NULL),
-(182, 5, 323, NULL, '2025100214_VaccineCard_2025.pdf', 'examinationpermit.pdf', NULL, 1, 'Disapproved', NULL, NULL, '2025-10-01 16:05:32', NULL),
+(178, 1, 1, NULL, '2025100214_BirthCertificate_2025.pdf', 'personaldataformprint.pdf', '75% OF ATTENDANCE IS NEEDED FOR TRANSFEREE', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:17', NULL),
+(179, 2, 1, NULL, '2025100214_Form138_2025.pdf', 'examinationpermit.pdf', 'GWA did not meet the Requirements', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:20', NULL),
+(180, 3, 1, NULL, '2025100214_GoodMoralCharacter_2025.pdf', 'officeoftheregistrar.pdf', 'FORM 138 IS NOT COMPLETE', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:23', NULL),
+(181, 4, 1, NULL, '2025100214_CertificateOfGraduatingClass_2025.pdf', 'IAAS2_Midterm Activity No 2.pdf', 'Have failed and incomplete grades', 1, 'Documents Verified & ECAT', NULL, NULL, '2025-10-01 16:05:28', NULL),
+(182, 5, 1, NULL, '2025100214_VaccineCard_2025.pdf', 'examinationpermit.pdf', NULL, 1, 'Disapproved', NULL, NULL, '2025-10-01 16:05:32', NULL),
 (183, 1, 341, NULL, '2025100232_PSA_2025.png', 'admin.png', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:11', NULL),
 (184, 2, 341, NULL, '2025100232_F138_2025.jpg', 'solo.jpg', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:15', NULL),
 (185, 3, 341, NULL, '2025100232_CGMC_2025.jpg', 'thumbmark.jpg', NULL, 1, 'Documents Verified & ECAT', NULL, NULL, '2025-11-10 18:24:20', NULL),
@@ -2265,7 +2273,11 @@ INSERT INTO `student_curriculum_table` (`id`, `student_numbering_id`, `curriculu
 (14, 128, 1),
 (15, 128, 1),
 (16, 128, 1),
-(17, 128, 1);
+(17, 128, 1),
+(18, 1, 1),
+(19, 1, 1),
+(20, 1, 1),
+(21, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -2289,12 +2301,206 @@ CREATE TABLE `student_evaluation_table` (
 --
 
 INSERT INTO `student_evaluation_table` (`id`, `student_number`, `school_year_id`, `prof_id`, `course_id`, `question_id`, `question_answer`, `answered_at`) VALUES
-(22, '202500341', 16, 63, 4, 7, 1, '2025-11-10 11:15:11'),
-(23, '202500341', 16, 63, 4, 8, 3, '2025-11-10 11:15:11'),
-(24, '202500341', 16, 63, 4, 9, 2, '2025-11-10 11:15:11'),
-(25, '202500341', 16, NULL, 3, 7, 4, '2025-11-10 11:15:23'),
-(26, '202500341', 16, NULL, 3, 8, 3, '2025-11-10 11:15:23'),
-(27, '202500341', 16, NULL, 3, 9, 4, '2025-11-10 11:15:23');
+(37, '202500001', 3, 38, 3, 10, 1, '2025-11-14 06:04:14'),
+(38, '202500001', 3, 38, 3, 11, 1, '2025-11-14 06:04:14'),
+(39, '202500001', 3, 38, 3, 12, 1, '2025-11-14 06:04:14'),
+(40, '202500001', 3, 38, 3, 13, 1, '2025-11-14 06:04:15'),
+(41, '202500001', 3, 38, 3, 14, 1, '2025-11-14 06:04:15'),
+(42, '202500001', 3, 63, 4, 10, 1, '2025-11-14 06:16:49'),
+(43, '202500001', 3, 63, 4, 11, 1, '2025-11-14 06:16:49'),
+(44, '202500001', 3, 63, 4, 12, 1, '2025-11-14 06:16:49'),
+(45, '202500001', 3, 63, 4, 13, 1, '2025-11-14 06:16:49'),
+(46, '202500001', 3, 63, 4, 14, 1, '2025-11-14 06:16:49'),
+(47, '202500001', 3, 38, 10, 10, 1, '2025-11-14 06:17:11'),
+(48, '202500001', 3, 38, 10, 11, 1, '2025-11-14 06:17:11'),
+(49, '202500001', 3, 38, 10, 12, 1, '2025-11-14 06:17:11'),
+(50, '202500001', 3, 38, 10, 13, 1, '2025-11-14 06:17:11'),
+(51, '202500001', 3, 38, 10, 14, 1, '2025-11-14 06:17:11'),
+(52, '202500001', 3, 38, 5, 10, 1, '2025-11-14 06:17:27'),
+(53, '202500001', 3, 38, 5, 11, 1, '2025-11-14 06:17:27'),
+(54, '202500001', 3, 38, 5, 12, 1, '2025-11-14 06:17:27'),
+(55, '202500001', 3, 38, 5, 13, 1, '2025-11-14 06:17:27'),
+(56, '202500001', 3, 38, 5, 14, 1, '2025-11-14 06:17:27'),
+(57, '202500001', 3, 38, 6, 10, 5, '2025-11-14 06:17:39'),
+(58, '202500001', 3, 38, 6, 11, 5, '2025-11-14 06:17:39'),
+(59, '202500001', 3, 38, 6, 12, 5, '2025-11-14 06:17:39'),
+(60, '202500001', 3, 38, 6, 13, 5, '2025-11-14 06:17:39'),
+(61, '202500001', 3, 38, 6, 14, 5, '2025-11-14 06:17:39'),
+(62, '202500001', 3, 38, 7, 10, 5, '2025-11-14 06:17:49'),
+(63, '202500001', 3, 38, 7, 11, 5, '2025-11-14 06:17:49'),
+(64, '202500001', 3, 38, 7, 12, 5, '2025-11-14 06:17:49'),
+(65, '202500001', 3, 38, 7, 13, 5, '2025-11-14 06:17:49'),
+(66, '202500001', 3, 38, 7, 14, 5, '2025-11-14 06:17:49'),
+(67, '202500001', 3, 38, 8, 10, 5, '2025-11-14 06:18:00'),
+(68, '202500001', 3, 38, 8, 11, 5, '2025-11-14 06:18:00'),
+(69, '202500001', 3, 38, 8, 12, 5, '2025-11-14 06:18:00'),
+(70, '202500001', 3, 38, 8, 13, 5, '2025-11-14 06:18:00'),
+(71, '202500001', 3, 38, 8, 14, 5, '2025-11-14 06:18:00'),
+(72, '202500001', 3, 38, 9, 10, 5, '2025-11-14 06:18:11'),
+(73, '202500001', 3, 38, 9, 11, 5, '2025-11-14 06:18:11'),
+(74, '202500001', 3, 38, 9, 12, 5, '2025-11-14 06:18:11'),
+(75, '202500001', 3, 38, 9, 13, 5, '2025-11-14 06:18:11'),
+(76, '202500001', 3, 38, 9, 14, 5, '2025-11-14 06:18:11'),
+(77, '202500001', 3, 38, 11, 10, 5, '2025-11-14 06:18:23'),
+(78, '202500001', 3, 38, 11, 11, 5, '2025-11-14 06:18:24'),
+(79, '202500001', 3, 38, 11, 12, 5, '2025-11-14 06:18:24'),
+(80, '202500001', 3, 38, 11, 13, 5, '2025-11-14 06:18:24'),
+(81, '202500001', 3, 38, 11, 14, 5, '2025-11-14 06:18:24'),
+(82, '202500001', 3, 38, 11, 10, 5, '2025-11-14 06:18:35'),
+(83, '202500001', 3, 38, 11, 11, 5, '2025-11-14 06:18:35'),
+(84, '202500001', 3, 38, 11, 12, 5, '2025-11-14 06:18:35'),
+(85, '202500001', 3, 38, 11, 13, 5, '2025-11-14 06:18:35'),
+(86, '202500001', 3, 38, 11, 14, 5, '2025-11-14 06:18:35'),
+(87, '202500001', 3, 63, 4, 10, 5, '2025-11-14 06:38:38'),
+(88, '202500001', 3, 63, 4, 11, 5, '2025-11-14 06:38:38'),
+(89, '202500001', 3, 63, 4, 12, 5, '2025-11-14 06:38:38'),
+(90, '202500001', 3, 63, 4, 13, 5, '2025-11-14 06:38:38'),
+(91, '202500001', 3, 63, 4, 14, 5, '2025-11-14 06:38:38'),
+(92, '202500001', 3, 38, 3, 10, 5, '2025-11-14 06:39:07'),
+(93, '202500001', 3, 38, 3, 11, 5, '2025-11-14 06:39:07'),
+(94, '202500001', 3, 38, 3, 12, 5, '2025-11-14 06:39:07'),
+(95, '202500001', 3, 38, 3, 13, 5, '2025-11-14 06:39:07'),
+(96, '202500001', 3, 38, 3, 14, 5, '2025-11-14 06:39:07'),
+(97, '202500001', 3, 63, 4, 10, 5, '2025-11-14 06:52:03'),
+(98, '202500001', 3, 63, 4, 11, 5, '2025-11-14 06:52:03'),
+(99, '202500001', 3, 63, 4, 12, 5, '2025-11-14 06:52:03'),
+(100, '202500001', 3, 63, 4, 13, 5, '2025-11-14 06:52:03'),
+(101, '202500001', 3, 63, 4, 14, 5, '2025-11-14 06:52:03'),
+(102, '202500001', 3, 38, 10, 10, 5, '2025-11-14 06:52:35'),
+(103, '202500001', 3, 38, 10, 11, 5, '2025-11-14 06:52:35'),
+(104, '202500001', 3, 38, 10, 12, 5, '2025-11-14 06:52:35'),
+(105, '202500001', 3, 38, 10, 13, 5, '2025-11-14 06:52:35'),
+(106, '202500001', 3, 38, 10, 14, 5, '2025-11-14 06:52:35'),
+(107, '202500001', 3, 38, 3, 10, 5, '2025-11-14 06:52:44'),
+(108, '202500001', 3, 38, 3, 11, 5, '2025-11-14 06:52:44'),
+(109, '202500001', 3, 38, 3, 12, 5, '2025-11-14 06:52:44'),
+(110, '202500001', 3, 38, 3, 13, 5, '2025-11-14 06:52:44'),
+(111, '202500001', 3, 38, 3, 14, 5, '2025-11-14 06:52:44'),
+(112, '202500001', 3, 38, 5, 10, 5, '2025-11-14 06:52:52'),
+(113, '202500001', 3, 38, 5, 11, 5, '2025-11-14 06:52:52'),
+(114, '202500001', 3, 38, 5, 12, 5, '2025-11-14 06:52:52'),
+(115, '202500001', 3, 38, 5, 13, 5, '2025-11-14 06:52:52'),
+(116, '202500001', 3, 38, 5, 14, 5, '2025-11-14 06:52:52'),
+(117, '202500001', 3, 38, 6, 10, 5, '2025-11-14 06:53:01'),
+(118, '202500001', 3, 38, 6, 11, 5, '2025-11-14 06:53:01'),
+(119, '202500001', 3, 38, 6, 12, 5, '2025-11-14 06:53:01'),
+(120, '202500001', 3, 38, 6, 13, 5, '2025-11-14 06:53:01'),
+(121, '202500001', 3, 38, 6, 14, 5, '2025-11-14 06:53:01'),
+(122, '202500001', 3, 38, 7, 10, 5, '2025-11-14 06:53:11'),
+(123, '202500001', 3, 38, 7, 11, 5, '2025-11-14 06:53:11'),
+(124, '202500001', 3, 38, 7, 12, 5, '2025-11-14 06:53:11'),
+(125, '202500001', 3, 38, 7, 13, 5, '2025-11-14 06:53:11'),
+(126, '202500001', 3, 38, 7, 14, 5, '2025-11-14 06:53:12'),
+(127, '202500001', 3, 38, 8, 10, 5, '2025-11-14 06:53:25'),
+(128, '202500001', 3, 38, 8, 11, 5, '2025-11-14 06:53:25'),
+(129, '202500001', 3, 38, 8, 12, 5, '2025-11-14 06:53:25'),
+(130, '202500001', 3, 38, 8, 13, 5, '2025-11-14 06:53:25'),
+(131, '202500001', 3, 38, 8, 14, 5, '2025-11-14 06:53:25'),
+(132, '202500001', 3, 38, 9, 10, 5, '2025-11-14 06:53:34'),
+(133, '202500001', 3, 38, 9, 11, 5, '2025-11-14 06:53:34'),
+(134, '202500001', 3, 38, 9, 12, 5, '2025-11-14 06:53:34'),
+(135, '202500001', 3, 38, 9, 13, 5, '2025-11-14 06:53:34'),
+(136, '202500001', 3, 38, 9, 14, 5, '2025-11-14 06:53:34'),
+(137, '202500001', 3, 38, 11, 10, 5, '2025-11-14 06:53:44'),
+(138, '202500001', 3, 38, 11, 11, 5, '2025-11-14 06:53:44'),
+(139, '202500001', 3, 38, 11, 12, 5, '2025-11-14 06:53:44'),
+(140, '202500001', 3, 38, 11, 13, 5, '2025-11-14 06:53:44'),
+(141, '202500001', 3, 38, 11, 14, 5, '2025-11-14 06:53:44'),
+(142, '202500001', 3, 63, 4, 10, 5, '2025-11-14 07:25:22'),
+(143, '202500001', 3, 63, 4, 11, 5, '2025-11-14 07:25:22'),
+(144, '202500001', 3, 63, 4, 12, 5, '2025-11-14 07:25:22'),
+(145, '202500001', 3, 63, 4, 13, 5, '2025-11-14 07:25:22'),
+(146, '202500001', 3, 63, 4, 14, 5, '2025-11-14 07:25:22'),
+(147, '202500001', 3, 38, 10, 10, 5, '2025-11-14 07:25:35'),
+(148, '202500001', 3, 38, 10, 11, 5, '2025-11-14 07:25:35'),
+(149, '202500001', 3, 38, 10, 12, 5, '2025-11-14 07:25:35'),
+(150, '202500001', 3, 38, 10, 13, 5, '2025-11-14 07:25:35'),
+(151, '202500001', 3, 38, 10, 14, 5, '2025-11-14 07:25:35'),
+(152, '202500001', 3, 38, 3, 10, 5, '2025-11-14 07:25:52'),
+(153, '202500001', 3, 38, 3, 11, 5, '2025-11-14 07:25:52'),
+(154, '202500001', 3, 38, 3, 12, 5, '2025-11-14 07:25:52'),
+(155, '202500001', 3, 38, 3, 13, 5, '2025-11-14 07:25:52'),
+(156, '202500001', 3, 38, 3, 14, 5, '2025-11-14 07:25:52'),
+(157, '202500001', 3, 38, 5, 10, 5, '2025-11-14 07:26:02'),
+(158, '202500001', 3, 38, 5, 11, 5, '2025-11-14 07:26:03'),
+(159, '202500001', 3, 38, 5, 12, 5, '2025-11-14 07:26:03'),
+(160, '202500001', 3, 38, 5, 13, 5, '2025-11-14 07:26:03'),
+(161, '202500001', 3, 38, 5, 14, 5, '2025-11-14 07:26:03'),
+(162, '202500001', 3, 38, 6, 10, 5, '2025-11-14 07:26:14'),
+(163, '202500001', 3, 38, 6, 11, 5, '2025-11-14 07:26:14'),
+(164, '202500001', 3, 38, 6, 12, 5, '2025-11-14 07:26:14'),
+(165, '202500001', 3, 38, 6, 13, 5, '2025-11-14 07:26:14'),
+(166, '202500001', 3, 38, 6, 14, 5, '2025-11-14 07:26:14'),
+(167, '202500001', 3, 38, 7, 10, 5, '2025-11-14 07:26:23'),
+(168, '202500001', 3, 38, 7, 11, 5, '2025-11-14 07:26:23'),
+(169, '202500001', 3, 38, 7, 12, 5, '2025-11-14 07:26:23'),
+(170, '202500001', 3, 38, 7, 13, 5, '2025-11-14 07:26:23'),
+(171, '202500001', 3, 38, 7, 14, 5, '2025-11-14 07:26:23'),
+(172, '202500001', 3, 38, 8, 10, 5, '2025-11-14 07:26:33'),
+(173, '202500001', 3, 38, 8, 11, 5, '2025-11-14 07:26:33'),
+(174, '202500001', 3, 38, 8, 12, 5, '2025-11-14 07:26:33'),
+(175, '202500001', 3, 38, 8, 13, 5, '2025-11-14 07:26:33'),
+(176, '202500001', 3, 38, 8, 14, 5, '2025-11-14 07:26:33'),
+(177, '202500001', 3, 38, 9, 10, 5, '2025-11-14 07:26:43'),
+(178, '202500001', 3, 38, 9, 11, 5, '2025-11-14 07:26:43'),
+(179, '202500001', 3, 38, 9, 12, 5, '2025-11-14 07:26:43'),
+(180, '202500001', 3, 38, 9, 13, 5, '2025-11-14 07:26:43'),
+(181, '202500001', 3, 38, 9, 14, 5, '2025-11-14 07:26:43'),
+(182, '202500001', 3, 38, 11, 10, 5, '2025-11-14 07:26:53'),
+(183, '202500001', 3, 38, 11, 11, 5, '2025-11-14 07:26:53'),
+(184, '202500001', 3, 38, 11, 12, 5, '2025-11-14 07:26:53'),
+(185, '202500001', 3, 38, 11, 13, 5, '2025-11-14 07:26:53'),
+(186, '202500001', 3, 38, 11, 14, 5, '2025-11-14 07:26:53'),
+(187, '202500001', 3, 38, 3, 10, 5, '2025-11-14 07:42:03'),
+(188, '202500001', 3, 38, 3, 11, 5, '2025-11-14 07:42:03'),
+(189, '202500001', 3, 38, 3, 12, 5, '2025-11-14 07:42:03'),
+(190, '202500001', 3, 38, 3, 13, 5, '2025-11-14 07:42:03'),
+(191, '202500001', 3, 38, 3, 14, 5, '2025-11-14 07:42:03'),
+(192, '202500001', 3, 63, 4, 10, 5, '2025-11-14 09:29:10'),
+(193, '202500001', 3, 63, 4, 11, 5, '2025-11-14 09:29:10'),
+(194, '202500001', 3, 63, 4, 12, 5, '2025-11-14 09:29:10'),
+(195, '202500001', 3, 63, 4, 13, 5, '2025-11-14 09:29:10'),
+(196, '202500001', 3, 63, 4, 14, 5, '2025-11-14 09:29:10'),
+(197, '202500001', 3, 38, 10, 10, 5, '2025-11-14 09:29:38'),
+(198, '202500001', 3, 38, 10, 11, 5, '2025-11-14 09:29:38'),
+(199, '202500001', 3, 38, 10, 12, 5, '2025-11-14 09:29:38'),
+(200, '202500001', 3, 38, 10, 13, 5, '2025-11-14 09:29:38'),
+(201, '202500001', 3, 38, 10, 14, 5, '2025-11-14 09:29:38'),
+(202, '202500001', 3, 38, 3, 10, 5, '2025-11-14 09:30:17'),
+(203, '202500001', 3, 38, 3, 11, 5, '2025-11-14 09:30:17'),
+(204, '202500001', 3, 38, 3, 12, 5, '2025-11-14 09:30:17'),
+(205, '202500001', 3, 38, 3, 13, 5, '2025-11-14 09:30:17'),
+(206, '202500001', 3, 38, 3, 14, 5, '2025-11-14 09:30:17'),
+(207, '202500001', 3, 38, 5, 10, 5, '2025-11-14 09:30:27'),
+(208, '202500001', 3, 38, 5, 11, 5, '2025-11-14 09:30:27'),
+(209, '202500001', 3, 38, 5, 12, 5, '2025-11-14 09:30:27'),
+(210, '202500001', 3, 38, 5, 13, 5, '2025-11-14 09:30:27'),
+(211, '202500001', 3, 38, 5, 14, 5, '2025-11-14 09:30:27'),
+(212, '202500001', 3, 38, 6, 10, 5, '2025-11-14 09:30:37'),
+(213, '202500001', 3, 38, 6, 11, 5, '2025-11-14 09:30:37'),
+(214, '202500001', 3, 38, 6, 12, 5, '2025-11-14 09:30:37'),
+(215, '202500001', 3, 38, 6, 13, 5, '2025-11-14 09:30:37'),
+(216, '202500001', 3, 38, 6, 14, 5, '2025-11-14 09:30:37'),
+(217, '202500001', 3, 38, 7, 10, 5, '2025-11-14 09:30:49'),
+(218, '202500001', 3, 38, 7, 11, 5, '2025-11-14 09:30:49'),
+(219, '202500001', 3, 38, 7, 12, 5, '2025-11-14 09:30:49'),
+(220, '202500001', 3, 38, 7, 13, 5, '2025-11-14 09:30:49'),
+(221, '202500001', 3, 38, 7, 14, 5, '2025-11-14 09:30:49'),
+(222, '202500001', 3, 38, 8, 10, 5, '2025-11-14 09:30:59'),
+(223, '202500001', 3, 38, 8, 11, 5, '2025-11-14 09:30:59'),
+(224, '202500001', 3, 38, 8, 12, 5, '2025-11-14 09:30:59'),
+(225, '202500001', 3, 38, 8, 13, 5, '2025-11-14 09:30:59'),
+(226, '202500001', 3, 38, 8, 14, 5, '2025-11-14 09:30:59'),
+(227, '202500001', 3, 38, 9, 10, 5, '2025-11-14 09:31:07'),
+(228, '202500001', 3, 38, 9, 11, 5, '2025-11-14 09:31:07'),
+(229, '202500001', 3, 38, 9, 12, 5, '2025-11-14 09:31:07'),
+(230, '202500001', 3, 38, 9, 13, 5, '2025-11-14 09:31:07'),
+(231, '202500001', 3, 38, 9, 14, 5, '2025-11-14 09:31:07'),
+(232, '202500001', 3, 38, 11, 10, 5, '2025-11-14 09:31:15'),
+(233, '202500001', 3, 38, 11, 11, 5, '2025-11-14 09:31:15'),
+(234, '202500001', 3, 38, 11, 12, 5, '2025-11-14 09:31:15'),
+(235, '202500001', 3, 38, 11, 13, 5, '2025-11-14 09:31:15'),
+(236, '202500001', 3, 38, 11, 14, 5, '2025-11-14 09:31:15');
 
 -- --------------------------------------------------------
 
@@ -2470,7 +2676,7 @@ CREATE TABLE `student_status_table` (
 --
 
 INSERT INTO `student_status_table` (`id`, `student_number`, `active_curriculum`, `enrolled_status`, `year_level_id`, `active_school_year_id`, `control_status`) VALUES
-(36, '202500001', 1, '1', 3, 1, 0),
+(36, '202500001', 1, '1', 1, 1, 0),
 (37, '202500002', 1, '1', 1, 0, 0),
 (38, '202500012', 0, '1', 0, 0, 0),
 (39, '202500009', 0, '1', 0, 0, 0),
@@ -2570,8 +2776,41 @@ INSERT INTO `time_table` (`id`, `room_day`, `school_time_start`, `school_time_en
 (31, 4, '10:00 AM', '12:00 PM', 7, 2, 38, 21, 12),
 (32, 3, '12:00 PM', '3:00 PM', 2, 15, 63, 21, 12),
 (33, 6, '8:00 AM', '10:00 AM', 4, 11, 63, 21, 12),
-(34, 1, '7:00 AM', '10:00 AM', 1, 1, 38, 21, 3),
-(41, 1, '10:00 AM', '12:00 PM', 1, 10, 38, 21, 16);
+(41, 1, '10:00 AM', '12:00 PM', 1, 10, 38, 21, 16),
+(42, 2, '7:00 AM', '9:00 AM', 1, 3, 38, 21, 3),
+(43, 3, '7:00 AM', '10:00 AM', 1, 4, 38, 2, 3),
+(44, 2, '10:00 AM', '12:00 PM', 1, 5, 38, 26, 3),
+(45, 4, '7:00 AM', '9:00 AM', 1, 6, 38, 21, 3),
+(46, 3, '5:00 PM', '7:00 PM', 1, 7, 38, 26, 3),
+(47, 5, '9:00 AM', '12:00 PM', 1, 8, 38, 26, 3),
+(48, 6, '7:00 AM', '12:00 PM', 1, 9, 38, 26, 3),
+(49, 6, '5:00 PM', '9:00 PM', 1, 10, 38, 21, 3),
+(50, 1, '10:00 AM', '1:00 PM', 1, 11, 38, 2, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tosf`
+--
+
+CREATE TABLE `tosf` (
+  `tosf_id` int(11) NOT NULL,
+  `athletic_fee` varchar(255) NOT NULL DEFAULT '0',
+  `cultural_fee` varchar(255) NOT NULL DEFAULT '0',
+  `developmental_fee` varchar(255) NOT NULL DEFAULT '0',
+  `guidance_fee` varchar(255) NOT NULL DEFAULT '0',
+  `library_fee` varchar(255) NOT NULL DEFAULT '0',
+  `medical_and_dental_fee` varchar(255) NOT NULL DEFAULT '0',
+  `registration_fee` varchar(255) NOT NULL DEFAULT '0',
+  `computer_fee` varchar(255) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `tosf`
+--
+
+INSERT INTO `tosf` (`tosf_id`, `athletic_fee`, `cultural_fee`, `developmental_fee`, `guidance_fee`, `library_fee`, `medical_and_dental_fee`, `registration_fee`, `computer_fee`) VALUES
+(2, '50', '50', '80', '30', '100', '130', '50', '500');
 
 -- --------------------------------------------------------
 
@@ -2613,6 +2852,17 @@ CREATE TABLE `unifast` (
   `active_school_year_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `unifast`
+--
+
+INSERT INTO `unifast` (`id`, `campus_name`, `student_number`, `learner_reference_number`, `last_name`, `given_name`, `middle_initial`, `degree_program`, `year_level`, `sex`, `email_address`, `phone_number`, `laboratory_units`, `computer_units`, `academic_units_enrolled`, `academic_units_nstp_enrolled`, `tuition_fees`, `nstp_fees`, `athletic_fees`, `computer_fees`, `cultural_fees`, `development_fees`, `guidance_fees`, `laboratory_fees`, `library_fees`, `medical_and_dental_fees`, `registration_fees`, `school_id_fees`, `total_tosf`, `remark`, `active_school_year_id`) VALUES
+(9, 'Manila', '202500001', '123456789012', 'Montaño', 'Mark Anthony', 'P', 'Bachelor of Science in Architecture', 'First Year', 'Male', 'markmontano999@gmail.com', '09171234567999999', '0', '3', '0', '3', '0', '1000', '50', '500', '50', '80', '30', '0', '100', '130', '2000', '100', '990', '', 1),
+(10, 'Manila', '202500001', '123456789012', 'Montaño', 'Mark Anthony', 'P', 'Bachelor of Science in Architecture', 'First Year', 'Male', 'markmontano999@gmail.com', '09171234567999999', '2', '3', '20', '3', '2600', '1000', '50', '500', '50', '80', '30', '200', '100', '130', '2000', '100', '3590', '', 1),
+(11, 'Manila', '202500001', '123456789012', 'Montaño', 'Mark Anthony', 'P', 'Bachelor of Science in Architecture', 'First Year', 'Male', 'markmontano999@gmail.com', '09171234567999999', '2', '3', '20', '3', '2600', '1000', '50', '500', '50', '80', '30', '200', '100', '130', '2000', '100', '3590', '', 16),
+(12, 'Manila', '202500001', '123456789012', 'Montaño', 'Mark Anthony', 'P', 'Bachelor of Science in Architecture', 'Fourth Year', 'Male', 'markmontano999@gmail.com', '09171234567999999', '2', '3', '20', '3', '2600', '1000', '50', '500', '50', '80', '30', '200', '100', '130', '2000', '100', '3590', '', 3),
+(13, 'Manila', '202500001', '123456789012', 'Montaño', 'Mark Anthony', 'P', 'Bachelor of Science in Architecture', 'Fourth Year', 'Male', 'markmontano999@gmail.com', '09171234567999999', '2', '3', '20', '3', '2600', '1000', '50', '500', '50', '80', '30', '200', '100', '130', '2000', '100', '3590', '', 3);
+
 -- --------------------------------------------------------
 
 --
@@ -2639,7 +2889,7 @@ CREATE TABLE `user_accounts` (
 --
 
 INSERT INTO `user_accounts` (`id`, `person_id`, `employee_id`, `profile_picture`, `role`, `last_name`, `middle_name`, `first_name`, `email`, `password`, `status`, `dprtmnt_id`) VALUES
-(1, 1, NULL, NULL, 'student', NULL, NULL, NULL, 'markmontao2671@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 6),
+(1, 1, NULL, NULL, 'student', NULL, NULL, NULL, 'markmontao2671@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, 1),
 (2, 4, NULL, NULL, 'student', NULL, NULL, NULL, 'markmontano0626@gmail.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8sF2zMALkDu', 1, NULL),
 (12, 13, NULL, NULL, 'student', NULL, NULL, NULL, 'benjamin.anderson13@example.com', '$2b$10$QEsrP1R1oVa.eZiqlZRgoeFaaIJSX2ZuR9DhZvArwINLs3mR2a/cm', 0, NULL),
 (13, 14, NULL, NULL, 'student', NULL, NULL, NULL, 'ava.thomas14@example.com', '$2b$10$Bqh2HDkbbs0PabLc1ycQpOYj4RBqeb4rR7b/Iu8B5b3mM7cAFPY8W', 0, NULL),
@@ -2711,12 +2961,6 @@ INSERT INTO `user_accounts` (`id`, `person_id`, `employee_id`, `profile_picture`
 (80, 1382, NULL, 'undefined_profile.png', 'student', 'Montano', 'Placido', 'Mark Anthony', 'markmontano888@gmail.com', '$2b$10$8HCsU/TuwWOZAN5/HqYRL.Dyhwg5vK6trjvaNStVLdLF7hdc87N1S', 1, 5),
 (81, 341, NULL, NULL, 'student', NULL, NULL, NULL, 'montano.ma.bsinfotech@gmail.com', '$2b$10$mwAgpMiEbt7UQKoketz/hei3/ibD9QL/jh5UHMrfxu5ihy7/VHR3G', 1, 6),
 (82, 1383, NULL, NULL, 'student', 'Montano', 'Placido', 'Mark Anthony', 'markmontano222@gmail.com', '$2b$10$AdN/pSDBTNMvbj9mbcmsMu33VqTcwyfu/rRkSGOCM0TxKjFT7Nbdi', 1, 7),
-(83, 1384, '7890-', '7890-_1762782743823.png', 'registrar', 'Montano', 'Placido', 'Mark Anthony', 'markmontano5511@gmail.com', '$2b$10$JfZE0L8rPGTdJxYwPjgTYeWgRZnp3IClupCTk6yDiOtuEVJn7wx2W', 1, 7),
-(84, 1385, '7890-', '7890-_1762783582090.png', 'registrar', 'Montano', 'Placido', 'Mark Anthony', 'markmontano67890@gmail.com', '$2b$10$ifEgWEHLffScWkGKsXLWBuuv9d9wWfVBywgtM2mKf2ahKh70L1rju', 1, 5),
-(85, 1386, '512352', '512352_1762788917421.jpg', 'registrar', 'rsdfsdf', 'dfhf', 'gjaDAS', 'markmontano5436346@gmail.com', '$2b$10$tQBJ7Z4MO141a3alWvleq.PB4GwVTSiD5worknie3hB1fTwg/YlRq', 0, 6),
-(86, 1387, '325235', '325235_1762789382949.jpg', 'registrar', 'hgfhfdgh', 'gfd', 'gdfgdf', 'markmontano511@gmail.com', '$2b$10$QhFsBQvkQsYDHwmKZQIyB.flx2Q/LEV1ZU0U2ovoJNJ1jUg8etJgW', 1, 8),
-(87, 1388, NULL, NULL, 'student', 'Montanofsaagdfgf', 'Placidohfg', 'Mark Anthonyfas', 'montano.ma.bsinfotechs@gmail.com', '$2b$10$5AeO49RhYB0GX7attPPhhukQi753msj3YuYUNv4Utrzi6VN61L1ry', 1, 5),
-(88, 1389, NULL, NULL, 'student', 'Montano', 'Placido', 'Mark Anthony', 'markmontano5221@gmail.com', '$2b$10$gbW57yRTYaRVFrcN3Ad8aO.WjHIyMhBEeaF9cYCsZ5dVNlSUsgK8W', 1, 5),
 (89, 343, NULL, NULL, 'student', NULL, NULL, NULL, 'morales.ta.bsinfotech@gmail.com', '$2b$10$8o/rEwI.5rU/koEz/HpIvO3GFjHCr2jEpH91VokYigNbwYGzJ1wYa', NULL, 1);
 
 -- --------------------------------------------------------
@@ -2847,6 +3091,12 @@ ALTER TABLE `enrolled_subject`
 -- Indexes for table `evaluation_table`
 --
 ALTER TABLE `evaluation_table`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `matriculation`
+--
+ALTER TABLE `matriculation`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -3001,6 +3251,12 @@ ALTER TABLE `time_table`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tosf`
+--
+ALTER TABLE `tosf`
+  ADD PRIMARY KEY (`tosf_id`);
+
+--
 -- Indexes for table `unifast`
 --
 ALTER TABLE `unifast`
@@ -3032,13 +3288,13 @@ ALTER TABLE `year_table`
 -- AUTO_INCREMENT for table `active_school_year_table`
 --
 ALTER TABLE `active_school_year_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `course_table`
 --
 ALTER TABLE `course_table`
-  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=85;
+  MODIFY `course_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=87;
 
 --
 -- AUTO_INCREMENT for table `curriculum_table`
@@ -3056,7 +3312,7 @@ ALTER TABLE `dprtmnt_curriculum_table`
 -- AUTO_INCREMENT for table `dprtmnt_profs_table`
 --
 ALTER TABLE `dprtmnt_profs_table`
-  MODIFY `dprtmnt_profs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `dprtmnt_profs_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `dprtmnt_room_table`
@@ -3080,13 +3336,19 @@ ALTER TABLE `dprtmnt_table`
 -- AUTO_INCREMENT for table `enrolled_subject`
 --
 ALTER TABLE `enrolled_subject`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=900;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1022;
 
 --
 -- AUTO_INCREMENT for table `evaluation_table`
 --
 ALTER TABLE `evaluation_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `matriculation`
+--
+ALTER TABLE `matriculation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `medical_requirements`
@@ -3099,12 +3361,6 @@ ALTER TABLE `medical_requirements`
 --
 ALTER TABLE `page_access`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
-
---
--- AUTO_INCREMENT for table `page_table`
---
-ALTER TABLE `page_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=101;
 
 --
 -- AUTO_INCREMENT for table `period_status`
@@ -3134,7 +3390,7 @@ ALTER TABLE `person_table`
 -- AUTO_INCREMENT for table `prof_table`
 --
 ALTER TABLE `prof_table`
-  MODIFY `prof_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `prof_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
 
 --
 -- AUTO_INCREMENT for table `program_table`
@@ -3152,7 +3408,7 @@ ALTER TABLE `program_tagging_table`
 -- AUTO_INCREMENT for table `question_table`
 --
 ALTER TABLE `question_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `requirements_table`
@@ -3206,13 +3462,13 @@ ALTER TABLE `student_counter`
 -- AUTO_INCREMENT for table `student_curriculum_table`
 --
 ALTER TABLE `student_curriculum_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `student_evaluation_table`
 --
 ALTER TABLE `student_evaluation_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=237;
 
 --
 -- AUTO_INCREMENT for table `student_grade_overall_table`
@@ -3236,13 +3492,19 @@ ALTER TABLE `student_status_table`
 -- AUTO_INCREMENT for table `time_table`
 --
 ALTER TABLE `time_table`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=42;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+
+--
+-- AUTO_INCREMENT for table `tosf`
+--
+ALTER TABLE `tosf`
+  MODIFY `tosf_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `unifast`
 --
 ALTER TABLE `unifast`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `user_accounts`

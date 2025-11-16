@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2025 at 01:04 AM
+-- Generation Time: Nov 16, 2025 at 06:50 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -629,9 +629,36 @@ CREATE TABLE `entrance_exam_schedule` (
 --
 
 INSERT INTO `entrance_exam_schedule` (`schedule_id`, `day_description`, `building_description`, `room_description`, `start_time`, `end_time`, `proctor`, `created_at`, `room_quota`) VALUES
-(21, 'Monday', 'MIS Building', 'CSS 202', '10:00:00', '11:00:00', 'Ernanie Carlos', '2025-09-08 11:06:05', 40),
-(22, '09/11/2025', 'MIS Building', 'CCS 203', '13:00:00', '15:00:00', 'Dhani San Jose', '2025-09-11 05:56:41', 40),
-(23, '2025-10-01', 'MIS Building', 'CCS 203', '09:00:00', '11:00:00', 'Marku', '2025-10-01 08:09:07', 40);
+(26, '2025-11-18', 'Lincoln Hall', 'Room 101', '08:00:00', '09:00:00', 'John Smith', '2025-11-16 16:38:56', 35),
+(27, '2025-11-18', 'Lincoln Hall', 'Room 102', '09:00:00', '10:00:00', 'Mary Johnson', '2025-11-16 16:38:56', 30),
+(28, '2025-11-18', 'Jefferson Hall', 'Room 201', '10:00:00', '11:00:00', 'James Williams', '2025-11-16 16:38:56', 40),
+(29, '2025-11-18', 'Jefferson Hall', 'Room 202', '11:00:00', '12:00:00', 'Patricia Brown', '2025-11-16 16:38:56', 45),
+(30, '2025-11-18', 'Roosevelt Building', 'Room 301', '13:00:00', '14:00:00', 'Robert Jones', '2025-11-16 16:38:56', 50),
+(31, '2025-11-18', 'Roosevelt Building', 'Room 302', '14:00:00', '15:00:00', 'Linda Garcia', '2025-11-16 16:38:56', 40),
+(32, '2025-11-19', 'Washington Hall', 'Room 101', '08:00:00', '09:00:00', 'Michael Miller', '2025-11-16 16:38:56', 35),
+(33, '2025-11-19', 'Washington Hall', 'Room 102', '09:00:00', '10:00:00', 'Elizabeth Davis', '2025-11-16 16:38:56', 30),
+(34, '2025-11-19', 'Adams Hall', 'Room 201', '10:00:00', '11:00:00', 'William Martinez', '2025-11-16 16:38:56', 40),
+(35, '2025-11-19', 'Adams Hall', 'Room 202', '11:00:00', '12:00:00', 'Barbara Hernandez', '2025-11-16 16:38:56', 45),
+(36, '2025-11-19', 'Franklin Building', 'Room 301', '13:00:00', '14:00:00', 'David Lopez', '2025-11-16 16:38:56', 50),
+(37, '2025-11-19', 'Franklin Building', 'Room 302', '14:00:00', '15:00:00', 'Jennifer Gonzalez', '2025-11-16 16:38:56', 40),
+(38, '2025-11-20', 'Madison Hall', 'Room 101', '08:00:00', '09:00:00', 'Richard Wilson', '2025-11-16 16:38:56', 35),
+(39, '2025-11-20', 'Madison Hall', 'Room 102', '09:00:00', '10:00:00', 'Susan Anderson', '2025-11-16 16:38:56', 30),
+(40, '2025-11-20', 'Monroe Hall', 'Room 201', '10:00:00', '11:00:00', 'Joseph Thomas', '2025-11-16 16:38:56', 40),
+(41, '2025-11-20', 'Monroe Hall', 'Room 202', '11:00:00', '12:00:00', 'Sarah Taylor', '2025-11-16 16:38:56', 45),
+(42, '2025-11-20', 'Hamilton Building', 'Room 301', '13:00:00', '14:00:00', 'Charles Moore', '2025-11-16 16:38:56', 50),
+(43, '2025-11-20', 'Hamilton Building', 'Room 302', '14:00:00', '15:00:00', 'Karen Jackson', '2025-11-16 16:38:56', 40),
+(44, '2025-11-21', 'Kennedy Hall', 'Room 101', '08:00:00', '09:00:00', 'Daniel White', '2025-11-16 16:38:56', 35),
+(45, '2025-11-21', 'Kennedy Hall', 'Room 102', '09:00:00', '10:00:00', 'Nancy Harris', '2025-11-16 16:38:56', 30),
+(46, '2025-11-21', 'Reagan Hall', 'Room 201', '10:00:00', '11:00:00', 'Matthew Martin', '2025-11-16 16:38:56', 40),
+(47, '2025-11-21', 'Reagan Hall', 'Room 202', '11:00:00', '12:00:00', 'Lisa Thompson', '2025-11-16 16:38:56', 45),
+(48, '2025-11-21', 'Eisenhower Building', 'Room 301', '13:00:00', '14:00:00', 'Anthony Garcia', '2025-11-16 16:38:56', 50),
+(49, '2025-11-21', 'Eisenhower Building', 'Room 302', '14:00:00', '15:00:00', 'Sandra Martinez', '2025-11-16 16:38:56', 40),
+(50, '2025-11-22', 'Jackson Hall', 'Room 101', '08:00:00', '09:00:00', 'Mark Robinson', '2025-11-16 16:38:56', 35),
+(51, '2025-11-22', 'Jackson Hall', 'Room 102', '09:00:00', '10:00:00', 'Donna Clark', '2025-11-16 16:38:56', 30),
+(52, '2025-11-22', 'Truman Hall', 'Room 201', '10:00:00', '11:00:00', 'Steven Rodriguez', '2025-11-16 16:38:56', 40),
+(53, '2025-11-22', 'Truman Hall', 'Room 202', '11:00:00', '12:00:00', 'Emily Lewis', '2025-11-16 16:38:56', 45),
+(54, '2025-11-22', 'Coolidge Building', 'Room 301', '13:00:00', '14:00:00', 'Brian Lee', '2025-11-16 16:38:56', 50),
+(55, '2025-11-22', 'Coolidge Building', 'Room 302', '14:00:00', '15:00:00', 'Rebecca Walker', '2025-11-16 16:38:56', 40);
 
 -- --------------------------------------------------------
 
@@ -852,19 +879,36 @@ INSERT INTO `exam_applicants` (`id`, `schedule_id`, `applicant_id`, `email_sent`
 (200, NULL, '2025100200', 0),
 (319, NULL, '2025100201', 0),
 (320, NULL, '2025100204', 0),
-(322, NULL, '2025100205', 0),
+(322, 23, '2025100205', 1),
 (324, NULL, '2025100206', 0),
-(325, NULL, '2025100214', 0),
-(326, NULL, '2025100218', 0),
+(325, 23, '2025100214', 1),
+(326, 23, '2025100218', 1),
 (327, 23, '2025100203', 1),
 (329, 23, '2025100220', 1),
 (330, 23, '2025100221', 1),
 (331, 23, '2025100223', 1),
 (332, 23, '2025100226', 1),
-(333, 22, '2025100232', 1),
-(334, 22, '2025100233', 1),
-(335, 22, '2025100234', 1),
-(336, 22, '2025100236', 1);
+(333, 23, '2025100232', 1),
+(334, 23, '2025100233', 1),
+(335, 23, '2025100234', 1),
+(336, NULL, '2025100236', 0),
+(337, 23, '2025100061', 1),
+(338, NULL, '2025100227', 0),
+(339, NULL, '2025100207', 0),
+(340, NULL, '2025100229', 0),
+(341, NULL, '2025100209', 0),
+(342, NULL, '2025100222', 0),
+(343, NULL, '2025100231', 0),
+(344, NULL, '2025100217', 0),
+(345, NULL, '2025100237', 0),
+(346, NULL, '2025100219', 0),
+(347, NULL, '2025100228', 0),
+(348, NULL, '2025100208', 0),
+(349, NULL, '2025100230', 0),
+(350, NULL, '2025100213', 0),
+(351, NULL, '2025100202', 0),
+(352, NULL, '2025100216', 0),
+(353, NULL, '2025100235', 0);
 
 -- --------------------------------------------------------
 
@@ -907,11 +951,11 @@ CREATE TABLE `interview_applicants` (
 --
 
 INSERT INTO `interview_applicants` (`id`, `schedule_id`, `applicant_id`, `email_sent`, `status`, `action`, `created_at`) VALUES
-(1, NULL, '2025100001', 1, 'Accepted', 0, '2025-09-17 05:47:54'),
+(1, NULL, '2025100001', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (2, NULL, '2025100002', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (3, NULL, '2025100003', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (4, NULL, '2025100004', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(5, NULL, '2025100005', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
+(5, 3, '2025100005', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (6, NULL, '2025100006', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (7, NULL, '2025100007', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (8, NULL, '2025100008', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
@@ -946,7 +990,7 @@ INSERT INTO `interview_applicants` (`id`, `schedule_id`, `applicant_id`, `email_
 (37, NULL, '2025100037', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (38, NULL, '2025100038', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (39, NULL, '2025100039', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(40, NULL, '2025100040', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
+(40, 3, '2025100040', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (41, NULL, '2025100041', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (42, NULL, '2025100042', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (43, NULL, '2025100043', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
@@ -967,7 +1011,7 @@ INSERT INTO `interview_applicants` (`id`, `schedule_id`, `applicant_id`, `email_
 (58, NULL, '2025100058', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (59, NULL, '2025100059', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (60, NULL, '2025100060', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(61, NULL, '2025100061', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
+(61, 3, '2025100061', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (62, NULL, '2025100062', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (63, NULL, '2025100063', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (64, NULL, '2025100064', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
@@ -1019,12 +1063,12 @@ INSERT INTO `interview_applicants` (`id`, `schedule_id`, `applicant_id`, `email_
 (110, NULL, '2025100110', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (111, NULL, '2025100111', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (112, NULL, '2025100112', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(113, NULL, '2025100113', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
+(113, 3, '2025100113', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (114, NULL, '2025100114', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (115, NULL, '2025100115', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (116, NULL, '2025100116', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (117, NULL, '2025100117', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(118, NULL, '2025100118', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
+(118, 3, '2025100118', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (119, NULL, '2025100119', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (120, NULL, '2025100120', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (121, NULL, '2025100121', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
@@ -1088,7 +1132,7 @@ INSERT INTO `interview_applicants` (`id`, `schedule_id`, `applicant_id`, `email_
 (179, NULL, '2025100179', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (180, NULL, '2025100180', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (181, NULL, '2025100181', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(182, NULL, '2025100182', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
+(182, 3, '2025100182', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (183, NULL, '2025100183', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (184, NULL, '2025100184', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (185, NULL, '2025100185', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
@@ -1104,41 +1148,41 @@ INSERT INTO `interview_applicants` (`id`, `schedule_id`, `applicant_id`, `email_
 (195, NULL, '2025100195', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (196, NULL, '2025100196', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (197, NULL, '2025100197', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(198, NULL, '2025100198', 1, 'Accepted', 0, '2025-09-17 05:47:54'),
+(198, 3, '2025100198', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (199, NULL, '2025100199', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (200, NULL, '2025100200', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (201, NULL, '2025100201', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (202, NULL, '2025100202', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
-(203, NULL, '2025100203', 1, 'Accepted', 0, '2025-09-17 05:47:54'),
-(204, NULL, '2025100204', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
-(205, 2, '2025100205', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
-(206, NULL, '2025100206', 0, 'Accepted', 0, '2025-09-17 05:47:54'),
+(203, 3, '2025100203', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
+(204, 3, '2025100204', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
+(205, 3, '2025100205', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
+(206, 3, '2025100206', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (207, NULL, '2025100207', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (208, NULL, '2025100208', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (209, NULL, '2025100209', 0, 'Waiting List', 0, '2025-09-17 05:47:54'),
 (210, NULL, '2025100213', 0, 'Waiting List', 0, '2025-10-01 07:59:35'),
-(211, NULL, '2025100214', 0, 'Accepted', 0, '2025-10-01 08:01:19'),
+(211, 3, '2025100214', 0, 'Waiting List', 0, '2025-10-01 08:01:19'),
 (212, NULL, '2025100216', 0, 'Waiting List', 0, '2025-10-01 09:13:11'),
 (213, NULL, '2025100217', 0, 'Waiting List', 0, '2025-10-02 08:43:35'),
-(214, NULL, '2025100218', 0, 'Accepted', 0, '2025-10-02 08:46:01'),
+(214, 3, '2025100218', 0, 'Waiting List', 0, '2025-10-02 08:46:01'),
 (215, NULL, '2025100219', 0, 'Waiting List', 0, '2025-10-02 08:58:33'),
 (216, NULL, '2025100220', 0, 'Waiting List', 0, '2025-10-03 07:43:00'),
 (217, NULL, '2025100221', 0, 'Waiting List', 0, '2025-10-07 06:53:10'),
 (218, NULL, '2025100222', 0, 'Waiting List', 0, '2025-10-07 07:31:55'),
 (219, NULL, '2025100223', 0, 'Waiting List', 0, '2025-10-09 23:32:51'),
 (220, NULL, '2025100224', 0, 'Waiting List', 0, '2025-10-20 00:55:31'),
-(221, NULL, '2025100225', 0, 'Accepted', 0, '2025-10-20 01:21:38'),
+(221, NULL, '2025100225', 0, 'Waiting List', 0, '2025-10-20 01:21:38'),
 (222, NULL, '2025100226', 0, 'Waiting List', 0, '2025-11-05 02:45:25'),
 (223, NULL, '2025100227', 0, 'Waiting List', 0, '2025-11-06 08:43:53'),
 (224, NULL, '2025100228', 0, 'Waiting List', 0, '2025-11-06 10:22:53'),
 (225, NULL, '2025100229', 0, 'Waiting List', 0, '2025-11-06 10:29:13'),
 (226, NULL, '2025100230', 0, 'Waiting List', 0, '2025-11-06 10:30:15'),
 (227, NULL, '2025100231', 0, 'Waiting List', 0, '2025-11-06 10:31:51'),
-(228, NULL, '2025100232', 1, 'Accepted', 0, '2025-11-10 10:16:34'),
-(229, NULL, '2025100233', 1, 'Waiting List', 0, '2025-11-12 03:00:28'),
-(230, NULL, '2025100234', 1, 'Accepted', 0, '2025-11-12 06:49:32'),
+(228, 3, '2025100232', 0, 'Waiting List', 0, '2025-11-10 10:16:34'),
+(229, NULL, '2025100233', 0, 'Waiting List', 0, '2025-11-12 03:00:28'),
+(230, 3, '2025100234', 0, 'Waiting List', 0, '2025-11-12 06:49:32'),
 (231, NULL, '2025100235', 0, 'Waiting List', 0, '2025-11-12 07:37:07'),
-(232, NULL, '2025100236', 1, 'Accepted', 0, '2025-11-12 09:24:51'),
+(232, 3, '2025100236', 0, 'Waiting List', 0, '2025-11-12 09:24:51'),
 (233, NULL, '2025100237', 0, 'Waiting List', 0, '2025-11-12 13:05:24');
 
 -- --------------------------------------------------------
@@ -1445,7 +1489,44 @@ INSERT INTO `notifications` (`id`, `type`, `message`, `applicant_number`, `actor
 (1169, 'update', '📝 Qualifying Exam: 0 → 10 | Interview: 0 → 0 | Final Rating: 0 → 5.00 for Applicant #2025100236', '2025100236', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-12 18:13:52'),
 (1170, 'update', '📝 Qualifying Exam: 10 → 100 | Interview: 0 → 0 | Final Rating: 5 → 50.00 for Applicant #2025100236', '2025100236', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-12 18:13:52'),
 (1171, 'update', '📝 Qualifying Exam: 100 → 100 | Interview: 0 → 9 | Final Rating: 50 → 54.50 for Applicant #2025100236', '2025100236', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-12 18:13:53'),
-(1172, 'update', '📝 Qualifying Exam: 100 → 100 | Interview: 9 → 99 | Final Rating: 55 → 99.50 for Applicant #2025100236', '2025100236', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-12 18:13:54');
+(1172, 'update', '📝 Qualifying Exam: 100 → 100 | Interview: 9 → 99 | Final Rating: 55 → 99.50 for Applicant #2025100236', '2025100236', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-12 18:13:54'),
+(1173, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:30:03'),
+(1174, 'Search', 'User #38 - Montano, Mark Anthony Placido searched student 202500001 in Program Evaluation', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:43:34'),
+(1175, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Program Evaluation', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:44:01'),
+(1176, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:50:27'),
+(1177, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:50:42'),
+(1178, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:51:09'),
+(1179, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:51:19'),
+(1180, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:51:41'),
+(1181, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:51:49'),
+(1182, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:52:01'),
+(1183, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:52:08'),
+(1184, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:52:20'),
+(1185, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:52:28'),
+(1186, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 12:55:26'),
+(1187, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 13:25:48'),
+(1188, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 13:25:53'),
+(1189, 'Search', 'User #38 - Montano, Mark Anthony Placido searched student 202500001 in Program Evaluation', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 13:26:14'),
+(1190, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Program Evaluation', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 13:26:20'),
+(1191, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 13:47:42'),
+(1192, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 16:21:53'),
+(1193, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 16:45:22'),
+(1194, 'submit', 'User #38 - Montano, Mark Anthony Placido successfully submit the student grades in Grading Sheet', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 17:21:04'),
+(1195, 'Printing', 'User #38 - Montano, Mark Anthony Placido printed Faculty Evaluation Report', '38', 'arcano.ee.bsinfotech@gmail.com', 'Montano, Mark Anthony Placido', '2025-11-14 17:22:05'),
+(1196, 'email', '📧 Exam schedule email sent for Applicant #2025100001 (Schedule #23)', '2025100001', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:15:00'),
+(1197, 'email', '📧 Exam schedule email sent for Applicant #2025100001 (Schedule #23)', '2025100001', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:16:20'),
+(1198, 'email', '📧 Exam schedule email sent for Applicant #2025100218 (Schedule #23)', '2025100218', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:41'),
+(1199, 'email', '📧 Exam schedule email sent for Applicant #2025100205 (Schedule #23)', '2025100205', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:42'),
+(1200, 'email', '📧 Exam schedule email sent for Applicant #2025100203 (Schedule #23)', '2025100203', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:42'),
+(1201, 'email', '📧 Exam schedule email sent for Applicant #2025100220 (Schedule #23)', '2025100220', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:43'),
+(1202, 'email', '📧 Exam schedule email sent for Applicant #2025100214 (Schedule #23)', '2025100214', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:43'),
+(1203, 'email', '📧 Exam schedule email sent for Applicant #2025100226 (Schedule #23)', '2025100226', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:46'),
+(1204, 'email', '📧 Exam schedule email sent for Applicant #2025100233 (Schedule #23)', '2025100233', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:46'),
+(1205, 'email', '📧 Exam schedule email sent for Applicant #2025100223 (Schedule #23)', '2025100223', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:47'),
+(1206, 'email', '📧 Exam schedule email sent for Applicant #2025100221 (Schedule #23)', '2025100221', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:47'),
+(1207, 'email', '📧 Exam schedule email sent for Applicant #2025100232 (Schedule #23)', '2025100232', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:47'),
+(1208, 'email', '📧 Exam schedule email sent for Applicant #2025100234 (Schedule #23)', '2025100234', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:50'),
+(1209, 'email', '📧 Exam schedule email sent for Applicant #2025100061 (Schedule #23)', '2025100061', 'markmontano522@gmail.com', 'REGISTRAR (224-06342M) - Montano, Mark Anthony Placido', '2025-11-16 21:19:51');
 
 -- --------------------------------------------------------
 
@@ -1533,7 +1614,7 @@ INSERT INTO `person_status_table` (`id`, `person_id`, `applicant_id`, `exam_stat
 (58, 58, 2025100058, NULL, NULL, NULL, NULL, NULL, 91, NULL, NULL, NULL),
 (59, 59, 2025100059, NULL, NULL, NULL, NULL, NULL, 92, NULL, NULL, NULL),
 (60, 60, 2025100060, NULL, NULL, NULL, NULL, NULL, 95, NULL, NULL, NULL),
-(61, 61, 2025100061, NULL, NULL, NULL, NULL, NULL, 83, NULL, 80, 85),
+(61, 61, 2025100061, 1, NULL, NULL, NULL, NULL, 83, NULL, 80, 85),
 (62, 62, 2025100062, NULL, NULL, NULL, NULL, NULL, 85, NULL, NULL, NULL),
 (63, 63, 2025100063, NULL, NULL, NULL, NULL, NULL, 92, NULL, NULL, NULL),
 (64, 64, 2025100064, NULL, NULL, NULL, NULL, NULL, 89, NULL, NULL, NULL),
@@ -1677,7 +1758,7 @@ INSERT INTO `person_status_table` (`id`, `person_id`, `applicant_id`, `exam_stat
 (1603, 308, 2025100202, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (1604, 309, 2025100203, 1, NULL, NULL, NULL, NULL, 75, NULL, 100, 50),
 (1605, 310, 2025100204, NULL, NULL, NULL, NULL, NULL, 95, NULL, 100, 90),
-(1606, 312, 2025100205, NULL, NULL, NULL, NULL, 0, 100, 0, 100, 99),
+(1606, 312, 2025100205, 1, NULL, NULL, NULL, 0, 100, 0, 100, 99),
 (1607, 313, 2025100206, NULL, NULL, 0, 0, 0, 90, 0, 90, 90),
 (1608, 314, 2025100207, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
 (1609, 315, 2025100208, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
@@ -1685,30 +1766,30 @@ INSERT INTO `person_status_table` (`id`, `person_id`, `applicant_id`, `exam_stat
 (1612, 317, 2025100210, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
 (1613, 318, 2025100211, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
 (1614, 319, 2025100212, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
-(1615, 322, 2025100213, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(1616, 323, 2025100214, NULL, 0, 0, 0, 0, 40, 0, 40, 40),
-(1617, 325, 2025100216, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(1618, 326, 2025100217, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(1619, 327, 2025100218, NULL, 0, 0, 0, 0, 95, 0, 100, 90),
-(1620, 328, 2025100219, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(1621, 329, 2025100220, 1, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(1622, 330, 2025100221, 1, 0, 0, 0, 0, 90, 0, 90, 90),
-(1623, 331, 2025100222, NULL, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(1624, 332, 2025100223, 1, 0, 0, 0, 0, 0, 0, NULL, NULL),
-(1635, 333, 2025100224, NULL, 0, 0, 0, 0, 0, 0, 0, 0),
-(1636, 334, 2025100225, NULL, 0, 0, 0, 0, 0, 0, 0, 0),
-(1741, 335, 2025100226, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-(1742, 336, 2025100227, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1743, 337, 2025100228, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1744, 338, 2025100229, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1745, 339, 2025100230, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1746, 340, 2025100231, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1747, 341, 2025100232, 1, 0, 0, 0, 0, 100, 0, 100, 99),
-(1752, 342, 2025100233, 1, 0, 0, 0, 0, 0, 0, 0, 0),
-(1753, 343, 2025100234, 1, 0, 0, 0, 0, 95, 0, 100, 90),
-(1758, 344, 2025100235, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(1759, 345, 2025100236, 1, 0, 0, 0, 0, 100, 0, 100, 99),
-(1764, 346, 2025100237, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(1615, 322, 2025100213, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
+(1616, 323, 2025100214, 1, NULL, 0, 0, 0, 40, 0, 40, 40),
+(1617, 325, 2025100216, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
+(1618, 326, 2025100217, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
+(1619, 327, 2025100218, 1, NULL, 0, 0, 0, 95, 0, 100, 90),
+(1620, 328, 2025100219, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
+(1621, 329, 2025100220, 1, NULL, 0, 0, 0, 0, 0, NULL, NULL),
+(1622, 330, 2025100221, 1, NULL, 0, 0, 0, 90, 0, 90, 90),
+(1623, 331, 2025100222, NULL, NULL, 0, 0, 0, 0, 0, NULL, NULL),
+(1624, 332, 2025100223, 1, NULL, 0, 0, 0, 0, 0, NULL, NULL),
+(1635, 333, 2025100224, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1636, 334, 2025100225, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1741, 335, 2025100226, 1, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1742, 336, 2025100227, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1743, 337, 2025100228, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1744, 338, 2025100229, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1745, 339, 2025100230, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1746, 340, 2025100231, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1747, 341, 2025100232, 1, NULL, 0, 0, 0, 100, 0, 100, 99),
+(1752, 342, 2025100233, 1, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1753, 343, 2025100234, 1, NULL, 0, 0, 0, 95, 0, 100, 90),
+(1758, 344, 2025100235, NULL, NULL, 0, 0, 0, 0, 0, 0, 0),
+(1759, 345, 2025100236, NULL, NULL, 0, 0, 0, 100, 0, 100, 99),
+(1764, 346, 2025100237, NULL, NULL, 0, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2364,7 +2445,7 @@ INSERT INTO `user_accounts` (`user_id`, `person_id`, `email`, `password`, `role`
 (58, 58, 'zoey.cook58@example.com', '$2b$10$l mnoPQRS UV WX YZ AbCDEF G567890123457lmnoPQRS', 'applicant', 0),
 (59, 59, 'levi.morgan59@example.com', '$2b$10$mnopQRST UV WXY ZaBCDEFG H678901234568mnopQRST', 'applicant', 1),
 (60, 60, 'evelyn.bell60@example.com', '$2b$10$nopqRSTU VW XYZa bCDEFGHI 789012345679nopqRSTU', 'applicant', NULL),
-(61, 61, 'delacruz.lc.bsinfotech@gmail.com', '$2b$10$Trlo4T/GKUaIpE6CzpvVJ.Fbl4EGaiO.z.J3B6EVx8hmNVq93KFR6', 'applicant', 1),
+(61, 61, 'user61@example.com', '$2b$10$Trlo4T/GKUaIpE6CzpvVJ.Fbl4EGaiO.z.J3B6EVx8hmNVq93KFR6', 'applicant', 1),
 (62, 62, 'user62@example.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8hQy9jx7fZC', 'applicant', 1),
 (63, 63, 'user63@example.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8hQy9jx7fZC', 'applicant', 1),
 (64, 64, 'user64@example.com', '$2b$10$1z0TPyKFo6qtCrVAaA1D4e3qANATLI.pyTLqZinmmT8hQy9jx7fZC', 'applicant', 1),
@@ -2687,13 +2768,13 @@ ALTER TABLE `email_templates`
 -- AUTO_INCREMENT for table `entrance_exam_schedule`
 --
 ALTER TABLE `entrance_exam_schedule`
-  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `schedule_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT for table `exam_applicants`
 --
 ALTER TABLE `exam_applicants`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=337;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=354;
 
 --
 -- AUTO_INCREMENT for table `faculty_evaluation_table`
@@ -2723,7 +2804,7 @@ ALTER TABLE `medical_requirements`
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1173;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1210;
 
 --
 -- AUTO_INCREMENT for table `person_status_table`
