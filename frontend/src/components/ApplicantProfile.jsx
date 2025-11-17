@@ -31,57 +31,78 @@ const ApplicantProfile = () => {
   };
 
   const fetchApplicantData = async (query) => {
-  if (!query) return;
+    if (!query) return;
 
-  try {
-    // 1️⃣ Get person_id by applicant_number
-    const res = await axios.get(`http://localhost:5000/api/person-by-applicant/${query}`);
-    if (!res.data?.person_id) {
-      showSnackbar("❌ Applicant not found.", "error");
-      setPersonId(null);
-      return;
-    }
+    try {
+      // 1️⃣ Get person_id by applicant_number
+      const res = await axios.get(`http://localhost:5000/api/person-by-applicant/${query}`);
+      if (!res.data?.person_id) {
+        showSnackbar("❌ Applicant not found.", "error");
+        setPersonId(null);
+        return;
+      }
 
-    const pid = res.data.person_id;
+      const pid = res.data.person_id;
 
-    // 2️⃣ Check document verification
-    const verifiedRes = await axios.get(`http://localhost:5000/api/document_status/check/${query}`);
-    if (!verifiedRes.data.verified) {
-      showSnackbar("❌ Documents not yet verified. Not qualified for exam.", "error");
-      setPersonId(null);
-      return;
-    }
+      // 2️⃣ Check document verification
+      const verifiedRes = await axios.get(`http://localhost:5000/api/document_status/check/${query}`);
+      if (!verifiedRes.data.verified) {
+        showSnackbar("❌ Documents not yet verified. Not qualified for exam.", "error");
+        setPersonId(null);
+        return;
+      }
 
-    // 3️⃣ Get applicant scores (exam_result, qualifying_result, interview_result)
-    const scoreRes = await axios.get(`http://localhost:5000/api/applicant-scores/${query}`);
-    const { exam_result, qualifying_result, interview_result } = scoreRes.data || {};
+      // 3️⃣ Get applicant scores (from admission_exam + person_status_table)
+      const scoreRes = await axios.get(`http://localhost:5000/api/applicant-scores/${query}`);
 
-    // 🧮 Determine current applicant status
-    if (!exam_result) {
-      showSnackbar("📝 Verified applicant — no entrance exam score yet.", "info");
-    } else if (exam_result && !qualifying_result) {
-      showSnackbar("✅ Applicant passed Entrance Exam. Proceed to Qualifying Exam.", "success");
-    } else if (qualifying_result && !interview_result) {
-      showSnackbar("✅ Applicant passed Qualifying Exam. Proceed to Interview Exam.", "success");
-    } else if (interview_result) {
-      showSnackbar("🏁 Applicant has completed all exams. Awaiting acceptance status.", "success");
-    }
+      const {
+        entrance_exam_score,      // from admission_exam.final_rating
+        qualifying_result,        // from person_status_table
+        interview_result          // from person_status_table
+      } = scoreRes.data || {};
 
-    // 4️⃣ Check acceptance (medical step)
-    const statusRes = await axios.get(`http://localhost:5000/api/applicant-status/${query}`);
-    if (statusRes.data?.found && statusRes.data.status === "Accepted") {
-      showSnackbar("🎉 Applicant ACCEPTED! Proceed to Medical.", "success");
+      // 🧮 Determine current applicant status
+      if (!entrance_exam_score) {
+        showSnackbar(
+          "📝 Documents verified. This applicant can proceed with taking the Entrance Examination.",
+          "info"
+        );
+      }
+      else if (entrance_exam_score && !qualifying_result) {
+        showSnackbar(
+          "✅ Applicant passed Entrance Exam. Proceed to Qualifying Examination.",
+          "success"
+        );
+      }
+      else if (qualifying_result && !interview_result) {
+        showSnackbar(
+          "✅ Applicant passed Qualifying Exam. Proceed to Interview.",
+          "success"
+        );
+      }
+      else if (interview_result) {
+        showSnackbar(
+          "🏁 Applicant has completed Entrance, Qualifying, and Interview Exams.",
+          "success"
+        );
+      }
+
+      // 4️⃣ Check acceptance (medical step)
+      const statusRes = await axios.get(`http://localhost:5000/api/applicant-status/${query}`);
+      if (statusRes.data?.found && statusRes.data.status === "Accepted") {
+        showSnackbar("🎉 Applicant ACCEPTED! Proceed to Medical.", "success");
+        setPersonId(pid);
+        return;
+      }
+
       setPersonId(pid);
-      return;
-    }
 
-    setPersonId(pid);
-  } catch (err) {
-    console.error("Error fetching applicant:", err);
-    showSnackbar("⚠️ Error fetching applicant data. Check console for details.", "error");
-    setPersonId(null);
-  }
-};
+    } catch (err) {
+      console.error("Error fetching applicant:", err);
+      showSnackbar("⚠️ Error fetching applicant data. Check console for details.", "error");
+      setPersonId(null);
+    }
+  };
 
 
   useEffect(() => {

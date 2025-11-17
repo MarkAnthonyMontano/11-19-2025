@@ -13740,23 +13740,49 @@ app.get("/api/applicant-status/:applicant_id", async (req, res) => {
   }
 });
 
-// ✅ Get applicant exam, qualifying, and interview results
-app.get("/api/applicant-scores/:applicant_id", async (req, res) => {
-  const { applicant_id } = req.params;
+app.get("/api/applicant-scores/:applicant_number", async (req, res) => {
+  const { applicant_number } = req.params;
+
   try {
-    const [rows] = await db.query(
-      "SELECT exam_result, qualifying_result, interview_result FROM person_status_table WHERE applicant_id = ? LIMIT 1",
-      [applicant_id]
+    // Get person_id
+    const [personRow] = await db.query(
+      "SELECT person_id FROM applicant_numbering_table WHERE applicant_number = ? LIMIT 1",
+      [applicant_number]
     );
 
-    if (rows.length === 0) {
-      return res.json({});
+    if (!personRow.length) {
+      return res.status(404).json({ message: "Applicant not found" });
     }
 
-    res.json(rows[0]);
+    const person_id = personRow[0].person_id;
+
+    // 1️⃣ Get Admission Exam Score
+    const [examRow] = await db.query(
+      "SELECT final_rating FROM admission_exam WHERE person_id = ? LIMIT 1",
+      [person_id]
+    );
+
+    const entrance_exam_score = examRow.length ? examRow[0].final_rating : null;
+
+    // 2️⃣ Get Qualifying & Interview Results
+    const [statusRow] = await db.query(
+      `SELECT qualifying_result, interview_result 
+       FROM person_status_table 
+       WHERE person_id = ? LIMIT 1`,
+      [person_id]
+    );
+
+    const qualifying_result = statusRow.length ? statusRow[0].qualifying_result : null;
+    const interview_result = statusRow.length ? statusRow[0].interview_result : null;
+
+    res.json({
+      entrance_exam_score,
+      qualifying_result,
+      interview_result,
+    });
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: "Database error" });
+    res.status(500).json({ message: "Server error fetching scores" });
   }
 });
 

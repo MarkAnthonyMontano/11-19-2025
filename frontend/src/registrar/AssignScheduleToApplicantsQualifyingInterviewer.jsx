@@ -585,62 +585,89 @@ const AssignScheduleToApplicantsInterviewer = () => {
 
     const handleSendEmails = () => {
         if (!selectedSchedule) {
-            setSnack({ open: true, message: "Please select a schedule first.", severity: "warning" });
+            setSnack({
+                open: true,
+                message: "Please select a schedule first.",
+                severity: "warning",
+            });
             return;
         }
 
-        // Get the selected applicant from persons based on selectedApplicants set
-        const selectedId = Array.from(selectedApplicants)[0];
-        const applicant = currentPersons.find(a => a.applicant_number === selectedId);
+        // 👉 Get ALL applicants currently assigned to the selected schedule
+        const assignedApplicants = persons.filter(
+            (a) => a.schedule_id === selectedSchedule
+        );
+
+        if (assignedApplicants.length === 0) {
+            setSnack({
+                open: true,
+                message: "No applicants are assigned to this schedule.",
+                severity: "warning",
+            });
+            return;
+        }
+
+        // 👉 Extract applicant numbers for sending
+        const applicantNumbers = assignedApplicants.map(a => a.applicant_number);
+
+        // 👉 Set selectedApplicants state (used by confirmSendEmails)
+        setSelectedApplicants(new Set(applicantNumbers));
+
+        // 👉 Use first applicant for email preview
+        const first = assignedApplicants[0];
+        const fullName = `${first.last_name}, ${first.first_name} ${first.middle_name || ""}`.trim();
 
         const sched = schedules.find(s => s.schedule_id === selectedSchedule);
         if (!sched) {
-            setSnack({ open: true, message: "Schedule not found.", severity: "error" });
+            setSnack({
+                open: true,
+                message: "Schedule not found.",
+                severity: "error",
+            });
             return;
         }
 
+        // Format times
         const formattedStart = new Date(`1970-01-01T${sched.start_time}`).toLocaleTimeString("en-US", {
             hour: "numeric",
             minute: "2-digit",
             hour12: true,
         });
+
         const formattedEnd = new Date(`1970-01-01T${sched.end_time}`).toLocaleTimeString("en-US", {
             hour: "numeric",
             minute: "2-digit",
             hour12: true,
         });
 
-        // ✅ Safely build the applicant’s full name
-        const fullName = `${applicant.last_name ?? ""}, ${applicant.first_name ?? ""} ${applicant.middle_name ?? ""}`.trim();
-
-        // 📝 Pre-fill message before opening the dialog
+        // Prefill the email message
         setEmailMessage(
             `Dear ${fullName},
 
-You are scheduled for an interview on:
+            You are scheduled for an interview on:
 
-📅 Date: ${sched.day_description}
-🏢 Building: ${sched.building_description}
-🏫 Room: ${sched.room_description}
-🕒 Time: ${formattedStart} - ${formattedEnd}
+            📅 Date: ${sched.day_description}
+            🏢 Building: ${sched.building_description}
+            🏫 Room: ${sched.room_description}
+            🕒 Time: ${formattedStart} - ${formattedEnd}
 
-Please bring the following requirements:
+            Please bring the following requirements:
 
-1. First, log in to your account at /login_applicant, then proceed to the Applicant Form and click “Print Admission Form Process.”
-2. Proceed to the Guidance Office to verify if you are qualified to take the Qualifying / Interview Exam.
-3. You must have your Admission Form signed at the Guidance Office before proceeding to take the exam.
+            1. Log in at /login_applicant → Applicant Form → "Print Admission Form Process".
+            2. Proceed to the Guidance Office for verification.
+            3. Your Admission Form must be signed before taking the exam.
 
-Thank you and good luck on your Qualifying / Interview Exam!
-`
+            Thank you and good luck!
+            `
         );
 
-        // ✅ Now safely open the dialog
+        // OPEN the dialog
         setConfirmOpen(true);
     };
 
     const confirmSendEmails = () => {
         setConfirmOpen(false);
-        setLoading(true);
+        setLoading2(true);
         const assignedApplicants = Array.from(selectedApplicants);
 
         socket.emit("send_interview_emails", {
@@ -1245,11 +1272,7 @@ Thank you and good luck on your Qualifying / Interview Exam!
                             color="primary"
 
                             sx={{ minWidth: 150 }}
-                            onClick={() => {
-
-                                setSelectedApplicants(new Set([id])); // pick only this applicant
-                                handleSendEmails();                   // 🟢 pre-fill message & open dialog
-                            }}
+                            onClick={handleSendEmails}
                         >
                             Send Email
                         </Button>
