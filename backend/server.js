@@ -449,23 +449,32 @@ app.post(
 app.post("/register", async (req, res) => {
   const { email, password, campus } = req.body;
 
+  // 1️⃣ Required fields
   if (!email || !password) {
     return res.json({ success: false, message: "Please fill up all required fields" });
+  }
+
+  // 2️⃣ Gmail-only restriction (APPLIED HERE FIRST)
+  if (!email.toLowerCase().endsWith("@gmail.com")) {
+    return res.status(400).json({
+      success: false,
+      message: "Only Gmail accounts are allowed."
+    });
   }
 
   let person_id = null;
 
   try {
-    // ✅ 1️⃣ Fetch company name (to be used as default campus label)
+    // 3️⃣ Fetch company name (campus default)
     const [[company]] = await db.query(
       "SELECT company_name FROM company_settings WHERE id = 1"
     );
     const companyName = company?.company_name || "Main Campus";
 
-    // ✅ 2️⃣ Hash password
+    // 4️⃣ Hash password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 🚫 3️⃣ Check if email already exists
+    // 5️⃣ Check if email already exists
     const [existingUser] = await db.query(
       "SELECT * FROM user_accounts WHERE email = ?",
       [email.trim().toLowerCase()]
@@ -474,26 +483,25 @@ app.post("/register", async (req, res) => {
       return res.json({ success: false, message: "Email is already registered" });
     }
 
-    // ✅ 4️⃣ Determine campus value dynamically
-    // If no campus specified, fallback to companyName
+    // 6️⃣ Determine campus value dynamically
     const campusValue = campus?.trim()
       ? campus.trim()
       : `${companyName} - Main`;
 
-    // ✅ 5️⃣ Insert new person record
+    // 7️⃣ Insert new person record
     const [personResult] = await db.query(
       "INSERT INTO person_table (campus) VALUES (?)",
       [campusValue]
     );
     person_id = personResult.insertId;
 
-    // ✅ 6️⃣ Insert into user_accounts
+    // 8️⃣ Insert into user_accounts
     await db.query(
       "INSERT INTO user_accounts (person_id, email, password, role) VALUES (?, ?, ?, 'applicant')",
       [person_id, email.trim().toLowerCase(), hashedPassword]
     );
 
-    // ✅ 7️⃣ Get active school year + semester
+    // 9️⃣ Get active school year + semester
     const [activeYearResult] = await db3.query(`
       SELECT yt.year_description, st.semester_code
       FROM active_school_year_table sy
@@ -510,18 +518,18 @@ app.post("/register", async (req, res) => {
     const year = String(activeYearResult[0].year_description).split("-")[0];
     const semCode = activeYearResult[0].semester_code;
 
-    // ✅ 8️⃣ Generate applicant number
+    // 🔟 Generate applicant number
     const [countRes] = await db.query("SELECT COUNT(*) AS count FROM applicant_numbering_table");
     const padded = String(countRes[0].count + 1).padStart(5, "0");
     const applicant_number = `${year}${semCode}${padded}`;
 
-    // ✅ 9️⃣ Insert applicant number
+    // 1️⃣1️⃣ Insert applicant number
     await db.query(
       "INSERT INTO applicant_numbering_table (applicant_number, person_id) VALUES (?, ?)",
       [applicant_number, person_id]
     );
 
-    // ✅ 🔟 Generate QR Codes
+    // 1️⃣2️⃣ Generate QR Codes
     const qrData = `http://localhost:5173/examination_profile/${applicant_number}`;
     const qrData2 = `http://localhost:5173/applicant_profile/${applicant_number}`;
     const qrFilename = `${applicant_number}_qrcode.png`;
@@ -539,26 +547,28 @@ app.post("/register", async (req, res) => {
       width: 300,
     });
 
-    // ✅ 11️⃣ Save QR filename
+    // 1️⃣3️⃣ Save QR filename
     await db.query(
       "UPDATE applicant_numbering_table SET qr_code = ? WHERE applicant_number = ?",
       [qrFilename, applicant_number]
     );
 
-    // ✅ 12️⃣ Insert initial applicant statuses
+    // 1️⃣4️⃣ Insert initial applicant statuses
     await db.query(
       `INSERT INTO person_status_table 
        (person_id, applicant_id, exam_status, requirements, residency, student_registration_status, exam_result, hs_ave, qualifying_result, interview_result)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+
       [person_id, applicant_number, 0, 0, 0, 0, 0, 0, 0, 0]
     );
 
+    // 1️⃣5️⃣ Insert interview placeholder
     await db.query(
       "INSERT INTO interview_applicants (schedule_id, applicant_id, email_sent, status) VALUES (?, ?, ?, ?)",
       [null, applicant_number, 0, "Waiting List"]
     );
 
-    // ✅ 13️⃣ Respond success
+    // 1️⃣6️⃣ Respond success
     res.status(201).json({
       success: true,
       message: "Registered Successfully",
@@ -567,6 +577,7 @@ app.post("/register", async (req, res) => {
       qr_code: qrFilename,
       campus: campusValue,
     });
+
   } catch (error) {
     if (person_id) {
       await db.query("DELETE FROM person_table WHERE person_id = ?", [person_id]);
@@ -574,6 +585,9 @@ app.post("/register", async (req, res) => {
     res.json({ success: false, message: "Internal Server Error", error: error.message });
   }
 });
+
+
+
 app.post("/register_registrar", upload.single("profile_picture"), async (req, res) => {
   try {
     const {
@@ -2971,9 +2985,11 @@ app.get("/api/person/:id", async (req, res) => {
 
   try {
     const [rows] = await db.execute(`
-      SELECT pt.*, ant.applicant_number FROM applicant_numbering_table AS ant
-        LEFT JOIN person_table AS pt ON ant.person_id = pt.person_id
-      WHERE pt.person_id = ?`, [id]);
+      SELECT pt.*, ant.applicant_number 
+      FROM applicant_numbering_table AS ant
+      LEFT JOIN person_table AS pt ON ant.person_id = pt.person_id
+      WHERE pt.person_id = ?
+    `, [id]);
 
     if (rows.length === 0) {
       return res.status(404).json({ error: "Person not found" });
@@ -2987,50 +3003,84 @@ app.get("/api/person/:id", async (req, res) => {
 });
 
 
-// ✅ PUT update person details by person_id
-// ✅ Unified and Safe PUT update person details by person_id
+// 🛡 ALLOWED FIELDS IN person_table — prevents invalid updates
+const allowedFields = new Set([
+  "profile_img", "campus", "academicProgram", "classifiedAs", "applyingAs",
+  "program", "program2", "program3", "yearLevel", "last_name", "first_name",
+  "middle_name", "extension", "nickname", "height", "weight", "lrnNumber",
+  "nolrnNumber", "gender", "pwdMember", "pwdType", "pwdId", "birthOfDate",
+  "age", "birthPlace", "languageDialectSpoken", "citizenship", "religion",
+  "civilStatus", "tribeEthnicGroup", "cellphoneNumber", "emailAddress",
+  "presentStreet", "presentBarangay", "presentZipCode", "presentRegion",
+  "presentProvince", "presentMunicipality", "presentDswdHouseholdNumber",
+  "sameAsPresentAddress", "permanentStreet", "permanentBarangay",
+  "permanentZipCode", "permanentRegion", "permanentProvince",
+  "permanentMunicipality", "permanentDswdHouseholdNumber", "solo_parent",
+  "father_deceased", "father_family_name", "father_given_name",
+  "father_middle_name", "father_ext", "father_nickname", "father_education",
+  "father_education_level", "father_last_school", "father_course",
+  "father_year_graduated", "father_school_address", "father_contact",
+  "father_occupation", "father_employer", "father_income", "father_email",
+  "mother_deceased", "mother_family_name", "mother_given_name",
+  "mother_middle_name", "mother_ext", "mother_nickname", "mother_education",
+  "mother_education_level", "mother_last_school", "mother_course",
+  "mother_year_graduated", "mother_school_address", "mother_contact",
+  "mother_occupation", "mother_employer", "mother_income", "mother_email",
+  "guardian", "guardian_family_name", "guardian_given_name",
+  "guardian_middle_name", "guardian_ext", "guardian_nickname",
+  "guardian_address", "guardian_contact", "guardian_email", "annual_income",
+  "schoolLevel", "schoolLastAttended", "schoolAddress", "courseProgram",
+  "honor", "generalAverage", "yearGraduated", "schoolLevel1",
+  "schoolLastAttended1", "schoolAddress1", "courseProgram1", "honor1",
+  "generalAverage1", "yearGraduated1", "strand", "cough", "colds", "fever",
+  "asthma", "faintingSpells", "heartDisease", "tuberculosis",
+  "frequentHeadaches", "hernia", "chronicCough", "headNeckInjury", "hiv",
+  "highBloodPressure", "diabetesMellitus", "allergies", "cancer",
+  "smokingCigarette", "alcoholDrinking", "hospitalized",
+  "hospitalizationDetails", "medications", "hadCovid", "covidDate",
+  "vaccine1Brand", "vaccine1Date", "vaccine2Brand", "vaccine2Date",
+  "booster1Brand", "booster1Date", "booster2Brand", "booster2Date",
+  "chestXray", "cbc", "urinalysis", "otherworkups", "symptomsToday",
+  "remarks", "termsOfAgreement", "created_at", "current_step"
+]);
+
+
+// ✅ PUT update person details by person_id (SAFE VERSION)
 app.put("/api/person/:id", async (req, res) => {
   const { id } = req.params;
 
   try {
-    // 1️⃣ Validate request body
     if (!req.body || Object.keys(req.body).length === 0) {
       return res.status(400).json({ error: "No fields provided for update" });
     }
 
-    // 2️⃣ Clean the incoming data
+    // 🧼 Clean + FILTER only allowed columns
     const cleanedEntries = Object.entries(req.body)
-      // remove undefined keys
+      .filter(([key, value]) => allowedFields.has(key)) // ❗ ignores applicant_number
       .filter(([_, value]) => value !== undefined)
-      // treat empty string as NULL
       .map(([key, value]) => [key, value === "" ? null : value]);
 
-    // 3️⃣ Make sure we have valid data to update
     if (cleanedEntries.length === 0) {
       return res.status(400).json({ error: "No valid fields to update" });
     }
 
-    // 4️⃣ Build dynamic SQL
     const setClause = cleanedEntries.map(([key]) => `${key}=?`).join(", ");
-    const values = cleanedEntries.map(([_, value]) => value);
-    values.push(id); // add person_id for WHERE clause
+    const values = cleanedEntries.map(([_, val]) => val);
+    values.push(id);
 
     const sql = `UPDATE person_table SET ${setClause} WHERE person_id=?`;
-
-    // 5️⃣ Execute query
     const [result] = await db.execute(sql, values);
 
     if (result.affectedRows === 0) {
       return res.status(404).json({ error: "Person not found or no changes made" });
     }
 
-    // 6️⃣ Success
     res.json({ message: "✅ Person updated successfully" });
   } catch (error) {
     console.error("❌ Error updating person:", error);
     res.status(500).json({
       error: "Database error during update",
-      details: error.message,
+      details: error.message
     });
   }
 });

@@ -130,50 +130,41 @@ const SuperAdminApplicantDashboard2 = () => {
     // do not alter
 
     const location = useLocation();
-  
-  
-   const queryParams = new URLSearchParams(location.search);
-   const queryPersonId = queryParams.get("person_id")?.trim() || "";
- 
-   useEffect(() => {
-     const storedUser = localStorage.getItem("email");
-     const storedRole = localStorage.getItem("role");
-     const loggedInPersonId = localStorage.getItem("person_id");
- 
-     if (!storedUser || !storedRole || !loggedInPersonId) {
-       window.location.href = "/login";
-       return;
-     }
- 
-     setUser(storedUser);
-     setUserRole(storedRole);
- 
-     const allowedRoles = ["registrar", "applicant", "superadmin"];
-     if (!allowedRoles.includes(storedRole)) {
-       window.location.href = "/login";
-       return;
-     }
- 
-     const lastSelected = sessionStorage.getItem("admin_edit_person_id");
- 
-     // ⭐ CASE 1: URL HAS ?person_id=
-     if (queryPersonId !== "") {
-       sessionStorage.setItem("admin_edit_person_id", queryPersonId);
-       setUserID(queryPersonId);
-       return;
-     }
- 
-     // ⭐ CASE 2: URL has NO ID but we have a last selected student
-     if (lastSelected) {
-       setUserID(lastSelected);
-       return;
-     }
- 
-     // ⭐ CASE 3: No URL ID and no last selected → start blank
-     setUserID("");
-   }, [queryPersonId]);
- 
- 
+
+
+    const queryParams = new URLSearchParams(location.search);
+    const queryPersonId = queryParams.get("person_id");
+
+    useEffect(() => {
+        const storedUser = localStorage.getItem("email");
+        const storedRole = localStorage.getItem("role");
+        const loggedInPersonId = localStorage.getItem("person_id");
+        const searchedPersonId = sessionStorage.getItem("admin_edit_person_id");
+
+        if (!storedUser || !storedRole || !loggedInPersonId) {
+            window.location.href = "/login";
+            return;
+        }
+
+        setUser(storedUser);
+        setUserRole(storedRole);
+
+        // Roles that can access
+        const allowedRoles = ["registrar", "applicant", "superadmin"];
+        if (allowedRoles.includes(storedRole)) {
+            // ✅ Always take URL param first
+            const targetId = queryPersonId || searchedPersonId || loggedInPersonId;
+
+            // Save it so other pages (ECAT, forms) can use it
+            sessionStorage.setItem("admin_edit_person_id", targetId);
+
+            setUserID(targetId);
+            fetchByPersonId(targetId);
+            return;
+        }
+
+        window.location.href = "/login";
+    }, [queryPersonId]);
 
 
 
@@ -537,29 +528,29 @@ const SuperAdminApplicantDashboard2 = () => {
     };
 
 
-  
 
 
-const links = [
-  {
-    to: userID ? `/admin_ecat_application_form?person_id=${userID}` : "/admin_ecat_application_form",
-    label: "ECAT Application Form",
-  },
-  {
-    to: userID ? `/admin_admission_form_process?person_id=${userID}` : "/admin_admission_form_process",
-    label: "Admission Form Process",
-  },
-  {
-    to: userID ? `/admin_personal_data_form?person_id=${userID}` : "/admin_personal_data_form",
-    label: "Personal Data Form",
-  },
-  {
-    to: userID ? `/admin_office_of_the_registrar?person_id=${userID}` : "/admin_office_of_the_registrar",
-    label: `Application For ${shortTerm ? shortTerm.toUpperCase() : ""} College Admission`,
-  },
-  { to: "/admission_services", label: "Application/Student Satisfactory Survey" },
-  { label: "Examination Permit", onClick: handleExamPermitClick },
-];
+
+    const links = [
+        {
+            to: userID ? `/admin_ecat_application_form?person_id=${userID}` : "/admin_ecat_application_form",
+            label: "ECAT Application Form",
+        },
+        {
+            to: userID ? `/admin_admission_form_process?person_id=${userID}` : "/admin_admission_form_process",
+            label: "Admission Form Process",
+        },
+        {
+            to: userID ? `/admin_personal_data_form?person_id=${userID}` : "/admin_personal_data_form",
+            label: "Personal Data Form",
+        },
+        {
+            to: userID ? `/admin_office_of_the_registrar?person_id=${userID}` : "/admin_office_of_the_registrar",
+            label: `Application For ${shortTerm ? shortTerm.toUpperCase() : ""} College Admission`,
+        },
+        { to: "/admission_services", label: "Application/Student Satisfactory Survey" },
+        { label: "Examination Permit", onClick: handleExamPermitClick },
+    ];
 
 
 
@@ -664,62 +655,62 @@ const links = [
 
 
 
-         <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          width: "100%",
-          mt: 2,
-        }}
-      >
-        <Box
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            gap: 2,
-            p: 2,
-            borderRadius: "10px",
-            backgroundColor: "#fffaf5",
-            border: "1px solid #6D2323",
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.05)",
-            width: "100%",
-            overflow: "hidden",
-          }}
-        >
-          {/* Icon */}
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "#800000",
-              borderRadius: "8px",
-              width: 50,
-              height: 50,
-              flexShrink: 0,
-            }}
-          >
-            <ErrorIcon sx={{ color: "white", fontSize: 36 }} />
-          </Box>
+            <Box
+                sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    width: "100%",
+                    mt: 2,
+                }}
+            >
+                <Box
+                    sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        gap: 2,
+                        p: 2,
+                        borderRadius: "10px",
+                        backgroundColor: "#fffaf5",
+                        border: "1px solid #6D2323",
+                        boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.05)",
+                        width: "100%",
+                        overflow: "hidden",
+                    }}
+                >
+                    {/* Icon */}
+                    <Box
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            backgroundColor: "#800000",
+                            borderRadius: "8px",
+                            width: 50,
+                            height: 50,
+                            flexShrink: 0,
+                        }}
+                    >
+                        <ErrorIcon sx={{ color: "white", fontSize: 36 }} />
+                    </Box>
 
-          {/* Text */}
-          <Typography
-            sx={{
-              fontSize: "20px",
-              fontFamily: "Arial",
-              color: "#3e3e3e",
-              lineHeight: 1.3, // slightly tighter to fit in fewer rows
-              whiteSpace: "normal",
-              overflow: "hidden",
-            }}
-          >
-            <strong style={{ color: "maroon" }}>Notice:</strong> &nbsp;
-            <strong>1.</strong> Kindly type <strong>'NA'</strong> in boxes where there are no possible answers to the information being requested. &nbsp; | &nbsp;
-            <strong>2.</strong> To use the letter <strong>'Ñ'</strong>, press <kbd>ALT</kbd> + <kbd>165</kbd>; for <strong>'ñ'</strong>, press <kbd>ALT</kbd> + <kbd>164</kbd>. &nbsp; | &nbsp;
-            <strong>3.</strong> This is the list of all printable files.
-          </Typography>
-        </Box>
-      </Box>
+                    {/* Text */}
+                    <Typography
+                        sx={{
+                            fontSize: "20px",
+                            fontFamily: "Arial",
+                            color: "#3e3e3e",
+                            lineHeight: 1.3, // slightly tighter to fit in fewer rows
+                            whiteSpace: "normal",
+                            overflow: "hidden",
+                        }}
+                    >
+                        <strong style={{ color: "maroon" }}>Notice:</strong> &nbsp;
+                        <strong>1.</strong> Kindly type <strong>'NA'</strong> in boxes where there are no possible answers to the information being requested. &nbsp; | &nbsp;
+                        <strong>2.</strong> To use the letter <strong>'Ñ'</strong>, press <kbd>ALT</kbd> + <kbd>165</kbd>; for <strong>'ñ'</strong>, press <kbd>ALT</kbd> + <kbd>164</kbd>. &nbsp; | &nbsp;
+                        <strong>3.</strong> This is the list of all printable files.
+                    </Typography>
+                </Box>
+            </Box>
 
 
             {/* Cards Section */}

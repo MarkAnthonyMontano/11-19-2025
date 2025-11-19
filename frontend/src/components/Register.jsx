@@ -43,6 +43,7 @@ const Register = () => {
     password: '',
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [snack, setSnack] = useState({ open: false, message: '', severity: 'info' });
   const navigate = useNavigate();
 
@@ -59,7 +60,28 @@ const Register = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleRegister = async () => {
-    if (isSubmitting) return; // prevent re-click
+    if (isSubmitting) return;
+
+    // ✅ Gmail-only validation
+    if (!usersData.email.endsWith("@gmail.com")) {
+      setSnack({
+        open: true,
+        message: "Only Gmail addresses are allowed!",
+        severity: "error",
+      });
+      return;
+    }
+
+    // ✅ Check password match
+    if (usersData.password !== confirmPassword) {
+      setSnack({
+        open: true,
+        message: "Passwords do not match!",
+        severity: "error",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
@@ -71,7 +93,7 @@ const Register = () => {
           message: response.data.message,
           severity: "error"
         });
-        setIsSubmitting(false); // re-enable button
+        setIsSubmitting(false);
         return;
       }
 
@@ -80,17 +102,17 @@ const Register = () => {
 
       setSnack({ open: true, message: "Registration Successful", severity: "success" });
 
-      // Wait before navigating
       setTimeout(() => navigate("/login_applicant"), 1000);
+
     } catch (error) {
-      console.error("Registration failed:", error);
       setSnack({
         open: true,
         message: error.response?.data?.message || "Registration failed",
         severity: "error"
       });
-      setIsSubmitting(false); // re-enable button
     }
+
+    setIsSubmitting(false);
   };
 
 
@@ -156,7 +178,7 @@ const Register = () => {
               <div className="TextField" style={{ position: "relative" }}>
                 <label htmlFor="email">Email Address</label>
                 <input
-                  type="text"
+                  type="email"
                   className="border"
                   id="email"
                   name="email"
@@ -213,6 +235,47 @@ const Register = () => {
                   {showPassword ? <Visibility /> : <VisibilityOff />}
                 </button>
               </div>
+
+              <div className="TextField" style={{ position: "relative" }}>
+                <label htmlFor="confirmPassword">Confirm Password</label>
+                <input
+                  type={showPassword ? "text" : "password"}
+                  className="border"
+                  id="confirmPassword"
+                  name="confirmPassword"
+                  placeholder="Re-enter your password"
+                  value={confirmPassword}
+                  onChange={(e) => setConfirmPassword(e.target.value)}
+                  required
+                  style={{ paddingLeft: "2.5rem", border: `2px solid ${borderColor}` }}
+                />
+                <LockIcon
+                  style={{
+                    position: "absolute",
+                    top: "2.5rem",
+                    left: "0.7rem",
+                    color: "rgba(0,0,0,0.4)"
+                  }}
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  style={{
+                    color: "rgba(0,0,0,0.3)",
+                    outline: "none",
+                    position: "absolute",
+                    top: "2.5rem",
+                    right: "1rem",
+                    background: "none",
+                    border: "none",
+                    cursor: "pointer"
+                  }}
+                >
+                  {showPassword ? <Visibility /> : <VisibilityOff />}
+                </button>
+              </div>
+
 
               {/* CAPTCHA */}
               <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>

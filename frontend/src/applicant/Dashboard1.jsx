@@ -986,7 +986,7 @@ const Dashboard1 = (props) => {
                   labelId="campus-label"
                   id="campus-select"
                   name="campus"
-                  value={person.campus === null ? "" : String(person.campus)}
+                 value={person.campus == null ? "" : String(person.campus)}
                   label="Campus (Manila/Cavite)"
                   onChange={(e) => {
                     const val = e.target.value;
@@ -1103,9 +1103,9 @@ const Dashboard1 = (props) => {
                 <Box display="flex" flexDirection="column" sx={{ width: "100%" }}>
                   {/* Program 1 */}
                   <Box display="flex" alignItems="center" gap={2} mb={1}>
-                    <label className="w-40 font-medium">Program:</label>
+                    <label className="w-40 font-medium">Course Applied:</label>
                     <FormControl fullWidth size="small" required error={!!errors.program}>
-                      <InputLabel>Program</InputLabel>
+                      <InputLabel>Course Applied</InputLabel>
                       <Select
                         name="program"
                         value={person.program || ""}
@@ -1125,8 +1125,8 @@ const Dashboard1 = (props) => {
                     </FormControl>
                   </Box>
 
-                  {/* Program 2 */}
-                  <Box display="flex" alignItems="center" gap={2} mb={1}>
+                
+                  {/* <Box display="flex" alignItems="center" gap={2} mb={1}>
                     <label className="w-40 font-medium">Program 2:</label>
                     <FormControl fullWidth size="small" required error={!!errors.program2}>
                       <InputLabel>Program 2</InputLabel>
@@ -1147,10 +1147,10 @@ const Dashboard1 = (props) => {
                         <FormHelperText>This field is required.</FormHelperText>
                       )}
                     </FormControl>
-                  </Box>
+                  </Box> */}
 
                   {/* Program 3 */}
-                  <Box display="flex" alignItems="center" gap={2}>
+                  {/* <Box display="flex" alignItems="center" gap={2}>
                     <label className="w-40 font-medium">Program 3:</label>
                     <FormControl fullWidth size="small" required error={!!errors.program3}>
                       <InputLabel>Program 3</InputLabel>
@@ -1171,7 +1171,7 @@ const Dashboard1 = (props) => {
                         <FormHelperText>This field is required.</FormHelperText>
                       )}
                     </FormControl>
-                  </Box>
+                  </Box> */}
                 </Box>
               </Box>
 
